@@ -19,11 +19,11 @@ public class SpeedrunWidget extends ObjectSelectionList<SpeedrunEntry> {
         this.setSelected(entry);
 
         this.addEntry(new SpeedrunEntry(new Speedrun(new ItemStack(Items.ICE), true, 1, 11)));
-        this.addEntry(new SpeedrunEntry(new Speedrun(new ItemStack(Items.GLASS), true, 1, 11)));
+        this.addEntry(new SpeedrunEntry(new Speedrun(new ItemStack(Items.GLASS), false, 1, 11)));
         this.addEntry(new SpeedrunEntry(new Speedrun(new ItemStack(Items.TARGET), true, 1, 11)));
         this.addEntry(new SpeedrunEntry(new Speedrun(new ItemStack(Items.INFESTED_STONE), true, 1, 11)));
         this.addEntry(new SpeedrunEntry(new Speedrun(new ItemStack(Items.GHAST_TEAR), true, 1, 11)));
-        this.addEntry(new SpeedrunEntry(new Speedrun(new ItemStack(Items.QUARTZ), true, 1, 11)));
+        this.addEntry(new SpeedrunEntry(new Speedrun(new ItemStack(Items.QUARTZ), false, 1, 11)));
         this.addEntry(new SpeedrunEntry(new Speedrun(new ItemStack(Items.FERN), true, 1, 11)));
     }
 

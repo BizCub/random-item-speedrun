@@ -3,6 +3,7 @@
     "key.category.minecraft.random_item_speedrun": "Random Item Speedrun",
 
     "gui.game_start_screen.title": "Random Item Speedrun",
+    "gui.game_start_screen.entry": "%1$s %2$s",
 
     "text.autoconfig.random_item_speedrun.title": "Random Item Speedrun Settings",
     "text.autoconfig.random_item_speedrun.option.bool": "Bool"
