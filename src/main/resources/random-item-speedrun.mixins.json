@@ -1,0 +1,12 @@
+{
+    "required": true,
+    "package": "com.bizcub.randomItemSpeedrun.mixin",
+    "injectors": {
+        "defaultRequire": 1
+    },
+    "mixins": [
+    ],
+    "client": [
+        "OptionsMixin"
+    ]
+}
