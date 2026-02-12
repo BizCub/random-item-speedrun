@@ -10,11 +10,13 @@ import java.util.ArrayList;
 public class SpeedrunWidget extends ObjectSelectionList<SpeedrunEntry> {
 
     public ArrayList<SpeedrunEntry> entries = new ArrayList<>();
+    public GameStartScreen screen;
 
     private SpeedrunEntry lastSelectedEntry;
 
-    public SpeedrunWidget(Minecraft minecraft, int i, int j, int k, int l) {
+    public SpeedrunWidget(Minecraft minecraft, int i, int j, int k, int l, GameStartScreen screen) {
         super(minecraft, i, j, k, l);
+        this.screen = screen;
         refreshEntries("");
     }
 
@@ -31,11 +33,11 @@ public class SpeedrunWidget extends ObjectSelectionList<SpeedrunEntry> {
         entries.add(new SpeedrunEntry(new Speedrun(new ItemStack(Items.QUARTZ), false, 1, 1770894351737L)));
         entries.add(new SpeedrunEntry(new Speedrun(new ItemStack(Items.FERN), true, 1, 1770894451537L)));
 
-        entries.forEach(entry -> {
-            if (entry.speedrun.itemStack().getItem().getName().getString().toLowerCase().contains(searchTerm.toLowerCase()))
-                this.addEntry(entry);
-        });
-        this.setFocused(entries.get(0));
+        entries.removeIf(entry -> !entry.speedrun.itemStack().getItem().getName().getString().toLowerCase().contains(searchTerm.toLowerCase()));
+        entries.forEach(this::addEntry);
+        if (!entries.isEmpty()) this.setFocused(entries.get(0));
+
+        screen.changeFocus();
     }
 
     protected SpeedrunEntry getFocusedSpeedrunEntry() {
