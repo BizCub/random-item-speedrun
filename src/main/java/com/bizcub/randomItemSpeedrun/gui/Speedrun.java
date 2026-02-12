@@ -6,6 +6,6 @@ public record Speedrun(
         ItemStack itemStack,
         boolean isSuccess,
         int time,
-        int date
+        long date
 ) {
 }
