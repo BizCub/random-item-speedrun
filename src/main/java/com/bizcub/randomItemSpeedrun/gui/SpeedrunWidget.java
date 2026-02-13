@@ -1,5 +1,6 @@
 package com.bizcub.randomItemSpeedrun.gui;
 
+import com.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.ObjectSelectionList;
 import net.minecraft.world.item.ItemStack;
@@ -24,14 +25,15 @@ public class SpeedrunWidget extends ObjectSelectionList<SpeedrunEntry> {
         this.clearEntries();
         entries.clear();
 
-        entries.add(new SpeedrunEntry(new Speedrun(new ItemStack(Items.ITEM_FRAME), true, 1, 1771894451737L)));
-        entries.add(new SpeedrunEntry(new Speedrun(new ItemStack(Items.ICE), true, 1, 177089445137L)));
-        entries.add(new SpeedrunEntry(new Speedrun(new ItemStack(Items.GLASS), false, 1, 1770894451237L)));
-        entries.add(new SpeedrunEntry(new Speedrun(new ItemStack(Items.TARGET), true, 1, 1770894451734L)));
-        entries.add(new SpeedrunEntry(new Speedrun(new ItemStack(Items.INFESTED_STONE), true, 1, 1770894451736L)));
-        entries.add(new SpeedrunEntry(new Speedrun(new ItemStack(Items.GHAST_TEAR), true, 1, 1770894461737L)));
-        entries.add(new SpeedrunEntry(new Speedrun(new ItemStack(Items.QUARTZ), false, 1, 1770894351737L)));
-        entries.add(new SpeedrunEntry(new Speedrun(new ItemStack(Items.FERN), true, 1, 1770894451537L)));
+        entries.add(new SpeedrunEntry(new Speedrun(new ItemStack(Items.ITEM_FRAME), true, 11, 1771894451737L)));
+        entries.add(new SpeedrunEntry(new Speedrun(new ItemStack(Items.ICE), true, 87558, 177089445137L)));
+        entries.add(new SpeedrunEntry(new Speedrun(new ItemStack(Items.GLASS), false, 5321, 1770894451237L)));
+        entries.add(new SpeedrunEntry(new Speedrun(new ItemStack(Items.TARGET), true, 41, 1770894451734L)));
+        entries.add(new SpeedrunEntry(new Speedrun(new ItemStack(Items.INFESTED_STONE), true, 111, 1770894451736L)));
+        entries.add(new SpeedrunEntry(new Speedrun(new ItemStack(Items.GHAST_TEAR), true, 901, 1770894461737L)));
+        entries.add(new SpeedrunEntry(new Speedrun(new ItemStack(Items.QUARTZ), false, 12, 1770894351737L)));
+        entries.add(new SpeedrunEntry(new Speedrun(new ItemStack(Items.FERN), true, 71, 1770894451537L)));
+        entries.add(new SpeedrunEntry(new Speedrun(new ItemStack(Items.WAXED_EXPOSED_COPPER_GOLEM_STATUE), true, 3324271, 1770894461537L)));
 
         entries.removeIf(entry -> !entry.speedrun.itemStack().getItem().getName().getString().toLowerCase().contains(searchTerm.toLowerCase()));
         entries.forEach(this::addEntry);
@@ -52,11 +54,11 @@ public class SpeedrunWidget extends ObjectSelectionList<SpeedrunEntry> {
 
     @Override
     protected int scrollBarX() {
-        return (int) (getWidth() / 1.02);
+        return Utils.getPercent(getWidth(), 98.5);
     }
 
     @Override
     public int getRowWidth() {
-        return (int) (getWidth() / 1.07);
+        return Utils.getPercent(getWidth(), 94);
     }
 }

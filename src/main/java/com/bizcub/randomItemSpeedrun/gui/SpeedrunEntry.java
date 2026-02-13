@@ -1,5 +1,6 @@
 package com.bizcub.randomItemSpeedrun.gui;
 
+import com.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -24,24 +25,25 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
                 this.speedrun.isSuccess()
                         ? Identifier.withDefaultNamespace("pending_invite/accept")
                         : Identifier.withDefaultNamespace("pending_invite/reject"),
-                (int) (this.getWidth() * 0.05),
-                this.getY() + (int) (this.getHeight() / 7),
+                Utils.getPercent(this.getWidth(), 5),
+                this.getY() + Utils.getPercent(this.getHeight(), 17),
                 20,
                 20
         );
         guiGraphics.renderItem(
                 this.speedrun.itemStack(),
-                (int) (this.getWidth() * 0.15),
-                this.getY() + (int) (this.getHeight() / 5.3)
+                Utils.getPercent(this.getWidth(), 12),
+                this.getY() + Utils.getPercent(getHeight(), 22)
         );
         guiGraphics.drawString(
                 this.client.font,
                 Component.translatable("gui.game_start_screen.entry",
                         this.speedrun.itemStack().getItem().getName(),
-                        Component.literal("- " + this.speedrun.time()).withStyle(ChatFormatting.GRAY)
+                        Component.translatable("gui.game_start_screen.entry.separator").withStyle(ChatFormatting.GRAY),
+                        Utils.getTimeComponent(speedrun.time(), ChatFormatting.GRAY)
                 ),
-                (int) (this.getWidth() * 0.23),
-                this.getY() + (int) (this.getHeight() / 2.6),
+                Utils.getPercent(this.getWidth(), 18),
+                this.getY() + Utils.getPercent(getHeight(), 37),
                 -1
         );
     }

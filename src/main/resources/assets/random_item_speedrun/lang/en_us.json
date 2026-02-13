@@ -3,9 +3,17 @@
     "key.category.minecraft.random_item_speedrun": "Random Item Speedrun",
 
     "gui.game_start_screen.title": "Random Item Speedrun",
-    "gui.game_start_screen.entry": "%1$s %2$s",
+    "gui.game_start_screen.entry": "%1$s%2$s%3$s",
+    "gui.game_start_screen.entry.separator": " - ",
+    "gui.game_start_screen.cloth_config_is_not_loaded": "Cloth Config is not loaded!",
+    "gui.game_start_screen.start_button": "Start Game",
     "gui.game_start_screen.side_panel.item": "Item: %s",
     "gui.game_start_screen.side_panel.time": "Time: %s",
+    "gui.game_start_screen.side_panel.time.time": "%1$s%2$s%3$s%4$s",
+    "gui.game_start_screen.side_panel.time.seconds": "%ss",
+    "gui.game_start_screen.side_panel.time.minutes": "%sm ",
+    "gui.game_start_screen.side_panel.time.hours": "%sh ",
+    "gui.game_start_screen.side_panel.time.days": "%sd ",
     "gui.game_start_screen.side_panel.date": "Date: %s",
 
     "text.autoconfig.random_item_speedrun.title": "Random Item Speedrun Settings",

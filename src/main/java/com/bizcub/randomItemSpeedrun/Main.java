@@ -1,5 +1,6 @@
 package com.bizcub.randomItemSpeedrun;
 
+import com.bizcub.randomItemSpeedrun.config.Compat;
 import com.bizcub.randomItemSpeedrun.config.Configs;
 import com.bizcub.randomItemSpeedrun.gui.GameStartScreen;
 import com.mojang.blaze3d.platform.InputConstants;
@@ -26,7 +27,7 @@ public class Main {
     public static List<String> allItemsId = new ArrayList<>();
 
     public static void init() {
-        Configs.init();
+        if (Compat.isClothConfigLoaded()) Configs.init();
         itemsInit();
 
         KeyMapping.Category CATEGORY = new KeyMapping.Category(
