@@ -50,6 +50,8 @@ public class Utils {
 
     public static void renderHud(GuiGraphics guiGraphics, DeltaTracker tickCounter) {
         Game game = Main.game;
+        if (!game.isStarted() || !Configs.getInstance().isHudRender) return;
+
         double offsetXPercent = 1;
         double offsetYPercent = 1.5;
         int color = Configs.getInstance().hudColor + 0xff000000;

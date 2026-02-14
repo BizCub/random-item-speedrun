@@ -4,6 +4,8 @@ import com.bizcub.randomItemSpeedrun.gui.Speedrun;
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Random;
@@ -23,6 +25,11 @@ public class Game {
     public void stop(boolean success) {
         this.isStart = false;
         Main.speedruns.add(new Speedrun(this.itemStack, success, this.time / 20, System.currentTimeMillis()));
+        var player = Minecraft.getInstance().player;
+        if (player != null && success) {
+            player.displayClientMessage(Component.translatable("chat.game_is_stopped", itemStack.getItemName()), false);
+            player.level().playPlayerSound(SoundEvents.BELL_BLOCK, SoundSource.PLAYERS, 5.0F, 1.0F);
+        }
     }
 
     public void buttonPressed() {

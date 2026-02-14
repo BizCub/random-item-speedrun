@@ -1,3 +1,4 @@
+//? fabric {
 package com.bizcub.randomItemSpeedrun.platform;
 
 import com.bizcub.randomItemSpeedrun.Main;
@@ -25,4 +26,4 @@ public class Fabric implements ClientModInitializer {
             return PlatformInit::getScreen;
         }
     }
-}
+}//?}

@@ -1,0 +1,28 @@
+{
+    "key.random_item_speedrun.start.open_game_start_screen": "Открыть экран",
+    "key.category.minecraft.random_item_speedrun": "Random Item Speedrun",
+
+    "gui.game_start_screen.title": "Random Item Speedrun",
+    "gui.game_start_screen.entry": "%1$s%2$s%3$s",
+    "gui.game_start_screen.entry.separator": " - ",
+    "gui.game_start_screen.cloth_config_is_not_loaded": "Cloth Config не загружен!",
+    "gui.game_start_screen.start_button.not_started": "Начать игру",
+    "gui.game_start_screen.start_button.started": "Завершить игру",
+    "gui.game_start_screen.side_panel.item": "Предмет: %s",
+    "gui.game_start_screen.side_panel.time": "Время: %s",
+    "gui.game_start_screen.side_panel.time.time": "%1$s%2$s%3$s%4$s",
+    "gui.game_start_screen.side_panel.time.seconds": "%sс",
+    "gui.game_start_screen.side_panel.time.minutes": "%sм ",
+    "gui.game_start_screen.side_panel.time.hours": "%sч ",
+    "gui.game_start_screen.side_panel.time.days": "%sд ",
+    "gui.game_start_screen.side_panel.date": "Дата: %s",
+
+    "chat.game_is_stopped": "Предмет %s найден!",
+
+    "text.autoconfig.random_item_speedrun.title": "Настройки Random Item Speedrun",
+    "text.autoconfig.random_item_speedrun.option.isHudRender": "Отображать оверлей",
+    "text.autoconfig.random_item_speedrun.option.isHudRender.@Tooltip": "Должны ли время и предмет отображаться на экране?",
+    "text.autoconfig.random_item_speedrun.option.hudColor": "Цвет оверлея",
+
+    "modmenu.descriptionTranslation.random_item_speedrun": "Этот мод позволит вам проверить свои знания в игре и умение быстро находить предметы"
+}

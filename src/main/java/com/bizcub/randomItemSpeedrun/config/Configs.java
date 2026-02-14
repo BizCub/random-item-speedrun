@@ -18,6 +18,9 @@ public class Configs implements ConfigData {
         return AutoConfig.getConfigHolder(Configs.class).getConfig();
     }
 
+    @ConfigEntry.Gui.Tooltip
+    public boolean isHudRender = true;
+
     @ConfigEntry.ColorPicker
     public int hudColor = 0xffffff;
 }
