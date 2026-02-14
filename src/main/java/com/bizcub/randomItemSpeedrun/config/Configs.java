@@ -1,17 +1,19 @@
 package com.bizcub.randomItemSpeedrun.config;
 
 import com.bizcub.randomItemSpeedrun.Main;
+import com.bizcub.randomItemSpeedrun.util.Utils;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 
-@Config(name = Main.MOD_ID)
+@Config(name = Main.MOD_ID + "/config")
 public class Configs implements ConfigData {
 
     public static void init() {
         AutoConfig.register(Configs.class, GsonConfigSerializer::new);
+        Utils.readSpeedruns();
     }
 
     public static Configs getInstance() {

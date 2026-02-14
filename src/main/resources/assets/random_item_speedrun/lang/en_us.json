@@ -19,8 +19,8 @@
 
     "chat.game_is_stopped": "%s item found!",
 
-    "text.autoconfig.random_item_speedrun.title": "Random Item Speedrun Settings",
-    "text.autoconfig.random_item_speedrun.option.isHudRender": "Display HUD",
-    "text.autoconfig.random_item_speedrun.option.isHudRender.@Tooltip": "Should time and item be displayed on the screen?",
-    "text.autoconfig.random_item_speedrun.option.hudColor": "HUD Color"
+    "text.autoconfig.random_item_speedrun/config.title": "Random Item Speedrun Settings",
+    "text.autoconfig.random_item_speedrun/config.option.isHudRender": "Display HUD",
+    "text.autoconfig.random_item_speedrun/config.option.isHudRender.@Tooltip": "Should time and item be displayed on the screen?",
+    "text.autoconfig.random_item_speedrun/config.option.hudColor": "HUD Color"
 }

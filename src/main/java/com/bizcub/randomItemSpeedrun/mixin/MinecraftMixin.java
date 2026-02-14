@@ -35,10 +35,10 @@ public class MinecraftMixin {
         Game game = Main.game;
 
         if (server != null && player != null && !server.isPaused() && game.isStarted()) {
-            String itemId = Utils.convertComponentToId(Utils.getIdFromItemStack(game.getItemStack()));
+            String itemId = Utils.convertComponentToId(Utils.getNameFromItemStack(game.getItemStack()));
             ArrayList<String> itemsId = new ArrayList<>();
             player.inventoryMenu.getItems().forEach(item ->
-                    itemsId.add(Utils.convertComponentToId(Utils.getIdFromItemStack(item))));
+                    itemsId.add(Utils.convertComponentToId(Utils.getNameFromItemStack(item))));
 
             game.addTick();
             if (itemsId.contains(itemId)) {

@@ -17,12 +17,14 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import org.lwjgl.glfw.GLFW;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
 public class Main {
     public static final String MOD_ID = /*$ mod_id*/ "random_item_speedrun";
+    public static final File SPEEDRUNS_FILE = new File("config/" + MOD_ID + "/speedruns.json");
 
     public static List<String> allItemsId = new ArrayList<>();
     public static ArrayList<Speedrun> speedruns = new ArrayList<>();

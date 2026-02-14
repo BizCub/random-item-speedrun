@@ -3,6 +3,10 @@ package com.bizcub.randomItemSpeedrun.util;
 import com.bizcub.randomItemSpeedrun.Game;
 import com.bizcub.randomItemSpeedrun.Main;
 import com.bizcub.randomItemSpeedrun.config.Configs;
+import com.bizcub.randomItemSpeedrun.gui.Speedrun;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -11,6 +15,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.List;
 
 public class Utils {
 
@@ -45,6 +55,10 @@ public class Utils {
     }
 
     public static String getIdFromItemStack(ItemStack itemStack) {
+        return convertComponentToId(itemStack.getItem().getName().getContents().toString());
+    }
+
+    public static String getNameFromItemStack(ItemStack itemStack) {
         return itemStack.getItem().getName().getString();
     }
 
@@ -71,5 +85,25 @@ public class Utils {
                 Utils.getPercent(guiGraphics.guiWidth(), offsetYPercent),
                 color
         );
+    }
+
+    public static void readSpeedruns() {
+        Gson gson = new Gson();
+        try (FileReader reader = new FileReader(Main.SPEEDRUNS_FILE)) {
+            Type listType = new TypeToken<List<Speedrun>>() {}.getType();
+            List<Speedrun> tests = gson.fromJson(reader, listType);
+            Main.speedruns.addAll(tests);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeSpeedruns() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try (FileWriter writer = new FileWriter(Main.SPEEDRUNS_FILE)) {
+            gson.toJson(Main.speedruns, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

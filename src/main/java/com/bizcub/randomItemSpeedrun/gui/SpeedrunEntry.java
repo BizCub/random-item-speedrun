@@ -31,14 +31,14 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
                 20
         );
         guiGraphics.renderItem(
-                this.speedrun.itemStack(),
+                this.speedrun.getItem(),
                 Utils.getPercent(this.getWidth(), 12),
                 this.getY() + Utils.getPercent(getHeight(), 22)
         );
         guiGraphics.drawString(
                 this.client.font,
                 Component.translatable("gui.game_start_screen.entry",
-                        this.speedrun.itemStack().getItem().getName(),
+                        this.speedrun.getItem().getItem().getName(),
                         Component.translatable("gui.game_start_screen.entry.separator").withStyle(ChatFormatting.GRAY),
                         Utils.getTimeComponent(speedrun.time(), ChatFormatting.GRAY.getColor())
                 ),
@@ -50,6 +50,6 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
 
     @Override
     public Component getNarration() {
-        return Component.translatable("narrator.select", speedrun.itemStack().getItem());
+        return Component.translatable("narrator.select", speedrun.getItem().getItem());
     }
 }

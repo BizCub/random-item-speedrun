@@ -19,10 +19,10 @@
 
     "chat.game_is_stopped": "Предмет %s найден!",
 
-    "text.autoconfig.random_item_speedrun.title": "Настройки Random Item Speedrun",
-    "text.autoconfig.random_item_speedrun.option.isHudRender": "Отображать оверлей",
-    "text.autoconfig.random_item_speedrun.option.isHudRender.@Tooltip": "Должны ли время и предмет отображаться на экране?",
-    "text.autoconfig.random_item_speedrun.option.hudColor": "Цвет оверлея",
+    "text.autoconfig.random_item_speedrun/config.title": "Настройки Random Item Speedrun",
+    "text.autoconfig.random_item_speedrun/config.option.isHudRender": "Отображать оверлей",
+    "text.autoconfig.random_item_speedrun/config.option.isHudRender.@Tooltip": "Должны ли время и предмет отображаться на экране?",
+    "text.autoconfig.random_item_speedrun/config.option.hudColor": "Цвет оверлея",
 
     "modmenu.descriptionTranslation.random_item_speedrun": "Этот мод позволит вам проверить свои знания в игре и умение быстро находить предметы"
 }

@@ -12,8 +12,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import org.jspecify.annotations.Nullable;
 
 public class GameStartScreen extends Screen {
@@ -94,9 +92,9 @@ public class GameStartScreen extends Screen {
         if (!Main.speedruns.isEmpty())
             focusedSpeedrun = this.speedrunWidget.getFocusedSpeedrunEntry().speedrun;
         else
-            focusedSpeedrun = new Speedrun(new ItemStack(Items.AIR), false, 0, 0);
+            focusedSpeedrun = new Speedrun("air", false, 0, 0);
 
-        this.itemDisplayWidget = new ScaledItemDisplayWidget(getWidthPercent(77), getHeightPercent(14), focusedSpeedrun.itemStack(), 5);
+        this.itemDisplayWidget = new ScaledItemDisplayWidget(getWidthPercent(77), getHeightPercent(14), focusedSpeedrun.getItem(), 5);
 
         int offsetX = getWidthPercent(68.25);
         this.speedrunInfoWidget = new SpeedrunInfoWidget(this.minecraft, /* size */ getWidthPercent(32), getHeightPercent(45), /* pos Y */ getHeightPercent(45.2), /* size entry */ getHeightPercent(4), this, offsetX, focusedSpeedrun);
