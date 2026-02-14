@@ -3,6 +3,8 @@ package com.bizcub.randomItemSpeedrun;
 import com.bizcub.randomItemSpeedrun.config.Compat;
 import com.bizcub.randomItemSpeedrun.config.Configs;
 import com.bizcub.randomItemSpeedrun.gui.GameStartScreen;
+import com.bizcub.randomItemSpeedrun.gui.Speedrun;
+import com.bizcub.randomItemSpeedrun.util.Utils;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -13,22 +15,26 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Stream;
 
 public class Main {
     public static final String MOD_ID = /*$ mod_id*/ "random_item_speedrun";
 
     public static List<String> allItemsId = new ArrayList<>();
+    public static ArrayList<Speedrun> speedruns = new ArrayList<>();
+    public static Game game;
 
     public static void init() {
         if (Compat.isClothConfigLoaded()) Configs.init();
-        itemsInit();
+
+        game = new Game();
+
+        fillItemsList();
+        removeImpossibleItems();
 
         KeyMapping.Category CATEGORY = new KeyMapping.Category(
                 Identifier.withDefaultNamespace(Main.MOD_ID)
@@ -48,36 +54,10 @@ public class Main {
         });
     }
 
-    public static String getRandomItem() {
-        Random random = new Random();
-        return allItemsId.get(random.nextInt(allItemsId.size()));
-    }
-
-    public static ItemStack getItemStackFromId(String id) {
-        Identifier identifier = Identifier.parse("minecraft:" + id);
-        Item item = BuiltInRegistries.ITEM.get(identifier).orElseThrow().value();
-        return new ItemStack(item, 1);
-    }
-
-    public static String convertComponentToId(String tabId) {
-        int firstIndex = tabId.indexOf("'");
-        if (tabId.startsWith("key=", firstIndex - 4)) {
-            tabId = tabId.substring(firstIndex + 1);
-            tabId = tabId.substring(0, tabId.indexOf("'"));
-            tabId = tabId.substring(tabId.lastIndexOf(".") + 1);
-        }
-        return tabId;
-    }
-
-    private static void itemsInit() {
-        fillItemsList();
-        removeImpossibleItems();
-    }
-
     private static void fillItemsList() {
         Registry<Item> itemRegistry = BuiltInRegistries.ITEM;
         Stream<Holder.Reference<Item>> items = itemRegistry.listElements();
-        items.toList().forEach(holder -> allItemsId.add(convertComponentToId(holder.value().asItem().getName().getContents().toString())));
+        items.toList().forEach(holder -> allItemsId.add(Utils.convertComponentToId(holder.value().asItem().getName().getContents().toString())));
     }
 
     private static void removeImpossibleItems() {

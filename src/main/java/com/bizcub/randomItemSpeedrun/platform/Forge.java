@@ -1,5 +1,5 @@
 //? forge {
-/*package com.bizcub.randomItemSpeedrun.platforms;
+/*package com.bizcub.randomItemSpeedrun.platform;
 
 import net.minecraftforge.fml.common.Mod;
 

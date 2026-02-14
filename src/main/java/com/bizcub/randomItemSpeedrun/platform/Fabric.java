@@ -1,4 +1,4 @@
-package com.bizcub.randomItemSpeedrun.platforms;
+package com.bizcub.randomItemSpeedrun.platform;
 
 import com.bizcub.randomItemSpeedrun.Main;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;

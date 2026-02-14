@@ -28,7 +28,7 @@ public class Time {
     public String getSeconds() {
         String secondsStr = "";
         if (this.seconds != -1) {
-            if (this.seconds < 10 && minutes != 0) secondsStr = "0" + secondsStr;
+            if (this.seconds < 10 && minutes != -1) secondsStr = "0" + secondsStr;
             secondsStr += this.seconds;
         }
         return secondsStr;
@@ -37,7 +37,7 @@ public class Time {
     public String getMinutes() {
         String minutesStr = "";
         if (this.minutes != -1) {
-            if (this.minutes < 10 && hours != 0) minutesStr = "0" + minutesStr;
+            if (this.minutes < 10 && hours != -1) minutesStr = "0" + minutesStr;
             minutesStr += this.minutes;
         }
         return minutesStr;
@@ -46,7 +46,7 @@ public class Time {
     public String getHours() {
         String hoursStr = "";
         if (this.hours != -1) {
-            if (this.hours < 10 && days != 0) hoursStr = "0" + hoursStr;
+            if (this.hours < 10 && days != -1) hoursStr = "0" + hoursStr;
             hoursStr += this.hours;
         }
         return hoursStr;

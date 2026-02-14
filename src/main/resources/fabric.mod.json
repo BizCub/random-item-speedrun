@@ -15,10 +15,10 @@
     },
     "entrypoints": {
         "client": [
-            "com.bizcub.randomItemSpeedrun.platforms.Fabric"
+            "com.bizcub.randomItemSpeedrun.platform.Fabric"
         ],
         "modmenu": [
-            "com.bizcub.randomItemSpeedrun.platforms.Fabric$ModMenu"
+            "com.bizcub.randomItemSpeedrun.platform.Fabric$ModMenu"
         ]
     },
     "mixins": [

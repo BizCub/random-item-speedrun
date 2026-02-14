@@ -3,7 +3,7 @@ package com.bizcub.randomItemSpeedrun.gui;
 import com.bizcub.randomItemSpeedrun.Main;
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import com.bizcub.randomItemSpeedrun.config.Compat;
-import com.bizcub.randomItemSpeedrun.platforms.PlatformInit;
+import com.bizcub.randomItemSpeedrun.platform.PlatformInit;
 import net.minecraft.client.gui.ComponentPath;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.*;
@@ -12,10 +12,13 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import org.jspecify.annotations.Nullable;
 
 public class GameStartScreen extends Screen {
     private EditBox searchBox;
+    private Button startButton;
     private SpeedrunWidget speedrunWidget;
     private SpeedrunInfoWidget speedrunInfoWidget;
     private ScaledItemDisplayWidget itemDisplayWidget;
@@ -39,9 +42,10 @@ public class GameStartScreen extends Screen {
         settingsButton.setPosition(getWidthPercent(1), getHeightPercent(2.5));
 
         addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, button -> onClose()).pos(this.width / 2 + 4, getHeightPercent(91.5)).size(125, 20).build());
-        Button startButton = addRenderableWidget(Button.builder(Component.translatable("gui.game_start_screen.start_button"), button -> {}).pos(this.width / 2 - 129, getHeightPercent(91.5)).size(125, 20).build());
+        startButton = addRenderableWidget(Button.builder(Component.empty(), button -> changeGameStatus()).pos(this.width / 2 - 129, getHeightPercent(91.5)).size(125, 20).build());
+        setStartButtonMessage();
 
-        this.speedrunWidget = addRenderableWidget(new SpeedrunWidget(this.minecraft, /* size */ getWidthPercent(66), getHeightPercent(79), /* pos Y */ getHeightPercent(11), /* size entry */ getHeightPercent(10), this));
+        this.speedrunWidget = addRenderableWidget(new SpeedrunWidget(this.minecraft, /* size */ getWidthPercent(66), getHeightPercent(79), /* pos Y */ getHeightPercent(11), /* size entry */ getHeightPercent(10)));
 
         if (!Compat.isClothConfigLoaded()) {
             settingsButton.active = false;
@@ -51,6 +55,23 @@ public class GameStartScreen extends Screen {
         }
 
         changeFocus();
+    }
+
+    private void changeGameStatus() {
+        Main.game.buttonPressed();
+        setStartButtonMessage();
+
+        if (Main.game.isStarted())
+            this.onClose();
+        else
+            this.speedrunWidget.refreshEntries("");
+    }
+
+    private void setStartButtonMessage() {
+        if (Main.game.isStarted())
+            startButton.setMessage(Component.translatable("gui.game_start_screen.start_button.started"));
+        else
+            startButton.setMessage(Component.translatable("gui.game_start_screen.start_button.not_started"));
     }
 
     @Override
@@ -68,7 +89,12 @@ public class GameStartScreen extends Screen {
 
     public void changeFocus() {
         if (speedrunWidget == null) return;
-        Speedrun focusedSpeedrun = this.speedrunWidget.getFocusedSpeedrunEntry().speedrun;
+
+        Speedrun focusedSpeedrun;
+        if (!Main.speedruns.isEmpty())
+            focusedSpeedrun = this.speedrunWidget.getFocusedSpeedrunEntry().speedrun;
+        else
+            focusedSpeedrun = new Speedrun(new ItemStack(Items.AIR), false, 0, 0);
 
         this.itemDisplayWidget = new ScaledItemDisplayWidget(getWidthPercent(77), getHeightPercent(14), focusedSpeedrun.itemStack(), 5);
 
