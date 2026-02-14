@@ -18,5 +18,5 @@
     "gui.game_start_screen.side_panel.date": "Date: %s",
 
     "text.autoconfig.random_item_speedrun.title": "Random Item Speedrun Settings",
-    "text.autoconfig.random_item_speedrun.option.bool": "Bool"
+    "text.autoconfig.random_item_speedrun.option.hudColor": "HUD Color"
 }

@@ -18,16 +18,10 @@ public class Game {
         this.time = 0;
         this.isStart = true;
         this.itemStack = Utils.getItemStackFromId(getRandomItem());
-        if (Minecraft.getInstance().player != null) {
-            Minecraft.getInstance().player.displayClientMessage(itemStack.getItem().getName(), false);
-        }
     }
 
     public void stop(boolean success) {
         this.isStart = false;
-        if (Minecraft.getInstance().player != null) {
-            Minecraft.getInstance().player.displayClientMessage(Component.literal("game is stopped"), false);
-        }
         Main.speedruns.add(new Speedrun(this.itemStack, success, this.time / 20, System.currentTimeMillis()));
     }
 
@@ -44,12 +38,16 @@ public class Game {
         return Main.allItemsId.get(random.nextInt(Main.allItemsId.size()));
     }
 
+    public boolean isStarted() {
+        return isStart;
+    }
+
     public void addTick() {
         time++;
     }
 
-    public boolean isStarted() {
-        return isStart;
+    public int getTime() {
+        return time;
     }
 
     public ItemStack getItemStack() {

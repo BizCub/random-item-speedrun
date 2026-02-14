@@ -17,7 +17,15 @@ public class MinecraftMixin {
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void tick(CallbackInfo ci) {
+        renderItem();
         checkCollectItem();
+    }
+
+    @Unique
+    private void renderItem() {
+        if (Main.game.getTime() == 0) {
+            Minecraft.getInstance().gameRenderer.displayItemActivation(Main.game.getItemStack());
+        }
     }
 
     @Unique

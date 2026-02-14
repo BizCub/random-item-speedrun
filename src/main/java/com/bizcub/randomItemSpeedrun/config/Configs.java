@@ -4,6 +4,7 @@ import com.bizcub.randomItemSpeedrun.Main;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 
 @Config(name = Main.MOD_ID)
@@ -17,5 +18,6 @@ public class Configs implements ConfigData {
         return AutoConfig.getConfigHolder(Configs.class).getConfig();
     }
 
-    public boolean bool = false;
+    @ConfigEntry.ColorPicker
+    public int hudColor = 0xffffff;
 }

@@ -61,7 +61,7 @@ public class Main {
     }
 
     private static void removeImpossibleItems() {
-        List<String> removableItems = List.of("air", "debug_stick", "bedrock", "barrier", "jigsaw", "light", "end_portal_frame", "reinforced_deepslate", "farmland", "vault", "suspicious_sand", "suspicious_gravel", "knowledge_book");
+        List<String> removableItems = List.of("player_head", "air", "debug_stick", "bedrock", "barrier", "jigsaw", "light", "end_portal_frame", "reinforced_deepslate", "farmland", "vault", "suspicious_sand", "suspicious_gravel", "knowledge_book");
         allItemsId.removeAll(removableItems);
         allItemsId.removeIf(id -> id.contains("command_block") || id.contains("test") || id.contains("structure") || id.contains("infested_stone") || id.contains("spawn_egg") || id.contains("spawner"));
     }
