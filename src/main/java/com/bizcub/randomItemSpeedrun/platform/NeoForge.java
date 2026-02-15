@@ -28,9 +28,10 @@ public class NeoForge {
     @SubscribeEvent
     public static void onKeyInput(InputEvent.Key event) {
         if (event.getAction() == InputConstants.PRESS &&
-                /^? >=1.21.9^/ //Constants.MY_KEYBIND.isActiveAndMatches(InputConstants.getKey(event.getKeyEvent()))
-                /^? <=1.21.8^/ Constants.MY_KEYBIND.isActiveAndMatches(InputConstants.getKey(event.getKey(), event.getScanCode()))
-        ) {
+                Constants.MY_KEYBIND.isActiveAndMatches(InputConstants.getKey(
+                        /^? >=1.21.9^/ //event.getKeyEvent()
+                        /^? <=1.21.8^/ event.getKey(), event.getScanCode()
+        ))) {
             Minecraft.getInstance().setScreen(new GameStartScreen());
         }
     }

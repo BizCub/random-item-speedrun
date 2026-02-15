@@ -22,7 +22,7 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
     private void render(GuiGraphics guiGraphics, int y, int width, int height) {
         guiGraphics.blitSprite(
                 /*? >=1.21.6*/ RenderPipelines.GUI_TEXTURED,
-                /*? <=1.21.5*/ //RenderType::guiTextured,
+                /*? <=1.21.5 && >=1.21.2*/ //RenderType::guiTextured,
                 this.speedrun.isSuccess()
                         ? Identifier.withDefaultNamespace("pending_invite/accept")
                         : Identifier.withDefaultNamespace("pending_invite/reject"),
@@ -39,7 +39,7 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
         guiGraphics.drawString(
                 this.client.font,
                 Component.translatable("gui.game_start_screen.entry",
-                        this.speedrun.getItem().getItem().getName(),
+                        this.speedrun.getItem().getItemName().getString(),
                         Component.translatable("gui.game_start_screen.entry.separator").withStyle(ChatFormatting.GRAY),
                         Utils.getTimeComponent(speedrun.time(), ChatFormatting.GRAY.getColor())
                 ),

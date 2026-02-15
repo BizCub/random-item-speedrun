@@ -13,7 +13,7 @@ public class ScaledItemDisplayWidget extends AbstractWidget {
     private final int size;
 
     public ScaledItemDisplayWidget(int offsetX, int offsetY, ItemStack itemStack, int size) {
-        super(offsetX, offsetY, offsetX, offsetY, itemStack.getDisplayName());
+        super(offsetX, offsetY, offsetX, offsetY, itemStack.getItemName());
         this.itemStack = itemStack;
         this.offsetX = offsetX;
         this.offsetY = offsetY;

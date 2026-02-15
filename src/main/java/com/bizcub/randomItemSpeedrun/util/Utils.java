@@ -39,18 +39,12 @@ public class Utils {
     }
 
     public static String convertComponentToId(String tabId) {
-        int firstIndex = tabId.indexOf("'");
-        if (tabId.startsWith("key=", firstIndex - 4)) {
-            tabId = tabId.substring(firstIndex + 1);
-            tabId = tabId.substring(0, tabId.indexOf("'"));
-            tabId = tabId.substring(tabId.lastIndexOf(".") + 1);
-        }
-        return tabId;
+        return tabId.substring(tabId.lastIndexOf(".") + 1);
     }
 
     public static ItemStack getItemStackFromId(String id) {
         List<Item> items = BuiltInRegistries.ITEM.stream().toList();
-        ItemStack itemStack = new ItemStack(Items.ACACIA_PLANKS);
+        ItemStack itemStack = new ItemStack(Items.BARRIER);
 
         for (Item item : items) {
             if (getIdFromItemStack(new ItemStack(item)).equals(id)) {
@@ -61,11 +55,11 @@ public class Utils {
     }
 
     public static String getIdFromItemStack(ItemStack itemStack) {
-        return convertComponentToId(itemStack.getItem().getName().getContents().toString());
+        return convertComponentToId(itemStack.getItem().getDescriptionId());
     }
 
     public static String getNameFromItemStack(ItemStack itemStack) {
-        return itemStack.getItem().getName().getString();
+        return itemStack.getItem().getDescriptionId();
     }
 
     public static void renderHud(GuiGraphics guiGraphics) {

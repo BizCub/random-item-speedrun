@@ -27,8 +27,8 @@ public class Main {
 
     private static void fillItemsList() {
         Registry<Item> itemRegistry = BuiltInRegistries.ITEM;
-        var items = itemRegistry.listElements();
-        items.toList().forEach(holder -> allItemsId.add(Utils.convertComponentToId(holder.value().asItem().getName().getContents().toString())));
+        var items = itemRegistry.stream().toList();
+        items.forEach(item -> allItemsId.add(Utils.convertComponentToId(item.getDescriptionId())));
     }
 
     private static void removeImpossibleItems() {

@@ -31,7 +31,7 @@ public class SpeedrunInfoWidget extends ObjectSelectionList<SpeedrunInfoEntry> {
         ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(Instant.ofEpochMilli(speedrun.date()), ZoneId.systemDefault());
         String date = WorldSelectionList.DATE_FORMAT.format(zonedDateTime);
 
-        this.addEntry(new SpeedrunInfoEntry(Component.translatable("gui.game_start_screen.side_panel.item", Component.literal(speedrun.getItem().getItem().getName().getString()).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.GRAY), offsetX));
+        this.addEntry(new SpeedrunInfoEntry(Component.translatable("gui.game_start_screen.side_panel.item", Component.literal(speedrun.getItem().getItemName().getString()).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.GRAY), offsetX));
         this.addEntry(new SpeedrunInfoEntry(Component.translatable("gui.game_start_screen.side_panel.time", Utils.getTimeComponent(speedrun.time(), ChatFormatting.WHITE.getColor())).withStyle(ChatFormatting.GRAY), offsetX));
         this.addEntry(new SpeedrunInfoEntry(Component.translatable("gui.game_start_screen.side_panel.date", Component.literal(date).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.GRAY), offsetX));
     }

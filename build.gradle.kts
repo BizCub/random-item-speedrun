@@ -13,6 +13,12 @@ stonecutter {
     replacements.string(scp >= "1.21.11") {
         replace("ResourceLocation", "Identifier")
     }
+    replacements.string(scp >= "1.21.4") {
+        replace("getScrollbarPosition()", "scrollBarX()")
+    }
+    replacements.string(scp >= "1.21.2") {
+        replace("getDisplayName()", "getItemName()")
+    }
 }
 
 repositories {
