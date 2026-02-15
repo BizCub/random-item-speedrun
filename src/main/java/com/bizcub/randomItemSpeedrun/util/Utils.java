@@ -2,12 +2,12 @@ package com.bizcub.randomItemSpeedrun.util;
 
 import com.bizcub.randomItemSpeedrun.Game;
 import com.bizcub.randomItemSpeedrun.Main;
+import com.bizcub.randomItemSpeedrun.config.Compat;
 import com.bizcub.randomItemSpeedrun.config.Configs;
 import com.bizcub.randomItemSpeedrun.gui.Speedrun;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -62,13 +62,13 @@ public class Utils {
         return itemStack.getItem().getName().getString();
     }
 
-    public static void renderHud(GuiGraphics guiGraphics, DeltaTracker tickCounter) {
+    public static void renderHud(GuiGraphics guiGraphics) {
         Game game = Main.game;
-        if (!game.isStarted() || !Configs.getInstance().isHudRender) return;
+        if (!game.isStarted() || (Compat.isClothConfigLoaded() && !Configs.getInstance().isHudRender)) return;
 
         double offsetXPercent = 1;
         double offsetYPercent = 1.5;
-        int color = Configs.getInstance().hudColor + 0xff000000;
+        int color = Constants.getHudColor();
 
         guiGraphics.drawString(
                 Minecraft.getInstance().font,
@@ -89,7 +89,7 @@ public class Utils {
 
     public static void readSpeedruns() {
         Gson gson = new Gson();
-        try (FileReader reader = new FileReader(Main.SPEEDRUNS_FILE)) {
+        try (FileReader reader = new FileReader(Constants.SPEEDRUNS_FILE)) {
             Type listType = new TypeToken<List<Speedrun>>() {}.getType();
             List<Speedrun> tests = gson.fromJson(reader, listType);
             Main.speedruns.addAll(tests);
@@ -100,7 +100,7 @@ public class Utils {
 
     public static void writeSpeedruns() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        try (FileWriter writer = new FileWriter(Main.SPEEDRUNS_FILE)) {
+        try (FileWriter writer = new FileWriter(Constants.SPEEDRUNS_FILE)) {
             gson.toJson(Main.speedruns, writer);
         } catch (IOException e) {
             e.printStackTrace();

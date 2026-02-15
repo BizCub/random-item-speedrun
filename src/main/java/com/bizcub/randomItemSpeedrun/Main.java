@@ -2,63 +2,32 @@ package com.bizcub.randomItemSpeedrun;
 
 import com.bizcub.randomItemSpeedrun.config.Compat;
 import com.bizcub.randomItemSpeedrun.config.Configs;
-import com.bizcub.randomItemSpeedrun.gui.GameStartScreen;
 import com.bizcub.randomItemSpeedrun.gui.Speedrun;
 import com.bizcub.randomItemSpeedrun.util.Utils;
-import com.mojang.blaze3d.platform.InputConstants;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.KeyMapping;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
-import org.lwjgl.glfw.GLFW;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class Main {
-    public static final String MOD_ID = /*$ mod_id*/ "random_item_speedrun";
-    public static final File SPEEDRUNS_FILE = new File("config/" + MOD_ID + "/speedruns.json");
-
     public static List<String> allItemsId = new ArrayList<>();
     public static ArrayList<Speedrun> speedruns = new ArrayList<>();
     public static Game game;
 
     public static void init() {
         if (Compat.isClothConfigLoaded()) Configs.init();
-
+        Utils.readSpeedruns();
         game = new Game();
 
         fillItemsList();
         removeImpossibleItems();
-
-        KeyMapping.Category CATEGORY = new KeyMapping.Category(
-                Identifier.withDefaultNamespace(Main.MOD_ID)
-        );
-
-        KeyMapping openStartScreen = KeyBindingHelper.registerKeyBinding(new KeyMapping(
-                "key." + MOD_ID + ".start.open_game_start_screen",
-                InputConstants.Type.KEYSYM,
-                GLFW.GLFW_KEY_Y,
-                CATEGORY
-        ));
-
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            while (openStartScreen.consumeClick()) {
-                Minecraft.getInstance().setScreen(new GameStartScreen());
-            }
-        });
     }
 
     private static void fillItemsList() {
         Registry<Item> itemRegistry = BuiltInRegistries.ITEM;
-        Stream<Holder.Reference<Item>> items = itemRegistry.listElements();
+        var items = itemRegistry.listElements();
         items.toList().forEach(holder -> allItemsId.add(Utils.convertComponentToId(holder.value().asItem().getName().getContents().toString())));
     }
 

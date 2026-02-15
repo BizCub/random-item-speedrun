@@ -17,19 +17,20 @@ public class MinecraftMixin {
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void tick(CallbackInfo ci) {
-        renderItem();
-        checkCollectItem();
+        if (Main.game == null) return;
+        ris$renderItem();
+        ris$checkCollectItem();
     }
 
     @Unique
-    private void renderItem() {
+    private void ris$renderItem() {
         if (Main.game.getTime() == 0) {
             Minecraft.getInstance().gameRenderer.displayItemActivation(Main.game.getItemStack());
         }
     }
 
     @Unique
-    private void checkCollectItem() {
+    private void ris$checkCollectItem() {
         var server = Minecraft.getInstance().getSingleplayerServer();
         var player = Minecraft.getInstance().player;
         Game game = Main.game;

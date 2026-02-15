@@ -1,6 +1,7 @@
 package com.bizcub.randomItemSpeedrun.gui;
 
 import com.bizcub.randomItemSpeedrun.Main;
+import com.bizcub.randomItemSpeedrun.util.Constants;
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import com.bizcub.randomItemSpeedrun.config.Compat;
 import com.bizcub.randomItemSpeedrun.platform.PlatformInit;
@@ -12,7 +13,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import org.jspecify.annotations.Nullable;
 
 public class GameStartScreen extends Screen {
     private EditBox searchBox;
@@ -33,9 +33,8 @@ public class GameStartScreen extends Screen {
         this.searchBox = new EditBox(this.font, /* pos */ getWidthPercent(5.7), getHeightPercent(2.5), /* size */ getWidthPercent(22), getHeightPercent(7), this.searchBox, Component.empty());
         this.searchBox.setHint(Component.translatable("gui.language.search"));
         addRenderableWidget(this.searchBox);
-        this.setInitialFocus(this.searchBox);
 
-        Identifier sprite = Identifier.fromNamespaceAndPath(Main.MOD_ID, "settings");
+        Identifier sprite = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "settings");
         SpriteIconButton settingsButton = addRenderableWidget(SpriteIconButton.builder(Component.empty(), button -> this.minecraft.setScreen(PlatformInit.getScreen(this)), true).size(getWidthPercent(3.8), getWidthPercent(3.8)).sprite(sprite, 15, 15).build());
         settingsButton.setPosition(getWidthPercent(1), getHeightPercent(2.5));
 
@@ -47,9 +46,7 @@ public class GameStartScreen extends Screen {
 
         if (!Compat.isClothConfigLoaded()) {
             settingsButton.active = false;
-            startButton.active = false;
             settingsButton.setTooltip(Tooltip.create(Component.translatable("gui.game_start_screen.cloth_config_is_not_loaded")));
-            startButton.setTooltip(Tooltip.create(Component.translatable("gui.game_start_screen.cloth_config_is_not_loaded")));
         }
 
         changeFocus();
@@ -102,7 +99,7 @@ public class GameStartScreen extends Screen {
     }
 
     @Override
-    public void setFocused(@Nullable GuiEventListener guiEventListener) {
+    public void setFocused(GuiEventListener guiEventListener) {
         super.setFocused(guiEventListener);
         changeFocus();
     }

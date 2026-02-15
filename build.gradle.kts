@@ -24,8 +24,8 @@ dependencies {
 
     if (isFabric) {
         modImplementation("net.fabricmc:fabric-loader:latest.release")
-        modImplementation("com.terraformersmc:modmenu:${mod.modmenu}")
         modImplementation("net.fabricmc.fabric-api:fabric-api:${mod.fabric_api}")
+        modImplementation("com.terraformersmc:modmenu:${mod.modmenu}")
     }
     if (isForge) {
         "forge"("net.minecraftforge:forge:${mod.mc}-${dep("forge_loader")}")

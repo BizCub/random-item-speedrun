@@ -50,6 +50,6 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
 
     @Override
     public Component getNarration() {
-        return Component.translatable("narrator.select", speedrun.getItem().getItem());
+        return Component.translatable("narrator.select", speedrun.getItem().getItemName());
     }
 }
