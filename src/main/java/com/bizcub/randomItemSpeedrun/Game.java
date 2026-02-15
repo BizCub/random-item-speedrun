@@ -28,7 +28,17 @@ public class Game {
         var player = Minecraft.getInstance().player;
         if (player != null && success) {
             player.displayClientMessage(Component.translatable("chat.game_is_stopped", itemStack.getItemName()), false);
-            player.level().playPlayerSound(SoundEvents.BELL_BLOCK, SoundSource.PLAYERS, 5.0F, 1.0F);
+            player.level()
+                    /*? >=1.21.5*/.playPlayerSound(
+                    //? <=1.21.4 {
+                    /*.playSound(
+                    player,
+                    player.blockPosition(),*///?}
+                    SoundEvents.BELL_BLOCK,
+                    SoundSource.PLAYERS,
+                    5.0F,
+                    1.0F
+            );
         }
         Utils.writeSpeedruns();
     }

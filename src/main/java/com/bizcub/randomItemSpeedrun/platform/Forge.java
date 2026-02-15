@@ -15,7 +15,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
+/^? >=1.21.6^/ import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
+/^? <=1.21.5^/ //import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 
@@ -29,7 +30,8 @@ public class Forge {
 
     @SubscribeEvent
     public static void onKeyInput(InputEvent.Key event) {
-        if (event.getAction() == InputConstants.PRESS && Constants.MY_KEYBIND.isActiveAndMatches(InputConstants.getKey(event.getInfo()))) {
+        /^? >=1.21.9^/ if (event.getAction() == InputConstants.PRESS && Constants.MY_KEYBIND.isActiveAndMatches(InputConstants.getKey(event.getInfo()))) {
+        /^? <=1.21.8^/ //if (event.getAction() == InputConstants.PRESS && Constants.MY_KEYBIND.isActiveAndMatches(InputConstants.getKey(event.getKey(), event.getScanCode()))) {
             Minecraft.getInstance().setScreen(new GameStartScreen());
         }
     }

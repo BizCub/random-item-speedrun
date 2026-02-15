@@ -8,7 +8,6 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.worldselection.WorldSelectionList;
 import net.minecraft.network.chat.Component;
-import org.jspecify.annotations.Nullable;
 
 import java.time.Instant;
 import java.time.ZoneId;
@@ -43,6 +42,6 @@ public class SpeedrunInfoWidget extends ObjectSelectionList<SpeedrunInfoEntry> {
     }
 
     @Override
-    public void setFocused(@Nullable GuiEventListener guiEventListener) {
+    public void setFocused(GuiEventListener guiEventListener) {
     }
 }

@@ -12,9 +12,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -49,9 +49,15 @@ public class Utils {
     }
 
     public static ItemStack getItemStackFromId(String id) {
-        Identifier identifier = Identifier.parse("minecraft:" + id);
-        Item item = BuiltInRegistries.ITEM.get(identifier).orElseThrow().value();
-        return new ItemStack(item, 1);
+        List<Item> items = BuiltInRegistries.ITEM.stream().toList();
+        ItemStack itemStack = new ItemStack(Items.ACACIA_PLANKS);
+
+        for (Item item : items) {
+            if (getIdFromItemStack(new ItemStack(item)).equals(id)) {
+                return new ItemStack(item);
+            }
+        }
+        return itemStack;
     }
 
     public static String getIdFromItemStack(ItemStack itemStack) {
@@ -98,7 +104,7 @@ public class Utils {
         try (FileReader reader = new FileReader(Constants.SPEEDRUNS_FILE)) {
             Type listType = new TypeToken<List<Speedrun>>() {}.getType();
             List<Speedrun> tests = gson.fromJson(reader, listType);
-            if (!Main.speedruns.isEmpty()) Main.speedruns.addAll(tests);
+            Main.speedruns.addAll(tests);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -5,6 +5,7 @@ import com.bizcub.randomItemSpeedrun.util.Constants;
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import com.bizcub.randomItemSpeedrun.config.Compat;
 import com.bizcub.randomItemSpeedrun.platform.PlatformInit;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.ComponentPath;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.*;
@@ -31,7 +32,7 @@ public class GameStartScreen extends Screen {
     protected void init() {
         super.init();
         this.searchBox = new EditBox(this.font, /* pos */ getWidthPercent(5.7), getHeightPercent(2.5), /* size */ getWidthPercent(22), getHeightPercent(7), this.searchBox, Component.empty());
-        this.searchBox.setHint(Component.translatable("gui.language.search"));
+        this.searchBox.setHint(Component.translatable("gui.recipebook.search_hint").withStyle(ChatFormatting.GRAY));
         addRenderableWidget(this.searchBox);
 
         Identifier sprite = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "settings");

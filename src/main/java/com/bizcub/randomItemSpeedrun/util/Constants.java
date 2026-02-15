@@ -16,7 +16,8 @@ public class Constants {
             "key." + MOD_ID + ".start.open_game_start_screen",
             InputConstants.Type.KEYSYM,
             InputConstants.KEY_Y,
-            KeyMapping.Category.MISC
+            /*? >=1.21.9*/ KeyMapping.Category.MISC
+            /*? <=1.21.8*/ //KeyMapping.CATEGORY_MISC
     );
 
     public static int getHudColor() {

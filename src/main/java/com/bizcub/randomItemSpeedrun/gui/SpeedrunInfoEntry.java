@@ -17,16 +17,27 @@ public class SpeedrunInfoEntry extends ObjectSelectionList.Entry<SpeedrunInfoEnt
         this.offsetX = offsetX;
     }
 
-    @Override
-    public void renderContent(GuiGraphics guiGraphics, int i, int j, boolean bl, float f) {
+    private void render(GuiGraphics guiGraphics, int y, int width, int height) {
         guiGraphics.drawString(
                 this.client.font,
                 component,
-                Utils.getPercent(getWidth(), 3) + offsetX,
-                this.getY() + Utils.getPercent(getHeight(), 37),
+                Utils.getPercent(width, 3) + offsetX,
+                y + Utils.getPercent(height, 37),
                 -1
         );
     }
+
+    //? >= 1.21.9 {
+    @Override
+    public void renderContent(GuiGraphics guiGraphics, int i, int j, boolean bl, float f) {
+        render(guiGraphics, this.getY(), this.getWidth(), this.getHeight());
+    }
+
+    //?} else {
+    /*@Override
+    public void render(GuiGraphics guiGraphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isHovered, float deltaTime) {
+        this.render(guiGraphics, top, width, height);
+    }*///?}
 
     @Override
     public Component getNarration() {

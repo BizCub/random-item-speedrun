@@ -9,6 +9,10 @@ stonecutter {
     constants["is_cloth_config_available"] = isClothConfigAvailable
 
     swaps["mod_id"] = "\"${prop("mod.id")}\";"
+
+    replacements.string(scp >= "1.21.11") {
+        replace("ResourceLocation", "Identifier")
+    }
 }
 
 repositories {
