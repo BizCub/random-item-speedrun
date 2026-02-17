@@ -59,6 +59,7 @@ publishMods {
         projectId = mod.modrinth
         accessToken = tokenDir("modrinth")
         if (isClothConfigAvailable) optional("cloth-config")
+        if (isFabric) requires("fabric-api")
         if (isFabric) optional("modmenu")
         minecraftVersionRange {
             start = mod.pub_start
@@ -70,6 +71,7 @@ publishMods {
         projectId = mod.curseforge
         accessToken = tokenDir("curseforge")
         if (isClothConfigAvailable) optional("cloth-config")
+        if (isFabric) requires("fabric-api")
         if (isFabric) optional("modmenu")
         minecraftVersionRange {
             start = mod.pub_start
