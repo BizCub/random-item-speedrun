@@ -98,7 +98,7 @@ public class Utils {
         try (FileReader reader = new FileReader(Constants.SPEEDRUNS_FILE)) {
             Type listType = new TypeToken<List<Speedrun>>() {}.getType();
             List<Speedrun> tests = gson.fromJson(reader, listType);
-            Main.speedruns.addAll(tests);
+            if (tests != null) Main.speedruns.addAll(tests);
         } catch (IOException e) {
             e.printStackTrace();
         }
