@@ -28,5 +28,9 @@ stonecutter {
         match("1.21.4", fb, fr, nf)
         match("1.21.3", fb, fr, nf)
         match("1.21.1", fb, fr, nf)
+        match("1.20.6", fb, fr)
+        match("1.20.4", fb, fr)
+        match("1.20.2", fb, fr)
+        match("1.20.1", fb, fr)
     }
 }

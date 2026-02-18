@@ -1,7 +1,6 @@
 package com.bizcub.randomItemSpeedrun.gui;
 
 import com.bizcub.randomItemSpeedrun.Main;
-import com.bizcub.randomItemSpeedrun.util.Constants;
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import com.bizcub.randomItemSpeedrun.config.Compat;
 import com.bizcub.randomItemSpeedrun.platform.PlatformInit;
@@ -13,7 +12,6 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
 
 public class GameStartScreen extends Screen {
     private EditBox searchBox;
@@ -31,19 +29,28 @@ public class GameStartScreen extends Screen {
     @Override
     protected void init() {
         super.init();
+        this.speedrunWidget = addRenderableWidget(new SpeedrunWidget(this.minecraft, /* size */
+                /*? >=1.20.3*/ getWidthPercent(66), getHeightPercent(79), /* pos Y */ getHeightPercent(11),
+                /*? <=1.20.2*/ //getWidthPercent(66), height, /* top Y */ getHeightPercent(11), /* down Y */ getHeightPercent(90),
+                /* size entry */ getHeightPercent(10)));
+        /*? <=1.20.5*/ //this.speedrunWidget.setRenderBackground(false);
+        /*? <=1.20.1*/ //this.speedrunWidget.setRenderTopAndBottom(false);
+
         this.searchBox = new EditBox(this.font, /* pos */ getWidthPercent(5.7), getHeightPercent(2.5), /* size */ getWidthPercent(22), getHeightPercent(7), this.searchBox, Component.empty());
         this.searchBox.setHint(Component.translatable("gui.recipebook.search_hint").withStyle(ChatFormatting.GRAY));
         addRenderableWidget(this.searchBox);
 
-        Identifier sprite = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "settings");
-        SpriteIconButton settingsButton = addRenderableWidget(SpriteIconButton.builder(Component.empty(), button -> this.minecraft.setScreen(PlatformInit.getScreen(this)), true).size(getWidthPercent(3.8), getWidthPercent(3.8)).sprite(sprite, 15, 15).build());
-        settingsButton.setPosition(getWidthPercent(1), getHeightPercent(2.5));
+        //? >=1.20.2 {
+        WidgetSprites sprites = new WidgetSprites(Utils.getIdentifier("default"), Utils.getIdentifier("hovered"));
+        ImageButton settingsButton = this.addRenderableWidget(new ImageButton(getWidthPercent(1), getHeightPercent(2.5), getWidthPercent(3.8), getWidthPercent(3.8), sprites, button -> this.minecraft.setScreen(PlatformInit.getScreen(this))));
+        //?} else {
+        /*var sprite = Utils.getIdentifier("textures/gui/sprites/widgets.png");
+        ImageButton settingsButton = this.addRenderableWidget(new ImageButton(getWidthPercent(1), getHeightPercent(2.5), 20, 20, 0, 0, 20, sprite, 32, 64, button -> this.minecraft.setScreen(PlatformInit.getScreen(this))));
+        settingsButton.setPosition(getWidthPercent(1), getHeightPercent(2.5));*///?}
 
         addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, button -> onClose()).pos(this.width / 2 + 4, getHeightPercent(91.5)).size(125, 20).build());
         startButton = addRenderableWidget(Button.builder(Component.empty(), button -> changeGameStatus()).pos(this.width / 2 - 129, getHeightPercent(91.5)).size(125, 20).build());
         setStartButtonMessage();
-
-        this.speedrunWidget = addRenderableWidget(new SpeedrunWidget(this.minecraft, /* size */ getWidthPercent(66), getHeightPercent(79), /* pos Y */ getHeightPercent(11), /* size entry */ getHeightPercent(10)));
 
         if (!Compat.isClothConfigLoaded()) {
             settingsButton.active = false;
@@ -95,8 +102,15 @@ public class GameStartScreen extends Screen {
         this.itemDisplayWidget = new ScaledItemDisplayWidget(getWidthPercent(77), getHeightPercent(14), focusedSpeedrun.getItem(), 5);
 
         int offsetX = getWidthPercent(68.25);
+
+        //? >=1.20.3 {
         this.speedrunInfoWidget = new SpeedrunInfoWidget(this.minecraft, /* size */ getWidthPercent(32), getHeightPercent(45), /* pos Y */ getHeightPercent(45.2), /* size entry */ getHeightPercent(4), this, offsetX, focusedSpeedrun);
         this.speedrunInfoWidget.setX(offsetX);
+        //?} else {
+        /*this.speedrunInfoWidget = new SpeedrunInfoWidget(this.minecraft, /^ size ^/ getWidthPercent(32), height, /^ topY ^/ getHeightPercent(45.2), /^ downY ^/ getHeightPercent(90), /^ size entry ^/ getHeightPercent(4), this, offsetX, focusedSpeedrun);
+        this.speedrunInfoWidget.setLeftPos(offsetX);*///?}
+        /*? <=1.20.5*/ //this.speedrunInfoWidget.setRenderBackground(false);
+        /*? <=1.20.1*/ //this.speedrunInfoWidget.setRenderTopAndBottom(false);
     }
 
     @Override

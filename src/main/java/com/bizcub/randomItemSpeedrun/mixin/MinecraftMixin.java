@@ -35,7 +35,11 @@ public class MinecraftMixin {
         var player = Minecraft.getInstance().player;
         Game game = Main.game;
 
-        if (server != null && player != null && !server.isPaused() && game.isStarted()) {
+        if (server != null && player != null
+                /*? >=1.21*/ && !server.isPaused()
+                /*? <=1.20.5*/ //&& !server.isStopped()
+                && game.isStarted()
+        ) {
             String itemId = Utils.convertComponentToId(Utils.getNameFromItemStack(game.getItemStack()));
             ArrayList<String> itemsId = new ArrayList<>();
             player.inventoryMenu.getItems().forEach(item ->

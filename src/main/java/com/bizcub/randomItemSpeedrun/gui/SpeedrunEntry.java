@@ -14,22 +14,30 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
 
     public Speedrun speedrun;
     protected final Minecraft client = Minecraft.getInstance();
+    private final SpeedrunWidget list;
 
-    public SpeedrunEntry(Speedrun speedrun) {
+    public SpeedrunEntry(Speedrun speedrun, SpeedrunWidget speedrunWidget) {
         this.speedrun = speedrun;
+        this.list = speedrunWidget;
     }
 
     private void render(GuiGraphics guiGraphics, int y, int width, int height) {
-        guiGraphics.blitSprite(
+        Identifier accept =
+                /*? >=1.20.2*/ Utils.getDefaultIdentifier("pending_invite/accept");
+                /*? <=1.20.1*/ //Utils.getCustomIdentifier("realms", "textures/gui/realms/accept_icon.png");
+        Identifier reject =
+                /*? >=1.20.2*/ Utils.getDefaultIdentifier("pending_invite/reject");
+                /*? <=1.20.1*/ //Utils.getCustomIdentifier("realms", "textures/gui/realms/reject_icon.png");
+
+        /*? >=1.20.2*/ guiGraphics.blitSprite(
+        /*? <=1.20.1*/ //guiGraphics.blit(
                 /*? >=1.21.6*/ RenderPipelines.GUI_TEXTURED,
                 /*? <=1.21.5 && >=1.21.2*/ //RenderType::guiTextured,
-                this.speedrun.isSuccess()
-                        ? Identifier.withDefaultNamespace("pending_invite/accept")
-                        : Identifier.withDefaultNamespace("pending_invite/reject"),
+                this.speedrun.isSuccess() ? accept : reject,
                 Utils.getPercent(width, 5),
                 y + Utils.getPercent(height, 17),
-                20,
-                20
+                /*? >=1.20.2*/ 20,20
+                /*? <=1.20.1*/ //0,0, 18, 18, 37, 18
         );
         guiGraphics.renderItem(
                 this.speedrun.getItem(),
@@ -39,7 +47,7 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
         guiGraphics.drawString(
                 this.client.font,
                 Component.translatable("gui.game_start_screen.entry",
-                        this.speedrun.getItem().getItemName().getString(),
+                        Utils.removeBracketsOrDefault(this.speedrun.getItem().getItemName().getString()),
                         Component.translatable("gui.game_start_screen.entry.separator").withStyle(ChatFormatting.GRAY),
                         Utils.getTimeComponent(speedrun.time(), ChatFormatting.GRAY.getColor())
                 ),
@@ -49,7 +57,7 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
         );
     }
 
-    //? >= 1.21.9 {
+    //? >=1.21.9 {
     @Override
     public void renderContent(GuiGraphics guiGraphics, int i, int j, boolean bl, float f) {
         render(guiGraphics, this.getY(), this.getWidth(), this.getHeight());
@@ -59,6 +67,13 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
     /*@Override
     public void render(GuiGraphics guiGraphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isHovered, float deltaTime) {
         render(guiGraphics, top, width, height);
+    }*///?}
+
+    //? <=1.20.4 {
+    /*@Override
+    public boolean mouseClicked(double mouseX, double mouseY, int delta) {
+        list.setSelected(this);
+        return true;
     }*///?}
 
     @Override

@@ -12,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -31,7 +32,7 @@ public class Utils {
                 time.isHoursExist() ? Component.translatable("gui.game_start_screen.side_panel.time.hours", time.getHours()) : Component.empty(),
                 time.isMinutesExist() ? Component.translatable("gui.game_start_screen.side_panel.time.minutes", time.getMinutes()) : Component.empty(),
                 Component.translatable("gui.game_start_screen.side_panel.time.seconds", time.getSeconds())
-        ).withColor(color);
+        ).withStyle(style -> style.withColor(color));
     }
 
     public static int getPercent(int side, double percent) {
@@ -62,6 +63,26 @@ public class Utils {
         return itemStack.getItem().getDescriptionId();
     }
 
+    public static String removeBracketsOrDefault(String string) {
+        /*? >=1.21.2*/ return string;
+        /*? <=1.21.1*/ //return string.substring(1, string.length() - 1);
+    }
+
+    public static Identifier getIdentifier(String id) {
+        /*? >=1.21*/ return Identifier.fromNamespaceAndPath(Constants.MOD_ID, id);
+        /*? <=1.20.6*/ //return new Identifier(Constants.MOD_ID, id);
+    }
+
+    public static Identifier getCustomIdentifier(String location, String id) {
+        /*? >=1.21*/ return Identifier.fromNamespaceAndPath(location, id);
+        /*? <=1.20.6*/ //return new Identifier(location, id);
+    }
+
+    public static Identifier getDefaultIdentifier(String id) {
+        /*? >=1.21*/ return Identifier.withDefaultNamespace(id);
+        /*? <=1.20.6*/ //return new Identifier(id);
+    }
+
     public static void renderHud(GuiGraphics guiGraphics) {
         Game game = Main.game;
         if (!game.isStarted() || (Compat.isClothConfigLoaded() && !Configs.getInstance().isHudRender)) return;
@@ -72,7 +93,7 @@ public class Utils {
 
         guiGraphics.drawString(
                 Minecraft.getInstance().font,
-                game.getItemStack().getItemName(),
+                Utils.removeBracketsOrDefault(game.getItemStack().getItemName().getString()),
                 Utils.getPercent(guiGraphics.guiWidth(), offsetXPercent),
                 Utils.getPercent(guiGraphics.guiWidth(), offsetYPercent),
                 color
