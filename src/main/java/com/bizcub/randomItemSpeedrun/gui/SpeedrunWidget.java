@@ -13,10 +13,8 @@ public class SpeedrunWidget extends ObjectSelectionList<SpeedrunEntry> {
     public ArrayList<SpeedrunEntry> entries = new ArrayList<>();
     private SpeedrunEntry lastSelectedEntry;
 
-    /*? >=1.20.3*/ public SpeedrunWidget(Minecraft minecraft, int width, int height, int y, int entryHeight) {
-    /*? <=1.20.2*/ //public SpeedrunWidget(Minecraft minecraft, int width, int height, int y1, int y2, int entryHeight) {
-        /*? >=1.20.3*/ super(minecraft, width, height, y, entryHeight);
-        /*? <=1.20.2*/ //super(minecraft, width, height, y1, y2, entryHeight);
+    public SpeedrunWidget(Minecraft minecraft, int width, int height, /*? >=1.20.3 {*/ int y /*?} else {*/ /*int y1, int y2 *//*?}*/, int entryHeight) {
+        super(minecraft, width, height, /*? >=1.20.3 {*/ y /*?} else {*/  /*y1, y2 *//*?}*/, entryHeight);
         refreshEntries("");
     }
 

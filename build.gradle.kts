@@ -13,8 +13,17 @@ stonecutter {
     replacements.string(scp >= "1.21.11") {
         replace("ResourceLocation", "Identifier")
     }
+    replacements.string(scp >= "1.21.11" && !isForge, "auto_config") {
+        replace("AutoConfig", "AutoConfigClient")
+    }
     replacements.string(scp >= "1.21.4") {
         replace("getScrollbarPosition()", "scrollBarX()")
+    }
+    replacements.string(scp >= "1.21.6") {
+        replace("import net.minecraft.client.renderer.RenderType",
+            "import net.minecraft.client.renderer.RenderPipelines")
+        replace("net.minecraftforge.eventbus.api.SubscribeEvent",
+            "net.minecraftforge.eventbus.api.listener.SubscribeEvent")
     }
     replacements.string(scp >= "1.21.2") {
         replace("getDisplayName()", "getItemName()")

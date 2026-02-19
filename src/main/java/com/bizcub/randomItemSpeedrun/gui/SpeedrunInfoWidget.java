@@ -18,10 +18,8 @@ public class SpeedrunInfoWidget extends ObjectSelectionList<SpeedrunInfoEntry> {
     public Screen screen;
     public int offsetX;
 
-    /*? >=1.20.3*/ public SpeedrunInfoWidget(Minecraft minecraft, int width, int height, int y, int entryHeight, Screen screen, int offsetX, Speedrun speedrun) {
-    /*? <=1.20.2*/ //public SpeedrunInfoWidget(Minecraft minecraft, int width, int height, int y1, int y2, int entryHeight, Screen screen, int offsetX, Speedrun speedrun) {
-        /*? >=1.20.3*/ super(minecraft, width, height, y, entryHeight);
-        /*? <=1.20.2*/ //super(minecraft, width, height, y1, y2, entryHeight);
+    public SpeedrunInfoWidget(Minecraft minecraft, int width, int height, /*? >=1.20.3 {*/ int y /*?} else {*/ /*int y1, int y2 *//*?}*/, int entryHeight, Screen screen, int offsetX, Speedrun speedrun) {
+        super(minecraft, width, height, /*? >=1.20.3 {*/ y /*?} else {*/  /*y1, y2 *//*?}*/, entryHeight);
         this.screen = screen;
         this.offsetX = offsetX;
         this.speedrun = speedrun;

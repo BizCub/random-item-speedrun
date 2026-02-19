@@ -22,16 +22,17 @@ public class ScaledItemDisplayWidget extends AbstractWidget {
 
     @Override
     protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        var pose = guiGraphics.pose();
         //? >=1.21.6 {
-        guiGraphics.pose().pushMatrix();
-        guiGraphics.pose().scale(size, size);
+        pose.pushMatrix();
+        pose.scale(size, size);
         guiGraphics.renderItem(itemStack, offsetX / size, offsetY / size);
-        guiGraphics.pose().popMatrix();
+        pose.popMatrix();
         //?} else {
-        /*guiGraphics.pose().pushPose();
-        guiGraphics.pose().scale(size, size, size);
+        /*pose.pushPose();
+        pose.scale(size, size, size);
         guiGraphics.renderItem(itemStack, offsetX / size, offsetY / size);
-        guiGraphics.pose().popPose();
+        pose.popPose();
         *///?}
     }
 

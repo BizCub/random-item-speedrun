@@ -5,8 +5,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ObjectSelectionList;
-/*? >=1.21.5*/ import net.minecraft.client.renderer.RenderPipelines;
-/*? <=1.21.5*/ //import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 
@@ -36,8 +35,8 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
                 this.speedrun.isSuccess() ? accept : reject,
                 Utils.getPercent(width, 5),
                 y + Utils.getPercent(height, 17),
-                /*? >=1.20.2*/ 20,20
-                /*? <=1.20.1*/ //0,0, 18, 18, 37, 18
+                /*? >=1.20.2*/ 20, 20
+                /*? <=1.20.1*/ //0, 0, 18, 18, 37, 18
         );
         guiGraphics.renderItem(
                 this.speedrun.getItem(),
