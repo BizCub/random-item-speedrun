@@ -33,7 +33,7 @@ public class GameStartScreen extends Screen {
                 /*? >=1.20.3*/ getWidthPercent(66), getHeightPercent(79), /* pos Y */ getHeightPercent(11),
                 /*? <=1.20.2*/ //getWidthPercent(66), height, /* top Y */ getHeightPercent(11), /* down Y */ getHeightPercent(90),
                 /* size entry */ getHeightPercent(10)));
-        /*? <=1.20.5*/ //this.speedrunWidget.setRenderBackground(false);
+        /*? <=1.20.4*/ //this.speedrunWidget.setRenderBackground(false);
         /*? <=1.20.1*/ //this.speedrunWidget.setRenderTopAndBottom(false);
 
         this.searchBox = new EditBox(this.font, /* pos */ getWidthPercent(5.7), getHeightPercent(2.5), /* size */ getWidthPercent(22), getHeightPercent(7), this.searchBox, Component.empty());
@@ -109,7 +109,7 @@ public class GameStartScreen extends Screen {
         //?} else {
         /*this.speedrunInfoWidget = new SpeedrunInfoWidget(this.minecraft, /^ size ^/ getWidthPercent(32), height, /^ topY ^/ getHeightPercent(45.2), /^ downY ^/ getHeightPercent(90), /^ size entry ^/ getHeightPercent(4), this, offsetX, focusedSpeedrun);
         this.speedrunInfoWidget.setLeftPos(offsetX);*///?}
-        /*? <=1.20.5*/ //this.speedrunInfoWidget.setRenderBackground(false);
+        /*? <=1.20.4*/ //this.speedrunInfoWidget.setRenderBackground(false);
         /*? <=1.20.1*/ //this.speedrunInfoWidget.setRenderTopAndBottom(false);
     }
 

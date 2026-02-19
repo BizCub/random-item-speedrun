@@ -31,13 +31,14 @@ public class MinecraftMixin {
 
     @Unique
     private void ris$checkCollectItem() {
-        var server = Minecraft.getInstance().getSingleplayerServer();
-        var player = Minecraft.getInstance().player;
+        Minecraft minecraft = Minecraft.getInstance();
+        var server = minecraft.getSingleplayerServer();
+        var player = minecraft.player;
         Game game = Main.game;
 
         if (server != null && player != null
-                /*? >=1.21*/ && !server.isPaused()
-                /*? <=1.20.5*/ //&& !server.isStopped()
+                /*? >=1.20.3*/ && !server.isPaused()
+                /*? <=1.20.2*/ //&& !minecraft.isPaused()
                 && game.isStarted()
         ) {
             String itemId = Utils.convertComponentToId(Utils.getNameFromItemStack(game.getItemStack()));

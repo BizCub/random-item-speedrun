@@ -24,7 +24,7 @@ public class Game {
 
     public void stop(boolean success) {
         this.isStart = false;
-        Main.speedruns.add(new Speedrun(Utils.getIdFromItemStack(this.itemStack), success, this.time / 20, System.currentTimeMillis()));
+        Main.speedruns.add(0, new Speedrun(Utils.getIdFromItemStack(this.itemStack), success, this.time / 20, System.currentTimeMillis()));
         var player = Minecraft.getInstance().player;
         if (player != null && success) {
             player.displayClientMessage(Component.translatable("chat.game_is_stopped", itemStack.getItemName()), false);

@@ -6,7 +6,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.ObjectSelectionList;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class SpeedrunWidget extends ObjectSelectionList<SpeedrunEntry> {
 
@@ -22,9 +21,7 @@ public class SpeedrunWidget extends ObjectSelectionList<SpeedrunEntry> {
         this.clearEntries();
         entries.clear();
 
-        ArrayList<Speedrun> tempSpeedruns = Main.speedruns;
-        Collections.reverse(tempSpeedruns);
-        tempSpeedruns.forEach(speedrun -> entries.add(new SpeedrunEntry(speedrun, this)));
+        Main.speedruns.forEach(speedrun -> entries.add(new SpeedrunEntry(speedrun, this)));
 
         entries.removeIf(entry -> !Utils.getNameFromItemStack(entry.speedrun.getItem()).toLowerCase().contains(searchTerm.toLowerCase()));
         entries.forEach(this::addEntry);
