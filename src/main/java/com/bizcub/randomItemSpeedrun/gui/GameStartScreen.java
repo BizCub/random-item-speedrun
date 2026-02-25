@@ -99,7 +99,7 @@ public class GameStartScreen extends Screen {
         else
             focusedSpeedrun = new Speedrun("air", false, 0, 0);
 
-        this.itemDisplayWidget = new ScaledItemDisplayWidget(getWidthPercent(77), getHeightPercent(14), focusedSpeedrun.getItem(), 5);
+        this.itemDisplayWidget = new ScaledItemDisplayWidget(getWidthPercent(77), getHeightPercent(14), focusedSpeedrun.getItem(), getHeightPercent(25));
 
         int offsetX = getWidthPercent(68.25);
 
