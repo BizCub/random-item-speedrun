@@ -3,17 +3,21 @@
 
 import com.bizcub.randomItemSpeedrun.Main;
 import com.bizcub.randomItemSpeedrun.gui.GameStartScreen;
+/^? >=1.21.6^/ import com.bizcub.randomItemSpeedrun.gui.ZoomedItemPIPRenderer;
+/^? >=1.21.6^/ import com.bizcub.randomItemSpeedrun.gui.ZoomedItemRenderState;
 import com.bizcub.randomItemSpeedrun.util.Constants;
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+/^? >=1.21.6^/ import net.neoforged.neoforge.client.event.RegisterPictureInPictureRenderersEvent;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
@@ -44,11 +48,20 @@ public class NeoForge {
     @Mod(Constants.MOD_ID)
     public static class Init {
 
-        public Init() {
+        public Init(IEventBus modEventBus, ModContainer modContainer) {
             Main.init();
 
-            ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, () ->
-                    (container, parent) -> PlatformInit.getScreen(parent));
+            /^? >=1.21.6^/ modEventBus.addListener(this::onRegisterPIPRenderers);
+
+            modContainer.registerExtensionPoint(
+                    IConfigScreenFactory.class,
+                    (container, parent) -> PlatformInit.getScreen(parent)
+            );
         }
+
+        //? >=1.21.6 {
+        private void onRegisterPIPRenderers(RegisterPictureInPictureRenderersEvent event) {
+            event.register(ZoomedItemRenderState.class, ZoomedItemPIPRenderer::new);
+        }//?}
     }
 }*///?}
