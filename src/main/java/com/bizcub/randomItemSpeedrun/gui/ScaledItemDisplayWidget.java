@@ -1,5 +1,6 @@
 package com.bizcub.randomItemSpeedrun.gui;
 
+import com.bizcub.randomItemSpeedrun.mixin.GuiGraphicsAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -43,7 +44,7 @@ public class ScaledItemDisplayWidget extends AbstractWidget {
                 null
         );
 
-        guiGraphics.guiRenderState.submitPicturesInPictureState(state);
+        ((GuiGraphicsAccessor) guiGraphics).getGuiRenderState().submitPicturesInPictureState(state);
 
         //?} else {
         /*var pose = guiGraphics.pose();
