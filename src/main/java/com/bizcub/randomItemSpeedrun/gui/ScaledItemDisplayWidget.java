@@ -33,7 +33,7 @@ public class ScaledItemDisplayWidget extends AbstractWidget {
 
         mc.getItemModelResolver().updateForTopItem(itemStackRenderState, itemStack, ItemDisplayContext.GUI, mc.level, mc.player, 0);
 
-        ZoomedItemRenderState state = new ZoomedItemRenderState(
+        ScaledItemRenderState state = new ScaledItemRenderState(
                 itemStackRenderState,
                 offsetX,
                 offsetY,

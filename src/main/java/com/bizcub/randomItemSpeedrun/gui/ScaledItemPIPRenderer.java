@@ -22,14 +22,14 @@ import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ARGB;
 
-public class ZoomedItemPIPRenderer extends PictureInPictureRenderer<ZoomedItemRenderState> {
+public class ScaledItemPIPRenderer extends PictureInPictureRenderer<ScaledItemRenderState> {
 
-    public ZoomedItemPIPRenderer(MultiBufferSource.BufferSource bufferSource) {
+    public ScaledItemPIPRenderer(MultiBufferSource.BufferSource bufferSource) {
         super(bufferSource);
     }
 
     @Override
-    protected void renderToTexture(ZoomedItemRenderState state, PoseStack poseStack) {
+    protected void renderToTexture(ScaledItemRenderState state, PoseStack poseStack) {
         poseStack.scale(1.0F, -1.0F, -1.0F);
 
         ItemStackRenderState itemState = state.itemStackRenderState();
@@ -52,7 +52,7 @@ public class ZoomedItemPIPRenderer extends PictureInPictureRenderer<ZoomedItemRe
     }
 
     @Override
-    protected void blitTexture(ZoomedItemRenderState state, GuiRenderState guiRenderState) {
+    protected void blitTexture(ScaledItemRenderState state, GuiRenderState guiRenderState) {
         GpuTextureView textureView = ((PictureInPictureRendererAccessor) this).getTextureView();
         if (textureView == null) return;
 
@@ -84,8 +84,8 @@ public class ZoomedItemPIPRenderer extends PictureInPictureRenderer<ZoomedItemRe
     }
 
     @Override
-    public Class<ZoomedItemRenderState> getRenderStateClass() {
-        return ZoomedItemRenderState.class;
+    public Class<ScaledItemRenderState> getRenderStateClass() {
+        return ScaledItemRenderState.class;
     }
 
     @Override
@@ -99,7 +99,7 @@ public class ZoomedItemPIPRenderer extends PictureInPictureRenderer<ZoomedItemRe
     }
 
     @Override
-    protected boolean textureIsReadyToBlit(ZoomedItemRenderState state) {
+    protected boolean textureIsReadyToBlit(ScaledItemRenderState state) {
         return false;
     }
 }//?}

@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.item.ItemStackRenderState;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix3x2f;
 
-public record ZoomedItemRenderState(
+public record ScaledItemRenderState(
         ItemStackRenderState itemStackRenderState,
         float renderX0,
         float renderY0,

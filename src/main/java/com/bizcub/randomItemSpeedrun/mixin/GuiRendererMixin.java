@@ -4,8 +4,8 @@ import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 
 //? >=1.21.6 && !neoforge {
-import com.bizcub.randomItemSpeedrun.gui.ZoomedItemPIPRenderer;
-import com.bizcub.randomItemSpeedrun.gui.ZoomedItemRenderState;
+import com.bizcub.randomItemSpeedrun.gui.ScaledItemPIPRenderer;
+import com.bizcub.randomItemSpeedrun.gui.ScaledItemRenderState;
 import net.minecraft.client.gui.render.GuiRenderer;
 import net.minecraft.client.gui.render.pip.PictureInPictureRenderer;
 import net.minecraft.client.gui.render.state.GuiRenderState;
@@ -34,7 +34,7 @@ public class GuiRendererMixin {
     @Inject(method = "<init>", at = @At("TAIL"))
     private void addRenderer(GuiRenderState guiRenderState, MultiBufferSource.BufferSource bufferSource, /*? >=1.21.9 {*/ SubmitNodeCollector submitNodeCollector, FeatureRenderDispatcher featureRenderDispatcher, /*?}*/ List<PictureInPictureRenderer<?>> list, CallbackInfo ci) {
         var map = new HashMap<>(pictureInPictureRenderers);
-        map.put(ZoomedItemRenderState.class, new ZoomedItemPIPRenderer(this.bufferSource));
+        map.put(ScaledItemRenderState.class, new ScaledItemPIPRenderer(this.bufferSource));
         pictureInPictureRenderers = map;
     }
 }

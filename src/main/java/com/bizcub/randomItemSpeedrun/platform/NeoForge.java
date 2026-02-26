@@ -3,8 +3,8 @@
 
 import com.bizcub.randomItemSpeedrun.Main;
 import com.bizcub.randomItemSpeedrun.gui.GameStartScreen;
-/^? >=1.21.6^/ import com.bizcub.randomItemSpeedrun.gui.ZoomedItemPIPRenderer;
-/^? >=1.21.6^/ import com.bizcub.randomItemSpeedrun.gui.ZoomedItemRenderState;
+/^? >=1.21.6^/ import com.bizcub.randomItemSpeedrun.gui.ScaledItemPIPRenderer;
+/^? >=1.21.6^/ import com.bizcub.randomItemSpeedrun.gui.ScaledItemRenderState;
 import com.bizcub.randomItemSpeedrun.util.Constants;
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import com.mojang.blaze3d.platform.InputConstants;
@@ -61,7 +61,7 @@ public class NeoForge {
 
         //? >=1.21.6 {
         private void onRegisterPIPRenderers(RegisterPictureInPictureRenderersEvent event) {
-            event.register(ZoomedItemRenderState.class, ZoomedItemPIPRenderer::new);
+            event.register(ScaledItemRenderState.class, ScaledItemPIPRenderer::new);
         }//?}
     }
 }*///?}
