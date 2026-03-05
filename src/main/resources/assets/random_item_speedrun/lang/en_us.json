@@ -1,6 +1,6 @@
 {
-    "key.random_item_speedrun.start.open_game_start_screen": "Open Screen",
-    "key.category.minecraft.random_item_speedrun": "Random Item Speedrun",
+    "key.random_item_speedrun.open_game_start_screen": "Open Screen",
+    "key.random_item_speedrun.quick_start": "Quick Start Speedrun",
 
     "gui.game_start_screen.title": "Random Item Speedrun",
     "gui.game_start_screen.entry": "%1$s%2$s%3$s",
@@ -22,5 +22,10 @@
     "text.autoconfig.random_item_speedrun/config.title": "Random Item Speedrun Settings",
     "text.autoconfig.random_item_speedrun/config.option.isHudRender": "Display HUD",
     "text.autoconfig.random_item_speedrun/config.option.isHudRender.@Tooltip": "Should time and item be displayed on the screen?",
-    "text.autoconfig.random_item_speedrun/config.option.hudColor": "HUD Color"
+    "text.autoconfig.random_item_speedrun/config.option.hudColor": "HUD Color",
+    "text.autoconfig.random_item_speedrun/config.option.difficulty": "Difficulty",
+    "text.autoconfig.random_item_speedrun/config.option.difficulty.easy": "Easy",
+    "text.autoconfig.random_item_speedrun/config.option.difficulty.normal": "Normal",
+    "text.autoconfig.random_item_speedrun/config.option.difficulty.hard": "Hard",
+    "text.autoconfig.random_item_speedrun/config.option.difficulty.hardcore": "Hardcore"
 }

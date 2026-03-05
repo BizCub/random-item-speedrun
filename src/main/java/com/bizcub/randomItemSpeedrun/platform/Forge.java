@@ -21,17 +21,23 @@ public class Forge {
 
     @SubscribeEvent
     public static void registerBindings(RegisterKeyMappingsEvent event) {
-        event.register(Constants.MY_KEYBIND);
+        event.register(Constants.OPEN_SCREEN);
+        event.register(Constants.QUICK_START);
     }
 
     @SubscribeEvent
     public static void onKeyInput(InputEvent.Key event) {
-        if (event.getAction() == InputConstants.PRESS &&
-                Constants.MY_KEYBIND.isActiveAndMatches(InputConstants.getKey(
-                        /^? >=1.21.9^/ event.getInfo()
-                        /^? <=1.21.8^/ //event.getKey(), event.getScanCode()
-                ))) {
-            Minecraft.getInstance().setScreen(new GameStartScreen());
+        if (event.getAction() == InputConstants.PRESS) {
+            var inputConstants = InputConstants.getKey(
+                    /^? >=1.21.9^/ event.getInfo()
+                    /^? <=1.21.8^/ //event.getKey(), event.getScanCode()
+            );
+            if (Constants.OPEN_SCREEN.isActiveAndMatches(inputConstants)) {
+                Minecraft.getInstance().setScreen(new GameStartScreen());
+            }
+            if (Constants.QUICK_START.isActiveAndMatches(inputConstants)) {
+                Main.game.buttonPressed();
+            }
         }
     }
 

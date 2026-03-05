@@ -45,7 +45,7 @@ public class GameStartScreen extends Screen {
         ImageButton settingsButton = this.addRenderableWidget(new ImageButton(getWidthPercent(1), getHeightPercent(2.5), getWidthPercent(3.8), getWidthPercent(3.8), sprites, button -> this.minecraft.setScreen(PlatformInit.getScreen(this))));
         //?} else {
         /*var sprite = Utils.getIdentifier("textures/gui/sprites/widgets.png");
-        ImageButton settingsButton = this.addRenderableWidget(new ImageButton(getWidthPercent(1), getHeightPercent(2.5), 20, 20, 0, 0, 20, sprite, 64, 64, button -> this.minecraft.setScreen(PlatformInit.getScreen(this))));
+        ImageButton settingsButton = this.addRenderableWidget(new ImageButton(getWidthPercent(1), getHeightPercent(2.5), getWidthPercent(3.8), getWidthPercent(3.8), 0, 0, getWidthPercent(3.9), sprite, getWidthPercent(12), getWidthPercent(12.1), button -> this.minecraft.setScreen(PlatformInit.getScreen(this))));
         settingsButton.setPosition(getWidthPercent(1), getHeightPercent(2.5));*///?}
 
         addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, button -> onClose()).pos(this.width / 2 + 4, getHeightPercent(91.5)).size(125, 20).build());

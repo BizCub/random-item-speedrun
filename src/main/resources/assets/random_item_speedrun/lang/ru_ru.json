@@ -1,6 +1,6 @@
 {
     "key.random_item_speedrun.start.open_game_start_screen": "Открыть экран",
-    "key.category.minecraft.random_item_speedrun": "Random Item Speedrun",
+    "key.random_item_speedrun.quick_start": "Быстрый старт спидрана",
 
     "gui.game_start_screen.title": "Random Item Speedrun",
     "gui.game_start_screen.entry": "%1$s%2$s%3$s",
@@ -23,6 +23,11 @@
     "text.autoconfig.random_item_speedrun/config.option.isHudRender": "Отображать оверлей",
     "text.autoconfig.random_item_speedrun/config.option.isHudRender.@Tooltip": "Должны ли время и предмет отображаться на экране?",
     "text.autoconfig.random_item_speedrun/config.option.hudColor": "Цвет оверлея",
+    "text.autoconfig.random_item_speedrun/config.option.difficulty": "Сложность",
+    "text.autoconfig.random_item_speedrun/config.option.difficulty.easy": "Лёгкая",
+    "text.autoconfig.random_item_speedrun/config.option.difficulty.normal": "Нормальная",
+    "text.autoconfig.random_item_speedrun/config.option.difficulty.hard": "Сложная",
+    "text.autoconfig.random_item_speedrun/config.option.difficulty.hardcore": "Хардкор",
 
     "modmenu.descriptionTranslation.random_item_speedrun": "Этот мод позволит вам проверить свои знания в игре и умение быстро находить предметы"
 }
