@@ -4,5 +4,5 @@
   * Hard - all items except those that take too long
   * Hardcore - all items
 * Updated list of impossible items
-* Added a keybind for faster speedruns
 * On earlier versions, the mod settings icon now has a size dependent on the screen size
+* Added a keybind for faster speedruns
