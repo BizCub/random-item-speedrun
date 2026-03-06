@@ -23,10 +23,11 @@ public class SpeedrunInfoWidget extends ObjectSelectionList<SpeedrunInfoEntry> {
         this.screen = screen;
         this.offsetX = offsetX;
         this.speedrun = speedrun;
-        init();
+        setEntries(this.speedrun);
     }
 
-    private void init() {
+    public void setEntries(Speedrun speedrun) {
+        this.clearEntries();
         DateFormat dete = new SimpleDateFormat();
         this.addEntry(new SpeedrunInfoEntry(Component.translatable("gui.game_start_screen.side_panel.item", Component.literal(Utils.removeBracketsOrDefault(speedrun.getItem().getItemName().getString())).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.GRAY), offsetX));
         this.addEntry(new SpeedrunInfoEntry(Component.translatable("gui.game_start_screen.side_panel.time", Utils.getTimeComponent(speedrun.time(), ChatFormatting.WHITE.getColor())).withStyle(ChatFormatting.GRAY), offsetX));

@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class ScaledItemDisplayWidget extends AbstractWidget {
 
-    private final ItemStack itemStack;
+    private ItemStack itemStack;
     private final int offsetX;
     private final int offsetY;
     private final int size;
@@ -23,6 +23,10 @@ public class ScaledItemDisplayWidget extends AbstractWidget {
         this.offsetX = offsetX;
         this.offsetY = offsetY;
         this.size = size;
+    }
+
+    public void updateItemStack(ItemStack itemStack) {
+        this.itemStack = itemStack;
     }
 
     @Override

@@ -21,6 +21,7 @@ public class GameStartScreen extends Screen {
     private ScaledItemDisplayWidget itemDisplayWidget;
 
     private String tempSearch;
+    Speedrun focusedSpeedrun;
 
     public GameStartScreen() {
         super(Component.translatable("gui.game_start_screen.title"));
@@ -49,7 +50,7 @@ public class GameStartScreen extends Screen {
         settingsButton.setPosition(getWidthPercent(1), getHeightPercent(2.5));*///?}
 
         addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, button -> onClose()).pos(this.width / 2 + 4, getHeightPercent(91.5)).size(125, 20).build());
-        startButton = addRenderableWidget(Button.builder(Component.empty(), button -> changeGameStatus()).pos(this.width / 2 - 129, getHeightPercent(91.5)).size(125, 20).build());
+        this.startButton = addRenderableWidget(Button.builder(Component.empty(), button -> changeGameStatus()).pos(this.width / 2 - 129, getHeightPercent(91.5)).size(125, 20).build());
         setStartButtonMessage();
 
         if (!Compat.isClothConfigLoaded()) {
@@ -58,6 +59,19 @@ public class GameStartScreen extends Screen {
         }
 
         changeFocus();
+
+        this.itemDisplayWidget = addRenderableWidget(new ScaledItemDisplayWidget(getWidthPercent(77), getHeightPercent(14), focusedSpeedrun.getItem(), getHeightPercent(25)));
+
+        int offsetX = getWidthPercent(68.25);
+        //? >=1.20.3 {
+        this.speedrunInfoWidget = new SpeedrunInfoWidget(this.minecraft, /* size */ getWidthPercent(32), getHeightPercent(45), /* pos Y */ getHeightPercent(45.2), /* size entry */ getHeightPercent(4), this, offsetX, focusedSpeedrun);
+        this.speedrunInfoWidget.setX(offsetX);
+        //?} else {
+        /*this.speedrunInfoWidget = new SpeedrunInfoWidget(this.minecraft, /^ size ^/ getWidthPercent(32), height, /^ topY ^/ getHeightPercent(45.2), /^ downY ^/ getHeightPercent(90), /^ size entry ^/ getHeightPercent(4), this, offsetX, focusedSpeedrun);
+        this.speedrunInfoWidget.setLeftPos(offsetX);*///?}
+        /*? <=1.20.4*/ //this.speedrunInfoWidget.setRenderBackground(false);
+        /*? <=1.20.1*/ //this.speedrunInfoWidget.setRenderTopAndBottom(false);
+        addRenderableWidget(this.speedrunInfoWidget);
     }
 
     private void changeGameStatus() {
@@ -82,9 +96,6 @@ public class GameStartScreen extends Screen {
         super.render(guiGraphics, i, j, f);
         guiGraphics.drawCenteredString(this.font, this.title, getWidthPercent(50), getHeightPercent(4), -1);
 
-        this.itemDisplayWidget.render(guiGraphics, i, j, f);
-        this.speedrunInfoWidget.render(guiGraphics, i, j, f);
-
         if (!this.searchBox.getValue().equals(this.tempSearch))
             this.speedrunWidget.refreshEntries(this.searchBox.getValue());
         this.tempSearch = this.searchBox.getValue();
@@ -92,25 +103,12 @@ public class GameStartScreen extends Screen {
 
     public void changeFocus() {
         if (speedrunWidget == null) return;
+        this.focusedSpeedrun = !Main.speedruns.isEmpty()
+                ? this.speedrunWidget.getFocusedSpeedrunEntry().speedrun
+                : new Speedrun("air", false, 0, 0);
 
-        Speedrun focusedSpeedrun;
-        if (!Main.speedruns.isEmpty())
-            focusedSpeedrun = this.speedrunWidget.getFocusedSpeedrunEntry().speedrun;
-        else
-            focusedSpeedrun = new Speedrun("air", false, 0, 0);
-
-        this.itemDisplayWidget = new ScaledItemDisplayWidget(getWidthPercent(77), getHeightPercent(14), focusedSpeedrun.getItem(), getHeightPercent(25));
-
-        int offsetX = getWidthPercent(68.25);
-
-        //? >=1.20.3 {
-        this.speedrunInfoWidget = new SpeedrunInfoWidget(this.minecraft, /* size */ getWidthPercent(32), getHeightPercent(45), /* pos Y */ getHeightPercent(45.2), /* size entry */ getHeightPercent(4), this, offsetX, focusedSpeedrun);
-        this.speedrunInfoWidget.setX(offsetX);
-        //?} else {
-        /*this.speedrunInfoWidget = new SpeedrunInfoWidget(this.minecraft, /^ size ^/ getWidthPercent(32), height, /^ topY ^/ getHeightPercent(45.2), /^ downY ^/ getHeightPercent(90), /^ size entry ^/ getHeightPercent(4), this, offsetX, focusedSpeedrun);
-        this.speedrunInfoWidget.setLeftPos(offsetX);*///?}
-        /*? <=1.20.4*/ //this.speedrunInfoWidget.setRenderBackground(false);
-        /*? <=1.20.1*/ //this.speedrunInfoWidget.setRenderTopAndBottom(false);
+        if (speedrunInfoWidget != null) this.speedrunInfoWidget.setEntries(focusedSpeedrun);
+        if (itemDisplayWidget != null) this.itemDisplayWidget.updateItemStack(focusedSpeedrun.getItem());
     }
 
     @Override
