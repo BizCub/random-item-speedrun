@@ -7,13 +7,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import com.mojang.blaze3d.textures.GpuTextureView;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.render.pip.PictureInPictureRenderer;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(PictureInPictureRenderer.class)
 public interface PictureInPictureRendererAccessor {
     @Accessor("textureView")
-    @Nullable
     GpuTextureView getTextureView();
 }
 

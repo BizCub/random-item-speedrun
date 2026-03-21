@@ -1,34 +1,10 @@
 plugins {
-    `multiloader-loader`
+    multiloader
     id("dev.architectury.loom") version "1.+"
     id("me.modmuss50.mod-publish-plugin") version "1.+"
 }
 
-stonecutter {
-    constants.match(mod.loader, "fabric", "forge", "neoforge")
-    constants["is_cloth_config_available"] = isClothConfigAvailable
-
-    swaps["mod_id"] = "\"${prop("mod.id")}\";"
-
-    replacements.string(scp >= "1.21.11") {
-        replace("ResourceLocation", "Identifier")
-    }
-    replacements.string(scp >= "1.21.11" && !isForge, "auto_config") {
-        replace("AutoConfig", "AutoConfigClient")
-    }
-    replacements.string(scp >= "1.21.4") {
-        replace("getScrollbarPosition()", "scrollBarX()")
-    }
-    replacements.string(scp >= "1.21.6") {
-        replace("import net.minecraft.client.renderer.RenderType",
-            "import net.minecraft.client.renderer.RenderPipelines")
-        replace("net.minecraftforge.eventbus.api.SubscribeEvent",
-            "net.minecraftforge.eventbus.api.listener.SubscribeEvent")
-    }
-    replacements.string(scp >= "1.21.2") {
-        replace("getDisplayName()", "getItemName()")
-    }
-}
+loom.silentMojangMappingsLicense()
 
 repositories {
     maven("https://maven.neoforged.net/releases")
@@ -37,22 +13,22 @@ repositories {
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:${mod.propIfExist("mc.snapshot", mod.mc)}")
+    minecraft("com.mojang:minecraft:${propIf("version", mod.mc)}")
     mappings(loom.officialMojangMappings())
-    modApi("me.shedaniel.cloth:cloth-config-${mod.loader}:${mod.cloth_config}")
+    modApi("me.shedaniel.cloth:cloth-config-${mod.loader}:${getProp("cloth_config")}")
 
     if (isFabric) {
         modImplementation("net.fabricmc:fabric-loader:latest.release")
-        modImplementation("net.fabricmc.fabric-api:fabric-api:${mod.fabric_api}")
-        modImplementation("com.terraformersmc:modmenu:${mod.modmenu}") {
+        modImplementation("net.fabricmc.fabric-api:fabric-api:${getProp("fabric_api")}")
+        modImplementation("com.terraformersmc:modmenu:${getProp("modmenu")}") {
             exclude("eu.pb4")
         }
     }
     if (isForge) {
-        "forge"("net.minecraftforge:forge:${mod.mc}-${dep("forge_loader")}")
+        "forge"("net.minecraftforge:forge:${getProp("forge")}")
     }
     if (isNeoForge) {
-        "neoForge"("net.neoforged:neoforge:${dep("neoforge_loader")}")
+        "neoForge"("net.neoforged:neoforge:${getProp("neoforge")}")
     }
 }
 

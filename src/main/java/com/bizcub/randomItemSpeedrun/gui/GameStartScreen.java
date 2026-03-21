@@ -6,7 +6,7 @@ import com.bizcub.randomItemSpeedrun.config.Compat;
 import com.bizcub.randomItemSpeedrun.platform.PlatformInit;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.ComponentPath;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
@@ -43,7 +43,7 @@ public class GameStartScreen extends Screen {
 
         //? >=1.20.2 {
         WidgetSprites sprites = new WidgetSprites(Utils.getIdentifier("default"), Utils.getIdentifier("disabled"), Utils.getIdentifier("hovered"));
-        ImageButton settingsButton = this.addRenderableWidget(new ImageButton(getWidthPercent(1), getHeightPercent(2.5), getWidthPercent(3.8), getWidthPercent(3.8), sprites, button -> this.minecraft.setScreen(PlatformInit.getScreen(this))));
+        ImageButton settingsButton = this.addRenderableWidget(new ImageButton(getWidthPercent(1), getHeightPercent(2.5), getWidthPercent(3.8), getWidthPercent(3.8), sprites, button -> {} /*this.minecraft.setScreen(PlatformInit.getScreen(this))*/));
         //?} else {
         /*var sprite = Utils.getIdentifier("textures/gui/sprites/widgets.png");
         ImageButton settingsButton = this.addRenderableWidget(new ImageButton(getWidthPercent(1), getHeightPercent(2.5), getWidthPercent(3.8), getWidthPercent(3.8), 0, 0, getWidthPercent(3.9), sprite, getWidthPercent(12), getWidthPercent(12.1), button -> this.minecraft.setScreen(PlatformInit.getScreen(this))));
@@ -91,10 +91,10 @@ public class GameStartScreen extends Screen {
             startButton.setMessage(Component.translatable("gui.game_start_screen.start_button.not_started"));
     }
 
-    @Override
-    public void render(GuiGraphics guiGraphics, int i, int j, float f) {
-        super.render(guiGraphics, i, j, f);
-        guiGraphics.drawCenteredString(this.font, this.title, getWidthPercent(50), getHeightPercent(4), -1);
+    @Override //~ if >=26.1 'render(' -> 'extractRenderState(' {
+    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+        super.extractRenderState(graphics, mouseX, mouseY, a);//~}
+        graphics.centeredText(this.font, this.title, getWidthPercent(50), getHeightPercent(4), -1);
 
         if (!this.searchBox.getValue().equals(this.tempSearch))
             this.speedrunWidget.refreshEntries(this.searchBox.getValue());

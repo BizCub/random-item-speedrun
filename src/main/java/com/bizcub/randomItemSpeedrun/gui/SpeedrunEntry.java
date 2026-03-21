@@ -3,7 +3,7 @@ package com.bizcub.randomItemSpeedrun.gui;
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.ObjectSelectionList;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
@@ -20,7 +20,7 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
         this.list = speedrunWidget;
     }
 
-    private void render(GuiGraphics guiGraphics, int y, int width, int height) {
+    private void render(GuiGraphicsExtractor graphics, int y, int width, int height) {
         Identifier accept =
                 /*? >=1.20.2*/ Utils.getDefaultIdentifier("pending_invite/accept");
                 /*? <=1.20.1*/ //Utils.getCustomIdentifier("realms", "textures/gui/realms/accept_icon.png");
@@ -28,8 +28,8 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
                 /*? >=1.20.2*/ Utils.getDefaultIdentifier("pending_invite/reject");
                 /*? <=1.20.1*/ //Utils.getCustomIdentifier("realms", "textures/gui/realms/reject_icon.png");
 
-        /*? >=1.20.2*/ guiGraphics.blitSprite(
-        /*? <=1.20.1*/ //guiGraphics.blit(
+        /*? >=1.20.2*/ graphics.blitSprite(
+        /*? <=1.20.1*/ //graphics.blit(
                 /*? >=1.21.6*/ RenderPipelines.GUI_TEXTURED,
                 /*? <=1.21.5 && >=1.21.2*/ //RenderType::guiTextured,
                 this.speedrun.isSuccess() ? accept : reject,
@@ -38,12 +38,13 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
                 /*? >=1.20.2*/ 20, 20
                 /*? <=1.20.1*/ //0, 0, 18, 18, 37, 18
         );
-        guiGraphics.renderItem(
+        //~ if >=26.1 'renderItem(' -> 'item('
+        graphics.item(
                 this.speedrun.getItem(),
                 Utils.getPercent(width, 12),
                 y + Utils.getPercent(height, 22)
         );
-        guiGraphics.drawString(
+        graphics.text(
                 this.client.font,
                 Component.translatable("gui.game_start_screen.entry",
                         Utils.removeBracketsOrDefault(this.speedrun.getItem().getItemName().getString()),
@@ -58,14 +59,14 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
 
     //? >=1.21.9 {
     @Override
-    public void renderContent(GuiGraphics guiGraphics, int i, int j, boolean bl, float f) {
-        render(guiGraphics, this.getY(), this.getWidth(), this.getHeight());
+    public void extractContent(GuiGraphicsExtractor graphics, int mouseX, int mouseY, boolean hovered, float a) {
+        render(graphics, this.getY(), this.getWidth(), this.getHeight());
     }
 
     //?} else {
     /*@Override
-    public void render(GuiGraphics guiGraphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isHovered, float deltaTime) {
-        render(guiGraphics, top, width, height);
+    public void render(GuiGraphicsExtractor graphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isHovered, float deltaTime) {
+        render(graphics, top, width, height);
     }*///?}
 
     //? <=1.20.4 {

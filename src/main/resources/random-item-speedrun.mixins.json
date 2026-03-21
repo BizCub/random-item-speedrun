@@ -7,9 +7,9 @@
     "mixins": [
     ],
     "client": [
-        "GuiGraphicsAccessor",
-        "GuiRendererMixin",
-        "MinecraftMixin",
-        "PictureInPictureRendererAccessor"
+      "GraphicsAccessor",
+      "GuiRendererMixin",
+      "MinecraftMixin",
+      "PictureInPictureRendererAccessor"
     ]
 }

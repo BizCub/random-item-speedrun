@@ -1,8 +1,8 @@
 package com.bizcub.randomItemSpeedrun.gui;
 
-import com.bizcub.randomItemSpeedrun.mixin.GuiGraphicsAccessor;
+import com.bizcub.randomItemSpeedrun.mixin.GraphicsAccessor;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 //? >=1.21.6 {
@@ -30,7 +30,8 @@ public class ScaledItemDisplayWidget extends AbstractWidget {
     }
 
     @Override
-    protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    //~ if >=26.1 'renderWidget' -> 'extractWidgetRenderState'
+    protected void extractWidgetRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
         //? >=1.21.6 {
         var itemStackRenderState = new ItemStackRenderState();
         Minecraft mc = Minecraft.getInstance();
@@ -48,15 +49,16 @@ public class ScaledItemDisplayWidget extends AbstractWidget {
                 null
         );
 
-        ((GuiGraphicsAccessor) guiGraphics).getGuiRenderState().submitPicturesInPictureState(state);
+        //~ if >=26.1 'submitPicturesInPictureState' -> 'addPicturesInPictureState'
+        ((GraphicsAccessor) graphics).getGuiRenderState().addPicturesInPictureState(state);
 
         //?} else {
-        /*var pose = guiGraphics.pose();
+        /*var pose = graphics.pose();
         int scale = size / 15;
 
         pose.pushPose();
         pose.scale(scale, scale, scale);
-        guiGraphics.renderItem(itemStack, offsetX / scale, offsetY / scale);
+        graphics.renderItem(itemStack, offsetX / scale, offsetY / scale);
         pose.popPose();*///?}
     }
 

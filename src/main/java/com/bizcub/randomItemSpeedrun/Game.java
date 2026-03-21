@@ -27,7 +27,8 @@ public class Game {
         Main.speedruns.add(0, new Speedrun(Utils.getIdFromItemStack(this.itemStack), success, this.time / 20, System.currentTimeMillis()));
         var player = Minecraft.getInstance().player;
         if (player != null && success) {
-            player.displayClientMessage(Component.translatable("chat.game_is_stopped", itemStack.getItemName()), false);
+            //~ if 26.1 'displayClientMessage' -> 'sendSystemMessage'
+            player.sendSystemMessage(Component.translatable("chat.game_is_stopped", itemStack.getItemName()) /*? <26.1 {*//*, false *//*?}*/);
             player.level()
                     /*? >=1.21.5*/.playPlayerSound(
                     //? <=1.21.4 {

@@ -11,8 +11,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.navigation.ScreenRectangle;
 import net.minecraft.client.gui.render.TextureSetup;
 import net.minecraft.client.gui.render.pip.PictureInPictureRenderer;
-import net.minecraft.client.gui.render.state.BlitRenderState;
-import net.minecraft.client.gui.render.state.GuiRenderState;
+import net.minecraft.client.renderer.state.gui.BlitRenderState;
+import net.minecraft.client.renderer.state.gui.GuiRenderState;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderPipelines;
 //? >=1.21.9 {
@@ -64,7 +64,7 @@ public class ScaledItemPIPRenderer extends PictureInPictureRenderer<ScaledItemRe
         int b = (int) (255 * alpha);
         int color = ARGB.color(intAlpha, r, g, b);
 
-        guiRenderState.submitBlitToCurrentLayer(new BlitRenderState(
+        guiRenderState.addBlitToCurrentLayer(new BlitRenderState(
                 RenderPipelines.GUI_TEXTURED_PREMULTIPLIED_ALPHA,
                 /*? >=1.21.11*/ TextureSetup.singleTexture(textureView, RenderSystem.getSamplerCache().getClampToEdge(FilterMode.LINEAR)),
                 /*? <=1.21.10*/ //TextureSetup.singleTexture(textureView),

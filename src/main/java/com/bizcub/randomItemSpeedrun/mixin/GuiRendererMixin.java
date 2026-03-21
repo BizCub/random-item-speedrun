@@ -8,8 +8,8 @@ import com.bizcub.randomItemSpeedrun.gui.ScaledItemPIPRenderer;
 import com.bizcub.randomItemSpeedrun.gui.ScaledItemRenderState;
 import net.minecraft.client.gui.render.GuiRenderer;
 import net.minecraft.client.gui.render.pip.PictureInPictureRenderer;
-import net.minecraft.client.gui.render.state.GuiRenderState;
-import net.minecraft.client.gui.render.state.pip.PictureInPictureRenderState;
+import net.minecraft.client.renderer.state.gui.GuiRenderState;
+import net.minecraft.client.renderer.state.gui.pip.PictureInPictureRenderState;
 import net.minecraft.client.renderer.MultiBufferSource;
 //? >=1.21.9 {
 import net.minecraft.client.renderer.SubmitNodeCollector;

@@ -9,7 +9,7 @@ import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -83,27 +83,27 @@ public class Utils {
         /*? <=1.20.6*/ //return new Identifier(id);
     }
 
-    public static void renderHud(GuiGraphics guiGraphics) {
+    public static void renderHud(GuiGraphicsExtractor graphics) {
         Game game = Main.game;
-        if (!game.isStarted() || (Compat.isClothConfigLoaded() && !Configs.getInstance().isHudRender)) return;
+        if (!game.isStarted() /* || (Compat.isClothConfigLoaded() && !Configs.getInstance().isHudRender)*/) return;
 
         double offsetXPercent = 1;
         double offsetYPercent = 1.5;
         int color = Constants.getHudColor();
 
-        guiGraphics.drawString(
+        graphics.text(
                 Minecraft.getInstance().font,
                 Utils.removeBracketsOrDefault(game.getItemStack().getItemName().getString()),
-                Utils.getPercent(guiGraphics.guiWidth(), offsetXPercent),
-                Utils.getPercent(guiGraphics.guiWidth(), offsetYPercent),
+                Utils.getPercent(graphics.guiWidth(), offsetXPercent),
+                Utils.getPercent(graphics.guiWidth(), offsetYPercent),
                 color
         );
         offsetYPercent += 2.5;
-        guiGraphics.drawString(
+        graphics.text(
                 Minecraft.getInstance().font,
                 Utils.getTimeComponent(game.getTime() / 20, color),
-                Utils.getPercent(guiGraphics.guiWidth(), offsetXPercent),
-                Utils.getPercent(guiGraphics.guiWidth(), offsetYPercent),
+                Utils.getPercent(graphics.guiWidth(), offsetXPercent),
+                Utils.getPercent(graphics.guiWidth(), offsetYPercent),
                 color
         );
     }
