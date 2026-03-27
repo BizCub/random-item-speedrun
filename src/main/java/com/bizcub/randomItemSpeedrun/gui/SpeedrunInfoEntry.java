@@ -18,6 +18,7 @@ public class SpeedrunInfoEntry extends ObjectSelectionList.Entry<SpeedrunInfoEnt
     }
 
     private void render(GuiGraphicsExtractor graphics, int y, int width, int height) {
+        //~ draw_string
         graphics.text(
                 this.client.font,
                 component,
@@ -25,6 +26,7 @@ public class SpeedrunInfoEntry extends ObjectSelectionList.Entry<SpeedrunInfoEnt
                 y + Utils.getPercent(height, 37),
                 -1
         );
+        //~ !draw_string
     }
 
     //? >= 1.21.9 {

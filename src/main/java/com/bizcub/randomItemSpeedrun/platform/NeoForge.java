@@ -48,7 +48,7 @@ public class NeoForge {
 
     @SubscribeEvent //~ !graphics
     public static void onRenderGuiPost(RenderGuiEvent.Post event) {
-        Utils.renderHud(event.getGuiGraphicsExtractor());
+        Utils.renderHud(event.getGuiGraphics());
     }
 
     @Mod(Constants.MOD_ID)

@@ -91,6 +91,7 @@ public class Utils {
         double offsetYPercent = 1.5;
         int color = Constants.getHudColor();
 
+        //~ draw_string
         graphics.text(
                 Minecraft.getInstance().font,
                 Utils.removeBracketsOrDefault(game.getItemStack().getItemName().getString()),
@@ -106,6 +107,7 @@ public class Utils {
                 Utils.getPercent(graphics.guiWidth(), offsetYPercent),
                 color
         );
+        //~ !draw_string
     }
 
     public static void readSpeedruns() {

@@ -14,7 +14,7 @@ public interface GraphicsAccessor {
 }
 
 //?} else {
-/*@Mixin(Minecraft.class)
-public class GuiGraphicsExtractorAccessor {
+/*@Mixin(value = {})
+public class GraphicsAccessor {
 
 }*///?}

@@ -44,6 +44,7 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
                 Utils.getPercent(width, 12),
                 y + Utils.getPercent(height, 22)
         );
+        //~ draw_string
         graphics.text(
                 this.client.font,
                 Component.translatable("gui.game_start_screen.entry",
@@ -55,6 +56,7 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
                 y + Utils.getPercent(height, 37),
                 -1
         );
+        //~ !draw_string
     }
 
     //? >=1.21.9 {
