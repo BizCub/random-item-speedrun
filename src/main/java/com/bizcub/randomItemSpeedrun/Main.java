@@ -24,17 +24,17 @@ public class Main {
     }
 
     public static void setDifficulty() {
-//        if (Compat.isClothConfigLoaded()) {
-//            switch (Configs.getInstance().difficulty) {
-//                case EASY -> fillItemsList(Constants.notEasyItems());
-//                case NORMAL -> fillItemsList(Constants.notMediumItems());
-//                case HARD -> fillItemsList(Constants.notHardItems());
-//                case HARDCORE -> fillItemsList(Constants.impossibleItems());
-//                default -> {}
-//            }
-//        } else {
-//            fillItemsList(Constants.notMediumItems());
-//        }
+        if (Compat.isClothConfigLoaded()) {
+            switch (Configs.getInstance().difficulty) {
+                case EASY -> fillItemsList(Constants.notEasyItems());
+                case NORMAL -> fillItemsList(Constants.notMediumItems());
+                case HARD -> fillItemsList(Constants.notHardItems());
+                case HARDCORE -> fillItemsList(Constants.impossibleItems());
+                default -> {}
+            }
+        } else {
+            fillItemsList(Constants.notMediumItems());
+        }
         fillItemsList(Constants.notMediumItems());
     }
 

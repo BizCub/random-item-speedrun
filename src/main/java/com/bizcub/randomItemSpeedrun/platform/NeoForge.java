@@ -46,7 +46,7 @@ public class NeoForge {
         }
     }
 
-    @SubscribeEvent
+    @SubscribeEvent //~ !graphics
     public static void onRenderGuiPost(RenderGuiEvent.Post event) {
         Utils.renderHud(event.getGuiGraphicsExtractor());
     }

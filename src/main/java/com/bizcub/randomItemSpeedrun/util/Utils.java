@@ -85,7 +85,7 @@ public class Utils {
 
     public static void renderHud(GuiGraphicsExtractor graphics) {
         Game game = Main.game;
-        if (!game.isStarted() /* || (Compat.isClothConfigLoaded() && !Configs.getInstance().isHudRender)*/) return;
+        if (!game.isStarted()  || (Compat.isClothConfigLoaded() && !Configs.getInstance().isHudRender)) return;
 
         double offsetXPercent = 1;
         double offsetYPercent = 1.5;

@@ -29,7 +29,7 @@ public class Constants {
     );
 
     public static int getHudColor() {
-//        if (Compat.isClothConfigLoaded()) return Configs.getInstance().hudColor + 0xff000000;
+        if (Compat.isClothConfigLoaded()) return Configs.getInstance().hudColor + 0xff000000;
         return 0xffffffff;
     }
 

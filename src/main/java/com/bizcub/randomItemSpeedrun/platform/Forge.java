@@ -41,9 +41,9 @@ public class Forge {
         }
     }
 
-    @SubscribeEvent
+    @SubscribeEvent //~!graphics
     public static void onRenderGuiPost(CustomizeGuiOverlayEvent.Chat event) {
-        Utils.renderHud(event.getGuiGraphicsExtractor());
+        Utils.renderHud(event.getGuiGraphics());
     }
 
     @Mod(Constants.MOD_ID)
