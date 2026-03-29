@@ -1,6 +1,5 @@
 package com.bizcub.randomItemSpeedrun.mixin;
 
-import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 
 //? >=1.21.6 && !neoforge {
@@ -40,7 +39,7 @@ public class GuiRendererMixin {
 }
 
 //?} else {
-/*@Mixin(Minecraft.class)
+/*@Mixin(value = {})
 public class GuiRendererMixin {
 
 }*///?}

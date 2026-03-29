@@ -1,5 +1,6 @@
 pluginManagement {
     repositories {
+        mavenLocal()
         mavenCentral()
         gradlePluginPortal()
         maven("https://maven.kikugie.dev/snapshots")
@@ -16,26 +17,22 @@ plugins {
 
 rootProject.name = extra["mod.name"] as String
 
-stonecutter {
-    create(rootProject) {
-        val fb = "fabric"; val fr = "forge"; val nf = "neoforge"
-        fun match(version: String, vararg loaders: String) = loaders.forEach {
-            var suffix = ""
-            if (it == "fabric" && sc.eval(version, "<26.1")) suffix = ".obf"
-            if (it == "forge" && sc.eval(version, "<26.1")) suffix = ".arch"
-            version("$version-$it", version).buildscript = "scripts/$it$suffix.gradle.kts"
-        }
-        match("26.1", fb, fr, nf)
-        match("1.21.11", fb, fr, nf)
-        match("1.21.10", fb, fr, nf)
-        match("1.21.8", fb, fr, nf)
-        match("1.21.5", fb, fr, nf)
-        match("1.21.4", fb, fr, nf)
-        match("1.21.3", fb, fr, nf)
-        match("1.21.1", fb, fr, nf)
-        match("1.20.6", fb, fr)
-        match("1.20.4", fb, fr)
-        match("1.20.2", fb, fr)
-        match("1.20.1", fb, fr)
+stonecutter.create(rootProject) {
+    val fb = "fabric"; val fr = "forge"; val nf = "neoforge"
+    fun match(version: String, vararg loaders: String) = loaders.forEach {
+        var suffix = if (it == "forge" && sc.eval(version, "<26.1")) ".arch" else ""
+        version("$version-$it", version).buildscript = "scripts/$it$suffix.gradle.kts"
     }
+    match("26.1", fb, fr, nf)
+    match("1.21.11", fb, fr, nf)
+    match("1.21.10", fb, fr, nf)
+    match("1.21.8", fb, fr, nf)
+    match("1.21.5", fb, fr, nf)
+    match("1.21.4", fb, fr, nf)
+    match("1.21.3", fb, fr, nf)
+    match("1.21.1", fb, fr, nf)
+    match("1.20.6", fb, fr)
+    match("1.20.4", fb, fr)
+    match("1.20.2", fb, fr)
+    match("1.20.1", fb, fr)
 }
