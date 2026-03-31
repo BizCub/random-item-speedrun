@@ -15,7 +15,7 @@ multiloader {
 
     dependencies {
         implementation(minecraft.dependency("net.minecraftforge:forge:${getProp("forge")}"))
-        annotationProcessor("net.minecraftforge:eventbus-validator:7.0.0")
+        if (scp >= "1.21.6") annotationProcessor("net.minecraftforge:eventbus-validator:7.0.0")
         for (dep in deps) {
             when (dep.id) {
                 "cloth-config-forge" -> compileOnly(dep.dependency)
@@ -28,9 +28,11 @@ multiloader {
         mappings("official", mod.mc)
 
         runs {
+            configureEach {
+                args("--mixin.config=${mod.mixin}.mixins.json")
+            }
             register("client") {
                 workingDir.convention(layout.projectDirectory.dir(clientRunPath))
-                args("--mixin.config=${mod.mixin}.mixins.json")
             }
             register("server") {
                 workingDir.convention(layout.projectDirectory.dir(serverRunPath))
