@@ -6,9 +6,7 @@
     "description": "${description}",
     "license": "${license}",
     "icon": "icon.png",
-    "authors": [
-        "${author}"
-    ],
+    "authors": ["${author}"],
     "contact": {
         "homepage": "https://modrinth.com/project/${modrinth}",
         "issues": "https://github.com/BizCub/${github}/issues"
@@ -16,6 +14,9 @@
     "entrypoints": {
         "client": [
             "com.bizcub.randomItemSpeedrun.platform.Fabric"
+        ],
+        "main": [
+            "com.bizcub.randomItemSpeedrun.platform.Fabric$Server"
         ],
         "modmenu": [
             "com.bizcub.randomItemSpeedrun.platform.Fabric$ModMenu"

@@ -5,11 +5,11 @@
         "defaultRequire": 1
     },
     "mixins": [
+        "MinecraftServerMixin"
     ],
     "client": [
-      "GraphicsAccessor",
-      "GuiRendererMixin",
-      "MinecraftMixin",
-      "PictureInPictureRendererAccessor"
+        "GraphicsAccessor",
+        "GuiRendererMixin",
+        "PictureInPictureRendererAccessor"
     ]
 }

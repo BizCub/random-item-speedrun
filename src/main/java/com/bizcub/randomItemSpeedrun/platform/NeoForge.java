@@ -2,6 +2,7 @@
 /*package com.bizcub.randomItemSpeedrun.platform;
 
 import com.bizcub.randomItemSpeedrun.Main;
+import com.bizcub.randomItemSpeedrun.config.Compat;
 import com.bizcub.randomItemSpeedrun.gui.GameStartScreen;
 /^? >=1.21.6^/ import com.bizcub.randomItemSpeedrun.gui.ScaledItemPIPRenderer;
 /^? >=1.21.6^/ import com.bizcub.randomItemSpeedrun.gui.ScaledItemRenderState;
@@ -61,7 +62,7 @@ public class NeoForge {
 
             modContainer.registerExtensionPoint(
                     IConfigScreenFactory.class,
-                    (container, parent) -> PlatformInit.getScreen(parent)
+                    (container, parent) -> Compat.getScreen(parent)
             );
         }
 
