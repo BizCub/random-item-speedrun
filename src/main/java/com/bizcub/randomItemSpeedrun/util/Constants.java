@@ -1,7 +1,8 @@
 package com.bizcub.randomItemSpeedrun.util;
 
+import com.bizcub.randomItemSpeedrun.Main;
 import com.bizcub.randomItemSpeedrun.config.Compat;
-import com.bizcub.randomItemSpeedrun.config.Configs;
+import com.bizcub.randomItemSpeedrun.config.ModClothConfig;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 
@@ -29,7 +30,7 @@ public class Constants {
     );
 
     public static int getHudColor() {
-        if (Compat.isClothConfigLoaded()) return Configs.getInstance().hudColor + 0xff000000;
+        if (Compat.isClothConfigLoaded()) return Main.getConfig().hudColor() + 0xff000000;
         return 0xffffffff;
     }
 

@@ -13,29 +13,27 @@ import net.minecraft.world.InteractionResult;
 import org.jetbrains.annotations.NotNull;
 
 @Config(name = Constants.MOD_ID + "/config")
-public class Configs implements ConfigData {
+public class ModClothConfig implements ModConfig, ConfigData {
 
     public static void init() {
-        AutoConfig.register(Configs.class, GsonConfigSerializer::new);
-
-        AutoConfig.getConfigHolder(Configs.class).registerSaveListener((manager, data) -> {
+        AutoConfig.getConfigHolder(ModClothConfig.class).registerSaveListener((manager, data) -> {
             Main.setDifficulty();
             return InteractionResult.SUCCESS;
         });
     }
 
-    public static Configs getInstance() {
-        return AutoConfig.getConfigHolder(Configs.class).getConfig();
+    public static ModClothConfig getInstance() {
+        return AutoConfig.register(ModClothConfig.class, GsonConfigSerializer::new).getConfig();
     }
 
     @ConfigEntry.Gui.EnumHandler(option = EnumDisplayOption.BUTTON)
-    public Difficulty difficulty = Difficulty.NORMAL;
+    public Difficulty difficulty = ModConfig.super.difficulty();
 
     @ConfigEntry.Gui.Tooltip
-    public boolean isHudRender = true;
+    public boolean isHudRender = ModConfig.super.isHudRender();
 
     @ConfigEntry.ColorPicker
-    public int hudColor = 0xffffff;
+    public int hudColor = ModConfig.super.hudColor();
 
     public enum Difficulty implements SelectionListEntry.Translatable {
         EASY("easy"),
@@ -53,5 +51,20 @@ public class Configs implements ConfigData {
         public @NotNull String getKey() {
             return key;
         }
+    }
+
+    @Override
+    public Difficulty difficulty() {
+        return this.difficulty;
+    }
+
+    @Override
+    public boolean isHudRender() {
+        return this.isHudRender;
+    }
+
+    @Override
+    public int hudColor() {
+        return this.hudColor;
     }
 }

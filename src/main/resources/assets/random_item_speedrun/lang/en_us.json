@@ -17,7 +17,7 @@
     "gui.game_start_screen.side_panel.time.days": "%sd ",
     "gui.game_start_screen.side_panel.date": "Date: %s",
 
-    "chat.game_is_stopped": "%s item found!",
+    "chat.game_is_stopped": "%1$s found the item %2$s!",
 
     "text.autoconfig.random_item_speedrun/config.title": "Random Item Speedrun Settings",
     "text.autoconfig.random_item_speedrun/config.option.isHudRender": "Display HUD",

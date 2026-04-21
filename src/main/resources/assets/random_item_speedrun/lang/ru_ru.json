@@ -17,7 +17,7 @@
     "gui.game_start_screen.side_panel.time.days": "%sд ",
     "gui.game_start_screen.side_panel.date": "Дата: %s",
 
-    "chat.game_is_stopped": "Предмет %s найден!",
+    "chat.game_is_stopped": "%1$s нашёл предмет %2$s!",
 
     "text.autoconfig.random_item_speedrun/config.title": "Настройки Random Item Speedrun",
     "text.autoconfig.random_item_speedrun/config.option.isHudRender": "Отображать оверлей",

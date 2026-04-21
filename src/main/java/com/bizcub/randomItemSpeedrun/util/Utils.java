@@ -3,11 +3,13 @@ package com.bizcub.randomItemSpeedrun.util;
 import com.bizcub.randomItemSpeedrun.Game;
 import com.bizcub.randomItemSpeedrun.Main;
 import com.bizcub.randomItemSpeedrun.config.Compat;
-import com.bizcub.randomItemSpeedrun.config.Configs;
+import com.bizcub.randomItemSpeedrun.config.ModClothConfig;
 import com.bizcub.randomItemSpeedrun.gui.Speedrun;
+import com.bizcub.randomItemSpeedrun.network.AnimationPayloadC2S;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+/*? fabric*/ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -83,9 +85,13 @@ public class Utils {
         /*? <=1.20.6*/ //return new Identifier(id);
     }
 
+    public static void sendTotemPayload(ItemStack itemStack) {
+        /*? fabric*/ ClientPlayNetworking.send(new AnimationPayloadC2S(itemStack));
+    }
+
     public static void renderHud(GuiGraphicsExtractor graphics) {
         Game game = Main.game;
-        if (!game.isStarted()  || (Compat.isClothConfigLoaded() && !Configs.getInstance().isHudRender)) return;
+        if (!game.isStarted()  || (Compat.isClothConfigLoaded() && !Main.getConfig().isHudRender())) return;
 
         double offsetXPercent = 1;
         double offsetYPercent = 1.5;

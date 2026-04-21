@@ -2,6 +2,7 @@
 /*package com.bizcub.randomItemSpeedrun.platform;
 
 import com.bizcub.randomItemSpeedrun.Main;
+import com.bizcub.randomItemSpeedrun.config.Compat;
 import com.bizcub.randomItemSpeedrun.gui.GameStartScreen;
 import com.bizcub.randomItemSpeedrun.util.Constants;
 import com.bizcub.randomItemSpeedrun.util.Utils;
@@ -54,7 +55,7 @@ public class Forge {
 
             //? <=1.21.3 {
             /^ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () ->
-                    new ConfigScreenHandler.ConfigScreenFactory((minecraft, screen) -> PlatformInit.getScreen(screen)));^///?}
+                    new ConfigScreenHandler.ConfigScreenFactory((minecraft, screen) -> Compat.getScreen(screen)));^///?}
         }
     }
 }*///?}

@@ -1,7 +1,8 @@
 package com.bizcub.randomItemSpeedrun;
 
 import com.bizcub.randomItemSpeedrun.config.Compat;
-import com.bizcub.randomItemSpeedrun.config.Configs;
+import com.bizcub.randomItemSpeedrun.config.ModClothConfig;
+import com.bizcub.randomItemSpeedrun.config.ModConfig;
 import com.bizcub.randomItemSpeedrun.gui.Speedrun;
 import com.bizcub.randomItemSpeedrun.util.Constants;
 import com.bizcub.randomItemSpeedrun.util.RemovableItems;
@@ -17,15 +18,20 @@ public class Main {
     public static Game game;
 
     public static void init() {
-        if (Compat.isClothConfigLoaded()) Configs.init();
+        if (Compat.isClothConfigLoaded()) ModClothConfig.init();
         Utils.readSpeedruns();
         game = new Game();
         setDifficulty();
+        getConfig();
+    }
+
+    public static ModConfig getConfig() {
+        return ModConfig.CONFIG;
     }
 
     public static void setDifficulty() {
         if (Compat.isClothConfigLoaded()) {
-            switch (Configs.getInstance().difficulty) {
+            switch (Main.getConfig().difficulty()) {
                 case EASY -> fillItemsList(Constants.notEasyItems());
                 case NORMAL -> fillItemsList(Constants.notMediumItems());
                 case HARD -> fillItemsList(Constants.notHardItems());
