@@ -2,19 +2,21 @@ package com.bizcub.randomItemSpeedrun.util;
 
 import com.bizcub.randomItemSpeedrun.Game;
 import com.bizcub.randomItemSpeedrun.Main;
-import com.bizcub.randomItemSpeedrun.config.Compat;
-import com.bizcub.randomItemSpeedrun.config.ModClothConfig;
 import com.bizcub.randomItemSpeedrun.gui.Speedrun;
-import com.bizcub.randomItemSpeedrun.network.AnimationPayloadC2S;
+import com.bizcub.randomItemSpeedrun.network.AnimationPayloadS2C;
+import com.bizcub.randomItemSpeedrun.network.ChangeGameStatusPayloadC2S;
+import com.bizcub.randomItemSpeedrun.network.HUDPayloadS2C;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 /*? fabric*/ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -85,13 +87,27 @@ public class Utils {
         /*? <=1.20.6*/ //return new Identifier(id);
     }
 
-    public static void sendTotemPayload(ItemStack itemStack) {
-        /*? fabric*/ ClientPlayNetworking.send(new AnimationPayloadC2S(itemStack));
+    public static void sendChangeGameStatusC2S() {
+        System.out.println("[C2S] sendChangeGameStatusC2S");
+
+        ClientPlayNetworking.send(new ChangeGameStatusPayloadC2S());
+    }
+
+    public static void sendAnimationS2C(ServerPlayer player) {
+        ServerPlayNetworking.send(player, new AnimationPayloadS2C(Main.game.getItemStack()));
+    }
+
+    public static void sendHUDS2C(ServerPlayer player) {
+        ServerPlayNetworking.send(player, new HUDPayloadS2C(Main.game.getItemStack(), Main.game.getTime(), Main.game.isStarted()));
+    }
+
+    public static void sendHUDS2C1(ServerPlayer player) {
+        ServerPlayNetworking.send(player, new HUDPayloadS2C(new ItemStack(Items.CACTUS), 0, Main.game.isStarted()));
     }
 
     public static void renderHud(GuiGraphicsExtractor graphics) {
-        Game game = Main.game;
-        if (!game.isStarted()  || (Compat.isClothConfigLoaded() && !Main.getConfig().isHudRender())) return;
+        Game game = Main.gameRender;
+        if (!game.isStarted() || !Main.getConfig().isHudRender()) return;
 
         double offsetXPercent = 1;
         double offsetYPercent = 1.5;

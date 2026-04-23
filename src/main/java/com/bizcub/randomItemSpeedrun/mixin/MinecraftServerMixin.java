@@ -34,17 +34,18 @@ public class MinecraftServerMixin {
                 /*? <=1.20.2*/ //&& !minecraft.isPaused()
                 && game.isStarted()
         ) {
+            game.addTick();
+
+            String itemId = Utils.convertComponentToId(Utils.getNameFromItemStack(game.getItemStack()));
             for (var player : server.getPlayerList().getPlayers()) {
-                String itemId = Utils.convertComponentToId(Utils.getNameFromItemStack(game.getItemStack()));
                 ArrayList<String> itemsId = new ArrayList<>();
                 player.inventoryMenu.getItems().forEach(item ->
                         itemsId.add(Utils.convertComponentToId(Utils.getNameFromItemStack(item))));
 
-                game.addTick();
                 if (itemsId.contains(itemId)) {
+                    game.stop(true);
                     server.getPlayerList().getPlayers().forEach(serverPlayer ->
                             serverPlayer.sendSystemMessage(Component.translatable("chat.game_is_stopped", player.getName(), game.getItemStack().getItemName())));
-                    game.stop(true);
                 }
             }
         }

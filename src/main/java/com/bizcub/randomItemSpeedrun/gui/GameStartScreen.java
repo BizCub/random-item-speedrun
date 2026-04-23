@@ -77,14 +77,14 @@ public class GameStartScreen extends Screen {
         Main.game.buttonPressed();
         setStartButtonMessage();
 
-        if (Main.game.isStarted())
+        if (!Main.gameRender.isStarted())
             this.onClose();
         else
             this.speedrunWidget.refreshEntries("");
     }
 
     private void setStartButtonMessage() {
-        if (Main.game.isStarted())
+        if (Main.gameRender.isStarted())
             startButton.setMessage(Component.translatable("gui.game_start_screen.start_button.started"));
         else
             startButton.setMessage(Component.translatable("gui.game_start_screen.start_button.not_started"));
