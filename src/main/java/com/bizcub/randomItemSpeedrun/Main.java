@@ -16,13 +16,18 @@ public class Main {
     public static List<String> allItemsId = new ArrayList<>();
     public static ArrayList<Speedrun> speedruns = new ArrayList<>();
     public static Game game;
+    public static Game gameRender;
 
     public static void init() {
         if (Compat.isClothConfigLoaded()) ModClothConfig.init();
+        gameRender = new Game();
         Utils.readSpeedruns();
-        game = new Game();
         setDifficulty();
         getConfig();
+    }
+
+    public static void serverInit() {
+        game = new Game();
     }
 
     public static ModConfig getConfig() {
@@ -41,7 +46,6 @@ public class Main {
         } else {
             fillItemsList(Constants.notMediumItems());
         }
-        fillItemsList(Constants.notMediumItems());
     }
 
     private static void fillItemsList(RemovableItems items) {

@@ -31,7 +31,7 @@ public class GuiRendererMixin {
     @Shadow @Final private MultiBufferSource.BufferSource bufferSource;
 
     @Inject(method = "<init>", at = @At("TAIL"))
-    private void addRenderer(GuiRenderState guiRenderState, MultiBufferSource.BufferSource bufferSource, /*? >=1.21.9 {*/ SubmitNodeCollector submitNodeCollector, FeatureRenderDispatcher featureRenderDispatcher, /*?}*/ List<PictureInPictureRenderer<?>> list, CallbackInfo ci) {
+    private void addRenderer(GuiRenderState renderState, MultiBufferSource.BufferSource bufferSource, /*? >=1.21.9 {*/ SubmitNodeCollector submitNodeCollector, FeatureRenderDispatcher featureRenderDispatcher, /*?}*/ List<PictureInPictureRenderer<?>> list, CallbackInfo ci) {
         var map = new HashMap<>(pictureInPictureRenderers);
         map.put(ScaledItemRenderState.class, new ScaledItemPIPRenderer(this.bufferSource));
         pictureInPictureRenderers = map;
