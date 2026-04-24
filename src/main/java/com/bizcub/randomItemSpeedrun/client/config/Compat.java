@@ -1,4 +1,4 @@
-package com.bizcub.randomItemSpeedrun.config;
+package com.bizcub.randomItemSpeedrun.client.config;
 
 //~ auto_config
 import me.shedaniel.autoconfig.AutoConfigClient;

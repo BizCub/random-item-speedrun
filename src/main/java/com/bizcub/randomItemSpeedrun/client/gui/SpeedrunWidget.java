@@ -1,6 +1,6 @@
-package com.bizcub.randomItemSpeedrun.gui;
+package com.bizcub.randomItemSpeedrun.client.gui;
 
-import com.bizcub.randomItemSpeedrun.Main;
+import com.bizcub.randomItemSpeedrun.client.RandomItemSpeedrunClient;
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.ObjectSelectionList;
@@ -21,7 +21,7 @@ public class SpeedrunWidget extends ObjectSelectionList<SpeedrunEntry> {
         this.clearEntries();
         entries.clear();
 
-        Main.speedrunsRender.forEach(speedrun -> entries.add(new SpeedrunEntry(speedrun, this)));
+        RandomItemSpeedrunClient.speedruns.forEach(speedrun -> entries.add(new SpeedrunEntry(speedrun, this)));
 
         entries.removeIf(entry -> !Utils.getNameFromItemStack(entry.speedrun.getItem()).toLowerCase().contains(searchTerm.toLowerCase()));
         entries.forEach(this::addEntry);

@@ -1,4 +1,4 @@
-package com.bizcub.randomItemSpeedrun.mixin;
+package com.bizcub.randomItemSpeedrun.client.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 

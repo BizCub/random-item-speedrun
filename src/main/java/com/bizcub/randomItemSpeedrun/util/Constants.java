@@ -1,11 +1,5 @@
 package com.bizcub.randomItemSpeedrun.util;
 
-import com.bizcub.randomItemSpeedrun.Main;
-import com.bizcub.randomItemSpeedrun.config.Compat;
-import com.bizcub.randomItemSpeedrun.config.ModClothConfig;
-import com.mojang.blaze3d.platform.InputConstants;
-import net.minecraft.client.KeyMapping;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,25 +8,6 @@ public class Constants {
 
     public static final String MOD_ID = /*$ mod_id*/ "random_item_speedrun";
     public static final File SPEEDRUNS_FILE = new File("config/" + MOD_ID + "/speedruns.json");
-
-    public static final KeyMapping OPEN_SCREEN = new KeyMapping(
-            "key." + MOD_ID + ".open_game_start_screen",
-            InputConstants.KEY_Y,
-            /*? >=1.21.9*/ KeyMapping.Category.MISC
-            /*? <=1.21.8*/ //KeyMapping.CATEGORY_MISC
-    );
-
-    public static final KeyMapping QUICK_START = new KeyMapping(
-            "key." + MOD_ID + ".quick_start",
-            InputConstants.UNKNOWN.getValue(),
-            /*? >=1.21.9*/ KeyMapping.Category.MISC
-            /*? <=1.21.8*/ //KeyMapping.CATEGORY_MISC
-    );
-
-    public static int getHudColor() {
-        if (Compat.isClothConfigLoaded()) return Main.getConfig().hudColor() + 0xff000000;
-        return 0xffffffff;
-    }
 
     public static RemovableItems notEasyItems() {
         ArrayList<String> equalItems = new ArrayList<>(List.of("pale_hanging_moss", "enchanting_table", "wind_charge", "music_disc_tears", "music_disc_relic", "music_disc_creator_music_box", "totem_of_undying", "spectral_arrow", "ominous_bottle", "mojang_banner_pattern", "enchanted_golden_apple", "conduit", "warped_roots", "weeping_vines", "twisting_vines", "dried_ghast", "turtle_egg", "jukebox", "glowstone", "glowstone_dust", "comparator", "daylight_detector", "observer", "tadpole_bucket", "ghast_tear", "experience_bottle", "trident", "heart_of_the_sea", "trial_key", "respawn_anchor"));
