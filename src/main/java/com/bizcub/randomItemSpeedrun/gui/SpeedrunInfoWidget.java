@@ -30,6 +30,7 @@ public class SpeedrunInfoWidget extends ObjectSelectionList<SpeedrunInfoEntry> {
         this.clearEntries();
         DateFormat dete = new SimpleDateFormat();
         this.addEntry(new SpeedrunInfoEntry(Component.translatable("gui.game_start_screen.side_panel.item", Component.literal(Utils.removeBracketsOrDefault(speedrun.getItem().getItemName().getString())).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.GRAY), offsetX));
+        this.addEntry(new SpeedrunInfoEntry(Component.translatable("gui.game_start_screen.side_panel.player", Component.literal(speedrun.playerName()).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.GRAY), offsetX));
         this.addEntry(new SpeedrunInfoEntry(Component.translatable("gui.game_start_screen.side_panel.time", Utils.getTimeComponent(speedrun.time(), ChatFormatting.WHITE.getColor())).withStyle(ChatFormatting.GRAY), offsetX));
         this.addEntry(new SpeedrunInfoEntry(Component.translatable("gui.game_start_screen.side_panel.date", Component.literal(dete.format(new Date(speedrun.date()))).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.GRAY), offsetX));
     }

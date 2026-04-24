@@ -23,11 +23,11 @@ public class Game {
         this.itemStack = Utils.getItemStackFromId(getRandomItem());
     }
 
-    public void stop(boolean isSuccess) {
+    public void stop(boolean isSuccess, String playerName) {
         if (!this.isStart) return;
 
         this.isStart = false;
-        Main.speedruns.add(0, new Speedrun(Utils.getIdFromItemStack(this.itemStack), isSuccess, this.time / 20, System.currentTimeMillis()));
+        Main.speedruns.add(0, new Speedrun(Utils.getIdFromItemStack(this.itemStack), playerName, isSuccess, this.time / 20, System.currentTimeMillis()));
         var player = Minecraft.getInstance().player;
         if (player != null && isSuccess) {
             player.level()
@@ -53,12 +53,15 @@ public class Game {
         if (!Main.game.isStarted()) {
             Main.game.start();
         } else {
-            Main.game.stop(false);
+            Main.game.stop(false, "");
         }
     }
 
     private String getRandomItem() {
         Random random = new Random();
+
+        System.out.println(Main.allItemsId);
+
         return Main.allItemsId.get(random.nextInt(Main.allItemsId.size()));
     }
 

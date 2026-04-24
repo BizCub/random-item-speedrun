@@ -15,6 +15,7 @@ import java.util.List;
 public class Main {
     public static List<String> allItemsId = new ArrayList<>();
     public static ArrayList<Speedrun> speedruns = new ArrayList<>();
+    public static ArrayList<Speedrun> speedrunsRender = new ArrayList<>();
     public static Game game;
     public static Game gameRender;
 
@@ -22,11 +23,11 @@ public class Main {
         if (Compat.isClothConfigLoaded()) ModClothConfig.init();
         gameRender = new Game();
         Utils.readSpeedruns();
-        setDifficulty();
         getConfig();
     }
 
     public static void serverInit() {
+        setDifficulty();
         game = new Game();
     }
 
