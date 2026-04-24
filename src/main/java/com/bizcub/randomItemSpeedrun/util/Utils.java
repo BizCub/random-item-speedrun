@@ -6,16 +6,18 @@ import com.bizcub.randomItemSpeedrun.gui.Speedrun;
 import com.bizcub.randomItemSpeedrun.network.AnimationPayloadS2C;
 import com.bizcub.randomItemSpeedrun.network.ChangeGameStatusPayloadC2S;
 import com.bizcub.randomItemSpeedrun.network.HUDPayloadS2C;
+import com.bizcub.randomItemSpeedrun.network.SpeedrunsPayloadS2C;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-/*? fabric*/ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -25,6 +27,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Utils {
@@ -68,28 +71,25 @@ public class Utils {
     }
 
     public static String removeBracketsOrDefault(String string) {
-        /*? >=1.21.2*/ return string;
-        /*? <=1.21.1*/ //return string.substring(1, string.length() - 1);
+        return
+                /*? >=1.21.2 {*/ string;
+                /*?} else*/ //string.substring(1, string.length() - 1);
     }
 
     public static Identifier getIdentifier(String id) {
-        /*? >=1.21*/ return Identifier.fromNamespaceAndPath(Constants.MOD_ID, id);
-        /*? <=1.20.6*/ //return new Identifier(Constants.MOD_ID, id);
-    }
-
-    public static Identifier getCustomIdentifier(String location, String id) {
-        /*? >=1.21*/ return Identifier.fromNamespaceAndPath(location, id);
-        /*? <=1.20.6*/ //return new Identifier(location, id);
+        return
+                /*? >=1.21 {*/ Identifier.fromNamespaceAndPath(
+                /*?} else*/ //new Identifier(
+                        Constants.MOD_ID, id);
     }
 
     public static Identifier getDefaultIdentifier(String id) {
-        /*? >=1.21*/ return Identifier.withDefaultNamespace(id);
-        /*? <=1.20.6*/ //return new Identifier(id);
+        return
+                /*? >=1.21 {*/ Identifier.withDefaultNamespace(id);
+                /*?} else*/ //new Identifier(id);
     }
 
     public static void sendChangeGameStatusC2S() {
-        System.out.println("[C2S] sendChangeGameStatusC2S");
-
         ClientPlayNetworking.send(new ChangeGameStatusPayloadC2S());
     }
 
@@ -98,11 +98,48 @@ public class Utils {
     }
 
     public static void sendHUDS2C(ServerPlayer player) {
-        ServerPlayNetworking.send(player, new HUDPayloadS2C(Main.game.getItemStack(), Main.game.getTime(), Main.game.isStarted()));
+        ServerPlayNetworking.send(player, new HUDPayloadS2C(
+                Main.game.getItemStack() != null ? Main.game.getItemStack() : new ItemStack(Items.CACTUS),
+                Main.game.isStarted() ? Main.game.getTime() : 0,
+                Main.game.isStarted()
+        ));
     }
 
-    public static void sendHUDS2C1(ServerPlayer player) {
-        ServerPlayNetworking.send(player, new HUDPayloadS2C(new ItemStack(Items.CACTUS), 0, Main.game.isStarted()));
+    public static void sendSpeedrunsS2C(ServerPlayer player) {
+        ServerPlayNetworking.send(player, new SpeedrunsPayloadS2C(Main.speedruns));
+    }
+
+    public static void serverTick(MinecraftServer server) {
+        Game game = Main.game;
+
+        if (game == null) return;
+
+        System.out.println(game.getItemStack());
+        System.out.println(game.getTime());
+        System.out.println(game.isStarted());
+
+        if (server != null
+                /*? >=1.20.3 {*/ && !server.isPaused()
+                /*?} else */ //&& !minecraft.isPaused()
+                && game.isStarted()
+        ) {
+            game.addTick();
+
+            String itemId = Utils.convertComponentToId(Utils.getNameFromItemStack(game.getItemStack()));
+            for (var player : server.getPlayerList().getPlayers()) {
+                ArrayList<String> itemsId = new ArrayList<>();
+                player.inventoryMenu.getItems().forEach(item ->
+                        itemsId.add(Utils.convertComponentToId(Utils.getNameFromItemStack(item))));
+
+                if (itemsId.contains(itemId)) {
+                    game.stop(true, player.getName().getString());
+                    server.getPlayerList().getPlayers().forEach(serverPlayer -> {
+                        serverPlayer.sendSystemMessage(Component.translatable("chat.game_is_stopped", player.getName(), game.getItemStack().getItemName()));
+                        Utils.sendSpeedrunsS2C(serverPlayer);
+                    });
+                }
+            }
+        }
     }
 
     public static void renderHud(GuiGraphicsExtractor graphics) {

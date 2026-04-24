@@ -102,9 +102,9 @@ public class GameStartScreen extends Screen {
 
     public void changeFocus() {
         if (speedrunWidget == null) return;
-        this.focusedSpeedrun = !Main.speedruns.isEmpty()
+        this.focusedSpeedrun = !Main.speedrunsRender.isEmpty()
                 ? this.speedrunWidget.getFocusedSpeedrunEntry().speedrun
-                : new Speedrun("air", false, 0, 0);
+                : new Speedrun("air", "", false, 0, 0);
 
         if (speedrunInfoWidget != null) this.speedrunInfoWidget.setEntries(focusedSpeedrun);
         if (itemDisplayWidget != null) this.itemDisplayWidget.updateItemStack(focusedSpeedrun.getItem());

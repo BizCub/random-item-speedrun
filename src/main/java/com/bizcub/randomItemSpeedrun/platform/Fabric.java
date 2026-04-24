@@ -7,6 +7,7 @@ import com.bizcub.randomItemSpeedrun.gui.GameStartScreen;
 import com.bizcub.randomItemSpeedrun.network.AnimationPayloadS2C;
 import com.bizcub.randomItemSpeedrun.network.ChangeGameStatusPayloadC2S;
 import com.bizcub.randomItemSpeedrun.network.HUDPayloadS2C;
+import com.bizcub.randomItemSpeedrun.network.SpeedrunsPayloadS2C;
 import com.bizcub.randomItemSpeedrun.util.Constants;
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
@@ -21,9 +22,11 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.Identifier;
+
+import java.util.ArrayList;
 
 public class Fabric implements ClientModInitializer {
 
@@ -34,6 +37,9 @@ public class Fabric implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(AnimationPayloadS2C.TYPE, (payload, context) ->
                 context.client().execute(() -> context.client().gameRenderer.displayItemActivation(payload.itemStack())));
 
+        ClientPlayNetworking.registerGlobalReceiver(SpeedrunsPayloadS2C.TYPE, (payload, context) ->
+                context.client().execute(() -> Main.speedrunsRender = new ArrayList<>(payload.speedruns())));
+
         ClientPlayNetworking.registerGlobalReceiver(HUDPayloadS2C.TYPE, (payload, context) ->
                 context.client().execute(() -> {
                     Main.gameRender.isStart = payload.isStart();
@@ -42,11 +48,10 @@ public class Fabric implements ClientModInitializer {
                 })
         );
 
-        /*? >=26.1*/ HudElementRegistry.addLast(Identifier.fromNamespaceAndPath(Constants.MOD_ID, "hud"),
-        /*? <=1.21.11*/ //HudRenderCallback.EVENT.register(
+        /*? >=26.1 {*/ HudElementRegistry.addLast(Utils.getIdentifier("hud"),
+        /*?} else*/ //HudRenderCallback.EVENT.register(
                 (graphics, deltaTracker) ->
-                        Utils.renderHud(graphics)
-        );
+                        Utils.renderHud(graphics));
 
         KeyMappingHelper.registerKeyMapping(Constants.OPEN_SCREEN);
         KeyMappingHelper.registerKeyMapping(Constants.QUICK_START);
@@ -70,10 +75,13 @@ public class Fabric implements ClientModInitializer {
             PayloadTypeRegistry.serverboundPlay().register(ChangeGameStatusPayloadC2S.TYPE, ChangeGameStatusPayloadC2S.CODEC);
             PayloadTypeRegistry.clientboundPlay().register(HUDPayloadS2C.TYPE, HUDPayloadS2C.CODEC);
             PayloadTypeRegistry.clientboundPlay().register(AnimationPayloadS2C.TYPE, AnimationPayloadS2C.CODEC);
+            PayloadTypeRegistry.clientboundPlay().register(SpeedrunsPayloadS2C.TYPE, SpeedrunsPayloadS2C.CODEC);
 
             ServerPlayNetworking.registerGlobalReceiver(ChangeGameStatusPayloadC2S.TYPE, (payload, context) ->
                     context.server().execute(() -> {
                         Main.game.changeGameStatus();
+
+                        context.server().getPlayerList().getPlayers().forEach(Utils::sendSpeedrunsS2C);
 
                         if (Main.game.isStarted())
                             context.server().getPlayerList().getPlayers().forEach(Utils::sendAnimationS2C);
@@ -81,13 +89,12 @@ public class Fabric implements ClientModInitializer {
             );
 
             ServerTickEvents.END_SERVER_TICK.register(server -> {
-                server.getPlayerList().getPlayers().forEach(player -> {
-                    if (Main.game.isStart)
-                        Utils.sendHUDS2C(player);
-                    else
-                        Utils.sendHUDS2C1(player);
-                });
+                Utils.serverTick(server);
+                server.getPlayerList().getPlayers().forEach(Utils::sendHUDS2C);
             });
+
+            ServerPlayConnectionEvents.JOIN.register((handler, sender, server) ->
+                    Utils.sendSpeedrunsS2C(handler.player));
         }
     }
 

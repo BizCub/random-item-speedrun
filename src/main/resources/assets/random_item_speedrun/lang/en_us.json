@@ -9,6 +9,7 @@
     "gui.game_start_screen.start_button.not_started": "Start Game",
     "gui.game_start_screen.start_button.started": "Finish Game",
     "gui.game_start_screen.side_panel.item": "Item: %s",
+    "gui.game_start_screen.side_panel.player": "Player: %s",
     "gui.game_start_screen.side_panel.time": "Time: %s",
     "gui.game_start_screen.side_panel.time.time": "%1$s%2$s%3$s%4$s",
     "gui.game_start_screen.side_panel.time.seconds": "%ss",
