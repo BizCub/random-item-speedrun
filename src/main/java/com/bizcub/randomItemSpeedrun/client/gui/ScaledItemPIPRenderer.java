@@ -1,7 +1,7 @@
 //? >=1.21.6 {
-package com.bizcub.randomItemSpeedrun.gui;
+package com.bizcub.randomItemSpeedrun.client.gui;
 
-import com.bizcub.randomItemSpeedrun.mixin.PictureInPictureRendererAccessor;
+import com.bizcub.randomItemSpeedrun.client.mixin.PictureInPictureRendererAccessor;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.textures.FilterMode;

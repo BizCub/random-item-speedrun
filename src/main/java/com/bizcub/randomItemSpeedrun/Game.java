@@ -1,10 +1,8 @@
 package com.bizcub.randomItemSpeedrun;
 
-import com.bizcub.randomItemSpeedrun.gui.Speedrun;
+import com.bizcub.randomItemSpeedrun.client.gui.Speedrun;
+import com.bizcub.randomItemSpeedrun.main.RandomItemSpeedrunMain;
 import com.bizcub.randomItemSpeedrun.util.Utils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Random;
@@ -27,42 +25,25 @@ public class Game {
         if (!this.isStart) return;
 
         this.isStart = false;
-        Main.speedruns.add(0, new Speedrun(Utils.getIdFromItemStack(this.itemStack), playerName, isSuccess, this.time / 20, System.currentTimeMillis()));
-        var player = Minecraft.getInstance().player;
-        if (player != null && isSuccess) {
-            player.level()
-                    /*? >=1.21.5 {*/.playPlayerSound(
-                    //?} else {
-                    /*.playSound(
-                    player,
-                    player.blockPosition(),*///?}
-                    SoundEvents.BELL_BLOCK,
-                    SoundSource.PLAYERS,
-                    5.0F,
-                    1.0F
-            );
-        }
-        Utils.writeSpeedruns();
+        RandomItemSpeedrunMain.speedruns.add(0, new Speedrun(Utils.getIdFromItemStack(this.itemStack), playerName, isSuccess, this.time / 20, System.currentTimeMillis()));
+        RandomItemSpeedrunMain.writeSpeedruns();
     }
 
     public void buttonPressed() {
-        Utils.sendChangeGameStatusC2S();
+        RandomItemSpeedrunMain.sendChangeGameStatusC2S();
     }
 
     public void changeGameStatus() {
-        if (!Main.game.isStarted()) {
-            Main.game.start();
+        if (!RandomItemSpeedrunMain.game.isStarted()) {
+            RandomItemSpeedrunMain.game.start();
         } else {
-            Main.game.stop(false, "");
+            RandomItemSpeedrunMain.game.stop(false, "");
         }
     }
 
     private String getRandomItem() {
         Random random = new Random();
-
-        System.out.println(Main.allItemsId);
-
-        return Main.allItemsId.get(random.nextInt(Main.allItemsId.size()));
+        return RandomItemSpeedrunMain.allItemsId.get(random.nextInt(RandomItemSpeedrunMain.allItemsId.size()));
     }
 
     public boolean isStarted() {

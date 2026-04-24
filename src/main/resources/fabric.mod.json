@@ -13,13 +13,13 @@
     },
     "entrypoints": {
         "client": [
-            "com.bizcub.randomItemSpeedrun.platform.Fabric"
-        ],
-        "main": [
-            "com.bizcub.randomItemSpeedrun.platform.Fabric$Server"
+            "com.bizcub.randomItemSpeedrun.client.platform.Fabric"
         ],
         "modmenu": [
-            "com.bizcub.randomItemSpeedrun.platform.Fabric$ModMenu"
+            "com.bizcub.randomItemSpeedrun.client.platform.Fabric$ModMenu"
+        ],
+        "main": [
+            "com.bizcub.randomItemSpeedrun.main.platform.Fabric"
         ]
     },
     "mixins": [

@@ -1,11 +1,9 @@
-package com.bizcub.randomItemSpeedrun.mixin;
+package com.bizcub.randomItemSpeedrun.client.mixin;
 
-import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 
 //? >=1.21.6 {
 import com.mojang.blaze3d.textures.GpuTextureView;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.render.pip.PictureInPictureRenderer;
 import org.spongepowered.asm.mixin.gen.Accessor;
 

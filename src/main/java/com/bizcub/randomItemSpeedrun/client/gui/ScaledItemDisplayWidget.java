@@ -1,6 +1,6 @@
-package com.bizcub.randomItemSpeedrun.gui;
+package com.bizcub.randomItemSpeedrun.client.gui;
 
-import com.bizcub.randomItemSpeedrun.mixin.GraphicsAccessor;
+import com.bizcub.randomItemSpeedrun.client.mixin.GraphicsAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;

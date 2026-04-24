@@ -1,6 +1,6 @@
-package com.bizcub.randomItemSpeedrun.config;
+package com.bizcub.randomItemSpeedrun.client.config;
 
-import com.bizcub.randomItemSpeedrun.Main;
+import com.bizcub.randomItemSpeedrun.main.RandomItemSpeedrunMain;
 import com.bizcub.randomItemSpeedrun.util.Constants;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
@@ -17,7 +17,7 @@ public class ModClothConfig implements ModConfig, ConfigData {
 
     public static void init() {
         AutoConfig.getConfigHolder(ModClothConfig.class).registerSaveListener((manager, data) -> {
-            Main.setDifficulty();
+            RandomItemSpeedrunMain.setDifficulty();
             return InteractionResult.SUCCESS;
         });
     }

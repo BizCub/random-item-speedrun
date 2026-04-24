@@ -1,4 +1,4 @@
-package com.bizcub.randomItemSpeedrun.gui;
+package com.bizcub.randomItemSpeedrun.client.gui;
 
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.client.Minecraft;

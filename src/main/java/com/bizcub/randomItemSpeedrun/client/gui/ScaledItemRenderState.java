@@ -1,5 +1,5 @@
 //? >=1.21.6 {
-package com.bizcub.randomItemSpeedrun.gui;
+package com.bizcub.randomItemSpeedrun.client.gui;
 
 import net.minecraft.client.gui.navigation.ScreenRectangle;
 import net.minecraft.client.renderer.state.gui.pip.PictureInPictureRenderState;

@@ -1,6 +1,6 @@
 package com.bizcub.randomItemSpeedrun.network;
 
-import com.bizcub.randomItemSpeedrun.gui.Speedrun;
+import com.bizcub.randomItemSpeedrun.client.gui.Speedrun;
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;

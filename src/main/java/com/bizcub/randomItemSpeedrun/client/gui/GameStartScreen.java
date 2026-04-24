@@ -1,8 +1,8 @@
-package com.bizcub.randomItemSpeedrun.gui;
+package com.bizcub.randomItemSpeedrun.client.gui;
 
-import com.bizcub.randomItemSpeedrun.Main;
+import com.bizcub.randomItemSpeedrun.client.RandomItemSpeedrunClient;
 import com.bizcub.randomItemSpeedrun.util.Utils;
-import com.bizcub.randomItemSpeedrun.config.Compat;
+import com.bizcub.randomItemSpeedrun.client.config.Compat;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.ComponentPath;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -74,17 +74,13 @@ public class GameStartScreen extends Screen {
     }
 
     private void changeGameStatus() {
-        Main.game.buttonPressed();
+        RandomItemSpeedrunClient.game.buttonPressed();
         setStartButtonMessage();
-
-        if (!Main.gameRender.isStarted())
-            this.onClose();
-        else
-            this.speedrunWidget.refreshEntries("");
+        this.onClose();
     }
 
     private void setStartButtonMessage() {
-        if (Main.gameRender.isStarted())
+        if (RandomItemSpeedrunClient.game.isStarted())
             startButton.setMessage(Component.translatable("gui.game_start_screen.start_button.started"));
         else
             startButton.setMessage(Component.translatable("gui.game_start_screen.start_button.not_started"));
@@ -102,7 +98,7 @@ public class GameStartScreen extends Screen {
 
     public void changeFocus() {
         if (speedrunWidget == null) return;
-        this.focusedSpeedrun = !Main.speedrunsRender.isEmpty()
+        this.focusedSpeedrun = !RandomItemSpeedrunClient.speedruns.isEmpty()
                 ? this.speedrunWidget.getFocusedSpeedrunEntry().speedrun
                 : new Speedrun("air", "", false, 0, 0);
 

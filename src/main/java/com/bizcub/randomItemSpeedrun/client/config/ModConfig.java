@@ -1,4 +1,4 @@
-package com.bizcub.randomItemSpeedrun.config;
+package com.bizcub.randomItemSpeedrun.client.config;
 
 public interface ModConfig {
     ModConfig CONFIG = Compat.isClothConfigLoaded() ? ModClothConfig.getInstance() : new ModConfig() { };
