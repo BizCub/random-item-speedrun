@@ -10,8 +10,9 @@ import com.bizcub.randomItemSpeedrun.util.Utils;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+//? fabric {
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;//?}
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
@@ -68,7 +69,7 @@ public class RandomItemSpeedrunMain {
 
         if (server != null
                 /*? >=1.20.3 {*/ && !server.isPaused()
-                /*?} else */ //&& !minecraft.isPaused()
+                /*?} else */ //&& !server.isStopped()
                 && game.isStarted()
         ) {
             game.addTick();
@@ -92,27 +93,32 @@ public class RandomItemSpeedrunMain {
     }
 
     public static void sendChangeGameStatusC2S() {
-        ClientPlayNetworking.send(new ChangeGameStatusPayloadC2S());
+        ChangeGameStatusPayloadC2S payload = new ChangeGameStatusPayloadC2S();
+        ClientPlayNetworking.send(ChangeGameStatusPayloadC2S.ID, payload.toBuffer());
     }
 
     public static void sendAnimationS2C(ServerPlayer player) {
-        ServerPlayNetworking.send(player, new AnimationPayloadS2C(game.getItemStack()));
+        AnimationPayloadS2C payload = new AnimationPayloadS2C(game.getItemStack());
+        ServerPlayNetworking.send(player, AnimationPayloadS2C.ID, payload.toBuffer());
     }
 
     public static void sendSpeedrunsS2C(ServerPlayer player) {
-        ServerPlayNetworking.send(player, new SpeedrunsPayloadS2C(speedruns));
+        SpeedrunsPayloadS2C payload = new SpeedrunsPayloadS2C(speedruns);
+        ServerPlayNetworking.send(player, SpeedrunsPayloadS2C.ID, payload.toBuffer());
     }
 
     public static void sendSoundS2C(ServerPlayer player, SoundEvent soundEvent) {
-        ServerPlayNetworking.send(player, new SoundPayloadS2C(soundEvent));
+        SoundPayloadS2C payload = new SoundPayloadS2C(soundEvent);
+        ServerPlayNetworking.send(player, SoundPayloadS2C.ID, payload.toBuffer());
     }
 
     public static void sendHUDS2C(ServerPlayer player) {
-        ServerPlayNetworking.send(player, new HUDPayloadS2C(
+        HUDPayloadS2C payload = new HUDPayloadS2C(
                 game.getItemStack() != null ? game.getItemStack() : new ItemStack(Items.CACTUS),
                 game.isStarted() ? game.getTime() : 0,
                 game.isStarted()
-        ));
+        );
+        ServerPlayNetworking.send(player, HUDPayloadS2C.ID, payload.toBuffer());
     }
 
     public static void readSpeedruns() {
