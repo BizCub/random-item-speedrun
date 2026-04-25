@@ -1,7 +1,6 @@
 package com.bizcub.randomItemSpeedrun.main;
 
 import com.bizcub.randomItemSpeedrun.Game;
-import com.bizcub.randomItemSpeedrun.RandomItemSpeedrun;
 import com.bizcub.randomItemSpeedrun.client.config.Compat;
 import com.bizcub.randomItemSpeedrun.client.gui.Speedrun;
 import com.bizcub.randomItemSpeedrun.network.*;
@@ -42,7 +41,7 @@ public class RandomItemSpeedrunMain {
 
     public static void setDifficulty() {
         if (Compat.isClothConfigLoaded()) {
-            switch (RandomItemSpeedrun.getConfig().difficulty()) {
+            switch (Constants.getConfig().difficulty()) {
                 case EASY -> fillItemsList(Constants.notEasyItems());
                 case NORMAL -> fillItemsList(Constants.notMediumItems());
                 case HARD -> fillItemsList(Constants.notHardItems());

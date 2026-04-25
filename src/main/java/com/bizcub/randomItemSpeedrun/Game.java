@@ -9,9 +9,9 @@ import java.util.Random;
 
 public class Game {
 
-    public int time;
-    public ItemStack itemStack;
-    public boolean isStart = false;
+    private int time;
+    private ItemStack itemStack;
+    private boolean isStart = false;
 
     public void start() {
         if (this.isStart) return;
@@ -46,19 +46,25 @@ public class Game {
         return RandomItemSpeedrunMain.allItemsId.get(random.nextInt(RandomItemSpeedrunMain.allItemsId.size()));
     }
 
-    public boolean isStarted() {
-        return isStart;
+    public void update(boolean isStart, ItemStack itemStack, int time) {
+        this.isStart = isStart;
+        this.itemStack = itemStack;
+        this.time = time;
     }
 
     public void addTick() {
-        time++;
+        this.time++;
     }
 
     public int getTime() {
-        return time;
+        return this.time;
+    }
+
+    public boolean isStarted() {
+        return this.isStart;
     }
 
     public ItemStack getItemStack() {
-        return itemStack;
+        return this.itemStack;
     }
 }

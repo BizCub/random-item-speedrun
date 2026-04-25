@@ -38,12 +38,7 @@ public class Fabric implements ClientModInitializer {
                 context.client().execute(() -> context.player().playSound(payload.soundEvent(), 1.0F, 1.0F)));
 
         ClientPlayNetworking.registerGlobalReceiver(HUDPayloadS2C.TYPE, (payload, context) ->
-                context.client().execute(() -> {
-                    RandomItemSpeedrunClient.game.isStart = payload.isStart();
-                    RandomItemSpeedrunClient.game.itemStack = payload.itemStack();
-                    RandomItemSpeedrunClient.game.time = payload.time();
-                })
-        );
+                context.client().execute(() -> RandomItemSpeedrunClient.game.update(payload.isStart(), payload.itemStack(), payload.time())));
 
         /*? >=26.1 {*/ HudElementRegistry.addLast(Utils.getIdentifier("hud"),
         /*?} else*/ //HudRenderCallback.EVENT.register(
