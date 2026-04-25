@@ -1,7 +1,6 @@
 package com.bizcub.randomItemSpeedrun.client;
 
 import com.bizcub.randomItemSpeedrun.Game;
-import com.bizcub.randomItemSpeedrun.RandomItemSpeedrun;
 import com.bizcub.randomItemSpeedrun.client.config.Compat;
 import com.bizcub.randomItemSpeedrun.client.config.ModClothConfig;
 import com.bizcub.randomItemSpeedrun.client.gui.Speedrun;
@@ -21,7 +20,7 @@ public class RandomItemSpeedrunClient {
     public static void init() {
         if (Compat.isClothConfigLoaded()) ModClothConfig.init();
         game = new Game();
-        RandomItemSpeedrun.getConfig();
+        Constants.getConfig();
     }
 
     public static final KeyMapping OPEN_SCREEN = new KeyMapping(
@@ -39,12 +38,12 @@ public class RandomItemSpeedrunClient {
     );
 
     public static int getHudColor() {
-        if (Compat.isClothConfigLoaded()) return RandomItemSpeedrun.getConfig().hudColor() + 0xff000000;
+        if (Compat.isClothConfigLoaded()) return Constants.getConfig().hudColor() + 0xff000000;
         return 0xffffffff;
     }
 
     public static void renderHud(GuiGraphicsExtractor graphics) {
-        if (!game.isStarted() || !RandomItemSpeedrun.getConfig().isHudRender()) return;
+        if (!game.isStarted() || !Constants.getConfig().isHudRender()) return;
 
         double offsetXPercent = 1;
         double offsetYPercent = 1.5;

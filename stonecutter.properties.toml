@@ -4,4 +4,4 @@
 # Extra dependencies see: https://linkie.shedaniel.dev/dependencies
 
 ["26.1.2"]
-pub.end="latest"
+pub-end="latest"
