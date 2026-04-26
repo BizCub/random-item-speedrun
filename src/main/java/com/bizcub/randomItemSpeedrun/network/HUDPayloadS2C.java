@@ -1,7 +1,8 @@
 package com.bizcub.randomItemSpeedrun.network;
 
-//? >=1.20.3 {
+//? >=1.20.5 {
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 //?} else {
@@ -14,11 +15,11 @@ import com.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
-public record HUDPayloadS2C(ItemStack itemStack, int time, boolean isStart) /*? >=1.20.3 >> ' {'*/ implements CustomPacketPayload {
+public record HUDPayloadS2C(ItemStack itemStack, int time, boolean isStart) /*? >=1.20.5 >> ' {'*/ implements CustomPacketPayload {
 
     public static final Identifier ID = Utils.getIdentifier("render_hud");
 
-    //? >=1.20.3 {
+    //? >=1.20.5 {
     public static final Type<HUDPayloadS2C> TYPE = new Type<>(Utils.getIdentifier("render_hud"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, HUDPayloadS2C> CODEC =

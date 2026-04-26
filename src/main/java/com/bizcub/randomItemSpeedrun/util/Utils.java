@@ -55,6 +55,12 @@ public class Utils {
                 /*?} else*/ //string.substring(1, string.length() - 1);
     }
 
+    public static Identifier getDefaultIdentifier(String id) {
+        return
+                /*? >=1.21 {*/ Identifier.withDefaultNamespace(id);
+                 /*?} else*/ //new Identifier(id);
+    }
+
     public static Identifier getIdentifier(String id) {
         return
                 /*? >=1.21 {*/ Identifier.fromNamespaceAndPath(
@@ -62,9 +68,10 @@ public class Utils {
                         Constants.MOD_ID, id);
     }
 
-    public static Identifier getDefaultIdentifier(String id) {
+    public static Identifier getCustomIdentifier(String location, String id) {
         return
-                /*? >=1.21 {*/ Identifier.withDefaultNamespace(id);
-                /*?} else*/ //new Identifier(id);
+                /*? >=1.21 {*/ Identifier.fromNamespaceAndPath(
+                /*?} else*/ //new Identifier(
+                        Constants.MOD_ID, id);
     }
 }

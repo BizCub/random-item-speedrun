@@ -1,6 +1,7 @@
 package com.bizcub.randomItemSpeedrun.client.config;
 
 //~ auto_config
+import com.bizcub.randomItemSpeedrun.client.gui.GameStartScreen;
 import me.shedaniel.autoconfig.AutoConfigClient;
 import net.minecraft.client.gui.screens.Screen;
 /*? fabric*/ import net.fabricmc.loader.api.FabricLoader;
@@ -22,8 +23,8 @@ public class Compat {
         return isModLoaded(CLOTH_CONFIG_ID);
     }
 
-    //? is_cloth_config_available {
     public static Screen getScreen(Screen parent) {
-        return AutoConfigClient.getConfigScreen(ModClothConfig.class, parent).get();
-    }//?}
+        /*? is_cloth_config_available {*/ return AutoConfigClient.getConfigScreen(ModClothConfig.class, parent).get();
+        /*?} else*/ //return new GameStartScreen();
+    }
 }

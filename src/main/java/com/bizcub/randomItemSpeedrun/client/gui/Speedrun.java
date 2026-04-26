@@ -1,6 +1,6 @@
 package com.bizcub.randomItemSpeedrun.client.gui;
 
-//? >=1.20.3 {
+//? >=1.20.5 {
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -24,17 +24,19 @@ public record Speedrun(
         return Utils.getItemStackFromId(itemId);
     }
 
-//    public static final StreamCodec<ByteBuf, Speedrun> CODEC = StreamCodec.composite(
-//            ByteBufCodecs.STRING_UTF8, Speedrun::itemId,
-//            ByteBufCodecs.STRING_UTF8, Speedrun::playerName,
-//            ByteBufCodecs.BOOL, Speedrun::isSuccess,
-//            ByteBufCodecs.INT, Speedrun::time,
-//            //~ if >=1.20.5 'VAR_LONG' -> 'LONG'
-//            ByteBufCodecs.VAR_LONG, Speedrun::date,
-//            Speedrun::new
-//    );
+    //? >=1.20.5 {
+    public static final StreamCodec<ByteBuf, Speedrun> CODEC = StreamCodec.composite(
+            ByteBufCodecs.STRING_UTF8, Speedrun::itemId,
+            ByteBufCodecs.STRING_UTF8, Speedrun::playerName,
+            ByteBufCodecs.BOOL, Speedrun::isSuccess,
+            ByteBufCodecs.INT, Speedrun::time,
+            //~ if >=1.21.2 'VAR_LONG' -> 'LONG'
+            ByteBufCodecs.LONG, Speedrun::date,
+            Speedrun::new
+    );
 
-    public static final Codec<Speedrun> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    //?} else {
+    /*public static final Codec<Speedrun> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.STRING.fieldOf("itemId").forGetter(Speedrun::itemId),
             Codec.STRING.fieldOf("playerName").forGetter(Speedrun::playerName),
             Codec.BOOL.fieldOf("isSuccess").forGetter(Speedrun::isSuccess),
@@ -52,5 +54,5 @@ public record Speedrun(
         buf.writeBoolean(speedrun.isSuccess);
         buf.writeInt(speedrun.time);
         buf.writeLong(speedrun.date);
-    }
+    }*///?}
 }

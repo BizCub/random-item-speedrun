@@ -1,6 +1,6 @@
 package com.bizcub.randomItemSpeedrun.network;
 
-//? >=1.20.3 {
+//? >=1.20.5 {
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -14,14 +14,14 @@ import com.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
-public record AnimationPayloadS2C(ItemStack itemStack) /*? >=1.20.3 >> ' {'*/ implements CustomPacketPayload {
+public record AnimationPayloadS2C(ItemStack itemStack) /*? >=1.20.5 >> ' {'*/ implements CustomPacketPayload {
 
     public static final Identifier ID = Utils.getIdentifier("animation");
 
-    //? >=1.20.3 {
+    //? >=1.20.5 {
     public static final Type<AnimationPayloadS2C> TYPE = new Type<>(ID);
 
-    public static final StreamCodec<FriendlyByteBuf, AnimationPayloadS2C> CODEC =
+    public static final StreamCodec<RegistryFriendlyByteBuf, AnimationPayloadS2C> CODEC =
             StreamCodec.composite(
                     ItemStack.STREAM_CODEC, AnimationPayloadS2C::itemStack,
                     AnimationPayloadS2C::new
