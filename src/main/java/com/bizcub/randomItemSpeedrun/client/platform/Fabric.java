@@ -19,8 +19,6 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 //~ if >=26.1 'HudRenderCallback' -> 'hud.HudElementRegistry'
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.minecraft.client.Minecraft;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 
 import java.util.ArrayList;
 
@@ -30,7 +28,7 @@ public class Fabric implements ClientModInitializer {
     public void onInitializeClient() {
         RandomItemSpeedrunClient.init();
 
-        //? >=1.20.3 {
+        //? >=1.20.5 {
         ClientPlayNetworking.registerGlobalReceiver(AnimationPayloadS2C.TYPE, (payload, context) ->
                 context.client().execute(() -> context.client().gameRenderer.displayItemActivation(payload.itemStack())));
 

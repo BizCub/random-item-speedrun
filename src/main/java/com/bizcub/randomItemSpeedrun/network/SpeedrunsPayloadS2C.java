@@ -1,7 +1,8 @@
 package com.bizcub.randomItemSpeedrun.network;
 
-//? >=1.20.3 {
+//? >=1.20.5 {
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 //?} else {
@@ -16,11 +17,11 @@ import net.minecraft.resources.Identifier;
 
 import java.util.List;
 
-public record SpeedrunsPayloadS2C(List<Speedrun> speedruns) /*? >=1.20.3 >> ' {'*/ implements CustomPacketPayload {
+public record SpeedrunsPayloadS2C(List<Speedrun> speedruns) /*? >=1.20.5 >> ' {'*/ implements CustomPacketPayload {
 
     public static final Identifier ID = Utils.getIdentifier("speedruns");
 
-    //? >=1.20.3 {
+    //? >=1.20.5 {
     public static final Type<SpeedrunsPayloadS2C> TYPE = new Type<>(ID);
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SpeedrunsPayloadS2C> CODEC =

@@ -27,6 +27,7 @@ multiloader {
             }
             register("server") {
                 gameDirectory = file(serverRunPath)
+                programArgument("--nogui")
                 server()
             }
         }

@@ -10,9 +10,6 @@ import com.bizcub.randomItemSpeedrun.util.Utils;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-//? fabric {
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;//?}
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
@@ -21,6 +18,13 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+
+//? fabric {
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+//?} neoforge {
+/*/^? >=1.21.6^/ import net.neoforged.neoforge.client.network.ClientPacketDistributor;
+import net.neoforged.neoforge.network.PacketDistributor;*///?}
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -94,22 +98,27 @@ public class RandomItemSpeedrunMain {
 
     public static void sendChangeGameStatusC2S() {
         ChangeGameStatusPayloadC2S payload = new ChangeGameStatusPayloadC2S();
-        ClientPlayNetworking.send(ChangeGameStatusPayloadC2S.ID, payload.toBuffer());
+        /*? fabric*/ ClientPlayNetworking.send(/*? <1.20.5 {*/ /*ChangeGameStatusPayloadC2S.ID, payload.toBuffer() *//*?} else {*/ payload /*?}*/);
+        //~ if >=1.21.6 'PacketDistributor' -> 'ClientPacketDistributor'
+        /*? neoforge*/ //ClientPacketDistributor.sendToServer(payload);
     }
 
     public static void sendAnimationS2C(ServerPlayer player) {
         AnimationPayloadS2C payload = new AnimationPayloadS2C(game.getItemStack());
-        ServerPlayNetworking.send(player, AnimationPayloadS2C.ID, payload.toBuffer());
+        /*? fabric*/ ServerPlayNetworking.send(player, /*? <1.20.5 {*/ /*AnimationPayloadS2C.ID, payload.toBuffer() *//*?} else {*/ payload /*?}*/);
+        /*? neoforge*/ //PacketDistributor.sendToPlayer(player, payload);
     }
 
     public static void sendSpeedrunsS2C(ServerPlayer player) {
         SpeedrunsPayloadS2C payload = new SpeedrunsPayloadS2C(speedruns);
-        ServerPlayNetworking.send(player, SpeedrunsPayloadS2C.ID, payload.toBuffer());
+        /*? fabric*/ ServerPlayNetworking.send(player, /*? <1.20.5 {*/ /*SpeedrunsPayloadS2C.ID, payload.toBuffer() *//*?} else {*/ payload /*?}*/);
+        /*? neoforge*/ //PacketDistributor.sendToPlayer(player, payload);
     }
 
     public static void sendSoundS2C(ServerPlayer player, SoundEvent soundEvent) {
         SoundPayloadS2C payload = new SoundPayloadS2C(soundEvent);
-        ServerPlayNetworking.send(player, SoundPayloadS2C.ID, payload.toBuffer());
+        /*? fabric*/ ServerPlayNetworking.send(player, /*? <1.20.5 {*/ /*SoundPayloadS2C.ID, payload.toBuffer() *//*?} else {*/ payload /*?}*/);
+        /*? neoforge*/ //PacketDistributor.sendToPlayer(player, payload);
     }
 
     public static void sendHUDS2C(ServerPlayer player) {
@@ -118,7 +127,8 @@ public class RandomItemSpeedrunMain {
                 game.isStarted() ? game.getTime() : 0,
                 game.isStarted()
         );
-        ServerPlayNetworking.send(player, HUDPayloadS2C.ID, payload.toBuffer());
+        /*? fabric*/ ServerPlayNetworking.send(player, /*? <1.20.5 {*/ /*HUDPayloadS2C.ID, payload.toBuffer() *//*?} else {*/ payload /*?}*/);
+        /*? neoforge*/ //PacketDistributor.sendToPlayer(player, payload);
     }
 
     public static void readSpeedruns() {

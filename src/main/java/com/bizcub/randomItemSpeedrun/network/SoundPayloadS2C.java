@@ -1,6 +1,6 @@
 package com.bizcub.randomItemSpeedrun.network;
 
-//? >=1.20.3 {
+//? >=1.20.5 {
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -8,19 +8,17 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 /*import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.Unpooled;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;*///?}
 
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 
-public record SoundPayloadS2C(SoundEvent soundEvent) /*? >=1.20.3 >> ' {'*/ implements CustomPacketPayload {
+public record SoundPayloadS2C(SoundEvent soundEvent) /*? >=1.20.5 >> ' {'*/ implements CustomPacketPayload {
 
     public static final Identifier ID = Utils.getIdentifier("sound");
 
-    //? >=1.20.3 {
+    //? >=1.20.5 {
     public static final Type<SoundPayloadS2C> TYPE = new Type<>(ID);
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SoundPayloadS2C> CODEC =

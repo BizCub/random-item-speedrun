@@ -1,6 +1,6 @@
 package com.bizcub.randomItemSpeedrun.network;
 
-//? >=1.20.3 {
+//? >=1.20.5 {
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -12,11 +12,11 @@ import net.minecraft.network.FriendlyByteBuf;*///?}
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.resources.Identifier;
 
-public record ChangeGameStatusPayloadC2S() /*? >=1.20.3 >> ' {'*/ implements CustomPacketPayload {
+public record ChangeGameStatusPayloadC2S() /*? >=1.20.5 >> ' {'*/ implements CustomPacketPayload {
 
     public static final Identifier ID = Utils.getIdentifier("change_game_status_c2s");
 
-    //? >=1.20.3 {
+    //? >=1.20.5 {
     public static final Type<ChangeGameStatusPayloadC2S> TYPE = new Type<>(ID);
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ChangeGameStatusPayloadC2S> CODEC =
