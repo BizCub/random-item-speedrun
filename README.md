@@ -31,11 +31,5 @@ To start/stop the game without entering the mod screen, you can assign a key in 
 
 </details>
 
-## Plans
-
-* More Minecraft versions may be available.
-* One of the planned options is sorting items by difficulty (easy difficulty - items from the overworld, medium - from easy difficulty and from the nether, hard - from medium difficulty and from the end).
-* Fix a known issue with low-resolution block rendering in additional speedrun information in more recent versions of the game.
-
 ## 🤝 Support
 <a href='https://ko-fi.com/X8X71FI3YO' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://i.postimg.cc/SQ5ZLKg5/support-me-on-kofi-beige.png' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
