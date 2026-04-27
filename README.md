@@ -12,6 +12,25 @@ The mod has settings where you can change the HUD parameters (more customization
 
 ![preview](https://cdn.modrinth.com/data/le0FiAgt/images/caf8291d75e76e4833b9b84a645b15191769ba4f.png)
 
+Since version 2.0, the mod has been running on the server. This means all players can participate in the same run simultaneously. The name of the player who finds the item will also be saved in the run list.
+
+You can specify the difficulty of drop items in the mod settings:
+* **Easy** - items that don't require entering the Nether,
+* **Normal** - items that don't require entering the End,
+* **Hard** - all items except those that take too long to obtain,
+* **Hardcore** - all items.
+
+To start/stop the game without entering the mod screen, you can assign a key in the binding settings. Pressing the key will then instantly change the game status.
+
+## Settings
+
+<details>
+<summary>Click to open</summary>
+
+![preview](https://cdn.modrinth.com/data/cached_images/1736dee7a853cba9de59209420c9aeb13bcef210.jpeg)
+
+</details>
+
 ## Plans
 
 * More Minecraft versions may be available.
