@@ -38,6 +38,8 @@ multiloader {
                 workingDir.convention(layout.projectDirectory.dir(serverRunPath))
             }
         }
+
+        accessTransformers.from(file(atForgePath))
     }
 
     val builtFile = tasks.jar.get().archiveFile
