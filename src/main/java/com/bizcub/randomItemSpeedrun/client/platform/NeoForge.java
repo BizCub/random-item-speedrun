@@ -45,9 +45,15 @@ public class NeoForge {
         }
     }
 
+    //? >=1.21.6 {
+    @SubscribeEvent
+    public static void registerPIPRenderers(RegisterPictureInPictureRenderersEvent event) {
+        event.register(ScaledItemRenderState.class, ScaledItemPIPRenderer::new);
+    }//?}
+
     @SubscribeEvent //~ !graphics
     public static void onRenderGuiPost(RenderGuiEvent.Post event) {
-        RandomItemSpeedrunClient.renderHud(event.getGuiGraphics());
+        RandomItemSpeedrunClient.renderHud(event.getGuiGraphicsExtractor());
     }
 
     @Mod(value = Constants.MOD_ID, dist = Dist.CLIENT)
@@ -55,13 +61,6 @@ public class NeoForge {
 
         public Init(IEventBus modEventBus, ModContainer modContainer) {
             RandomItemSpeedrunClient.init();
-
-            /^? >=1.21.6^/ modEventBus.addListener(this::onRegisterPIPRenderers);
         }
-
-        //? >=1.21.6 {
-        private void onRegisterPIPRenderers(RegisterPictureInPictureRenderersEvent event) {
-            event.register(ScaledItemRenderState.class, ScaledItemPIPRenderer::new);
-        }//?}
     }
 }*///?}

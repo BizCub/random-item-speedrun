@@ -50,7 +50,7 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
                 Component.translatable("gui.game_start_screen.entry",
                         Utils.removeBracketsOrDefault(this.speedrun.getItem().getItemName().getString()),
                         Component.translatable("gui.game_start_screen.entry.separator").withStyle(ChatFormatting.GRAY),
-                        Utils.getTimeComponent(speedrun.time(), ChatFormatting.GRAY.getColor())
+                        Utils.getTimeComponent(speedrun.time(), 11184810)
                 ),
                 Utils.getPercent(width, 18),
                 y + Utils.getPercent(height, 37),

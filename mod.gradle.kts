@@ -13,6 +13,9 @@ project.extensions.configure<MultiLoader>("multiloader") {
             sc.constants["is_cloth_config_available"] = isClothConfigAvailable
 
             sc.replacements {
+                string(scp >= "26.2") {
+                    replace(".setScreen(", ".gui.setScreen(")
+                }
                 string(scp >= "26.1", "!graphics") {
                     replace("GuiGraphics", "GuiGraphicsExtractor")
                 }
@@ -49,7 +52,7 @@ project.extensions.configure<MultiLoader>("multiloader") {
         }
     }
 
-    addDependency("maven.shedaniel.me", "api", "me.shedaniel.cloth:cloth-config-${mod.loader}:${getDep("cloth-config")?.split("+")?.first()}")
+    if (scp < "26.2") addDependency("maven.shedaniel.me", "api", "me.shedaniel.cloth:cloth-config-${mod.loader}:${getDep("cloth-config")?.split("+")?.first()}")
 
     if (isFabric) {
         addDependency("implementation", "net.fabricmc:fabric-loader:${getDep("fabric")}")

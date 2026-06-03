@@ -43,10 +43,11 @@ public record ScaledItemRenderState(
         return renderX1 - renderX0;
     }
 
+    //? <26.2 {
     @Override
     public Matrix3x2f pose() {
         return IDENTITY_POSE;
-    }
+    }//?}
 
     @Nullable
     @Override

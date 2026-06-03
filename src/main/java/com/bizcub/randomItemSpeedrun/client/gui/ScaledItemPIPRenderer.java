@@ -11,9 +11,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.navigation.ScreenRectangle;
 import net.minecraft.client.gui.render.TextureSetup;
 import net.minecraft.client.gui.render.pip.PictureInPictureRenderer;
+/*? <26.2*/ import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeStorage;
 import net.minecraft.client.renderer.state.gui.BlitRenderState;
 import net.minecraft.client.renderer.state.gui.GuiRenderState;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderPipelines;
 //? >=1.21.9 {
 import net.minecraft.client.renderer.SubmitNodeCollector;
@@ -24,23 +25,34 @@ import net.minecraft.util.ARGB;
 
 public class ScaledItemPIPRenderer extends PictureInPictureRenderer<ScaledItemRenderState> {
 
-    public ScaledItemPIPRenderer(MultiBufferSource.BufferSource bufferSource) {
-        super(bufferSource);
+    //? >=26.2 {
+    /*public ScaledItemPIPRenderer() {
+        super();
     }
 
+    *///?} else {
+    public ScaledItemPIPRenderer(MultiBufferSource.BufferSource bufferSource) {
+        super(bufferSource);
+    }//?}
+
     @Override
-    protected void renderToTexture(ScaledItemRenderState state, PoseStack poseStack) {
+    protected void renderToTexture(ScaledItemRenderState state, PoseStack poseStack /*? >=26.2 >> ')'*//*, SubmitNodeCollector submitNodeCollector*/) {
         poseStack.scale(1.0F, -1.0F, -1.0F);
 
         ItemStackRenderState itemState = state.itemStackRenderState();
 
+        //~ if >=26.2 'getLighting()' -> 'lighting()' {
         if (itemState.usesBlockLight()) {
             Minecraft.getInstance().gameRenderer.getLighting().setupFor(Lighting.Entry.ITEMS_3D);
         } else {
             Minecraft.getInstance().gameRenderer.getLighting().setupFor(Lighting.Entry.ITEMS_FLAT);
-        }
+        }//~}
 
-        //? >=1.21.9 {
+        //? >=26.2 {
+        /*itemState.submit(poseStack, submitNodeCollector, 15728880, OverlayTexture.NO_OVERLAY, 0);
+        Minecraft.getInstance().gameRenderer.featureRenderDispatcher().renderAllFeatures(new SubmitNodeStorage());
+
+        *///?} >=1.21.9 {
         SubmitNodeCollector submitNodeCollector = Minecraft.getInstance().gameRenderer.getSubmitNodeStorage();
         FeatureRenderDispatcher featureRenderDispatcher = Minecraft.getInstance().gameRenderer.getFeatureRenderDispatcher();
 
