@@ -41,6 +41,7 @@ public class RandomItemSpeedrunMain {
     public static void init() {
         readSpeedruns();
         setDifficulty();
+        removeDuplicateItems();
         game = new Game();
     }
 
@@ -66,6 +67,14 @@ public class RandomItemSpeedrunMain {
         allItemsId.removeAll(items.equalItems());
         for (String item : items.containItems())
             allItemsId.removeIf(id -> id.contains(item));
+    }
+
+    public static void removeDuplicateItems() {
+        if (Compat.isClothConfigLoaded() && !Constants.getConfig().removeDuplicates()) return;
+
+        List<String> duplicates = new ArrayList<>();
+        speedruns.forEach(speedrun -> duplicates.add(speedrun.itemId()));
+        allItemsId.removeAll(duplicates);
     }
 
     public static void serverTick(MinecraftServer server) {

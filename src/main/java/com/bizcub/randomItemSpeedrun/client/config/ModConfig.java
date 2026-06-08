@@ -7,6 +7,10 @@ public interface ModConfig {
         return ModClothConfig.Difficulty.NORMAL;
     }
 
+    default boolean removeDuplicates() {
+        return true;
+    }
+
     default boolean isHudRender() {
         return true;
     }

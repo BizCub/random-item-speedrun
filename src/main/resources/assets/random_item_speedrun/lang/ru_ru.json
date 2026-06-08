@@ -20,10 +20,14 @@
 
     "chat.game_is_stopped": "%1$s нашёл предмет %2$s!",
 
+    "title.no_items": "Не осталось предметов для спидрана!",
+
     "text.autoconfig.random_item_speedrun/config.title": "Настройки Random Item Speedrun",
     "text.autoconfig.random_item_speedrun/config.option.isHudRender": "Отображать оверлей",
     "text.autoconfig.random_item_speedrun/config.option.isHudRender.@Tooltip": "Должны ли время и предмет отображаться на экране?",
     "text.autoconfig.random_item_speedrun/config.option.hudColor": "Цвет оверлея",
+    "text.autoconfig.random_item_speedrun/config.option.removeDuplicates": "Удалить дубликаты",
+    "text.autoconfig.random_item_speedrun/config.option.removeDuplicates.@Tooltip": "Найденные предметы не придётся спидранить снова",
     "text.autoconfig.random_item_speedrun/config.option.difficulty": "Сложность",
     "text.autoconfig.random_item_speedrun/config.option.difficulty.easy": "Лёгкая",
     "text.autoconfig.random_item_speedrun/config.option.difficulty.normal": "Нормальная",

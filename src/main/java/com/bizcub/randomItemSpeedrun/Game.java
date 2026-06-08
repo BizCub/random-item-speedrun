@@ -3,8 +3,11 @@ package com.bizcub.randomItemSpeedrun;
 import com.bizcub.randomItemSpeedrun.client.gui.Speedrun;
 import com.bizcub.randomItemSpeedrun.main.RandomItemSpeedrunMain;
 import com.bizcub.randomItemSpeedrun.util.Utils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.List;
 import java.util.Random;
 
 public class Game {
@@ -15,6 +18,12 @@ public class Game {
 
     public void start() {
         if (this.isStart) return;
+
+        if (RandomItemSpeedrunMain.allItemsId.isEmpty()) {
+            //~ if >=26.1 'displayClientMessage' -> 'sendOverlayMessage'
+            Minecraft.getInstance().player.sendOverlayMessage(Component.translatable("title.no_items") /*? <=1.21.11 {*//*, true *//*?}*/);
+            return;
+        }
 
         this.isStart = true;
         this.time = 0;
@@ -27,6 +36,7 @@ public class Game {
         this.isStart = false;
         RandomItemSpeedrunMain.speedruns.add(0, new Speedrun(Utils.getIdFromItemStack(this.itemStack), playerName, isSuccess, this.time / 20, System.currentTimeMillis()));
         RandomItemSpeedrunMain.writeSpeedruns();
+        RandomItemSpeedrunMain.removeDuplicateItems();
     }
 
     public void buttonPressed() {
@@ -43,7 +53,8 @@ public class Game {
 
     private String getRandomItem() {
         Random random = new Random();
-        return RandomItemSpeedrunMain.allItemsId.get(random.nextInt(RandomItemSpeedrunMain.allItemsId.size()));
+        List<String> allItemsId = RandomItemSpeedrunMain.allItemsId;
+        return allItemsId.get(random.nextInt(allItemsId.size()));
     }
 
     public void update(boolean isStart, ItemStack itemStack, int time) {

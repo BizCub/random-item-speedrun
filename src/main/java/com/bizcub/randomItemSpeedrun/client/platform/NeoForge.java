@@ -1,3 +1,4 @@
+//~ !graphics
 //? neoforge {
 /*package com.bizcub.randomItemSpeedrun.client.platform;
 
@@ -51,9 +52,9 @@ public class NeoForge {
         event.register(ScaledItemRenderState.class, ScaledItemPIPRenderer::new);
     }//?}
 
-    @SubscribeEvent //~ !graphics
+    @SubscribeEvent
     public static void onRenderGuiPost(RenderGuiEvent.Post event) {
-        RandomItemSpeedrunClient.renderHud(event.getGuiGraphicsExtractor());
+        RandomItemSpeedrunClient.renderHud(event.getGuiGraphics());
     }
 
     @Mod(value = Constants.MOD_ID, dist = Dist.CLIENT)

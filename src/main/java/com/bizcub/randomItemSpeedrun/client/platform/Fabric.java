@@ -4,7 +4,7 @@ package com.bizcub.randomItemSpeedrun.client.platform;
 import com.bizcub.randomItemSpeedrun.client.RandomItemSpeedrunClient;
 import com.bizcub.randomItemSpeedrun.client.config.Compat;
 import com.bizcub.randomItemSpeedrun.client.gui.GameStartScreen;
-import com.bizcub.randomItemSpeedrun.client.gui.ScaledItemPIPRenderer;
+/*? >=1.21.6*/ import com.bizcub.randomItemSpeedrun.client.gui.ScaledItemPIPRenderer;
 import com.bizcub.randomItemSpeedrun.network.AnimationPayloadS2C;
 import com.bizcub.randomItemSpeedrun.network.HUDPayloadS2C;
 import com.bizcub.randomItemSpeedrun.network.SoundPayloadS2C;
@@ -17,8 +17,9 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 //~ if >=26.1 'keybinding' -> 'keymapping'
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-//~ if >=26.1 'HudRenderCallback' -> 'hud.HudElementRegistry'
+//~ if >=26.1 'SpecialGuiElementRegistry' -> 'PictureInPictureRendererRegistry'
 /*? >=1.21.6*/ import net.fabricmc.fabric.api.client.rendering.v1.PictureInPictureRendererRegistry;
+//~ if >=26.1 'HudRenderCallback' -> 'hud.HudElementRegistry'
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.minecraft.client.Minecraft;
 
@@ -69,8 +70,11 @@ public class Fabric implements ClientModInitializer {
                 (graphics, deltaTracker) ->
                         RandomItemSpeedrunClient.renderHud(graphics));
 
-        //? >=1.21.6
+        //? >=1.21.6 {
+        //~ if >=26.1 'SpecialGuiElementRegistry' -> 'PictureInPictureRendererRegistry' {
+        //~ if >=26.1 'vertexConsumers' -> 'bufferSource' {
         PictureInPictureRendererRegistry.register(ctx -> new ScaledItemPIPRenderer(/*? <26.2 >>+ ')'*/ ctx.bufferSource()));
+        /*~}*//*~}*//*?}*/
 
         KeyMappingHelper.registerKeyMapping(RandomItemSpeedrunClient.OPEN_SCREEN);
         KeyMappingHelper.registerKeyMapping(RandomItemSpeedrunClient.QUICK_START);

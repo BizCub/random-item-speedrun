@@ -18,6 +18,7 @@ public class ModClothConfig implements ModConfig, ConfigData {
     public static void init() {
         AutoConfig.getConfigHolder(ModClothConfig.class).registerSaveListener((manager, data) -> {
             RandomItemSpeedrunMain.setDifficulty();
+            RandomItemSpeedrunMain.removeDuplicateItems();
             return InteractionResult.SUCCESS;
         });
     }
@@ -28,6 +29,9 @@ public class ModClothConfig implements ModConfig, ConfigData {
 
     @ConfigEntry.Gui.EnumHandler(option = EnumDisplayOption.BUTTON)
     public Difficulty difficulty = ModConfig.super.difficulty();
+
+    @ConfigEntry.Gui.Tooltip
+    public boolean removeDuplicates = ModConfig.super.removeDuplicates();
 
     @ConfigEntry.Gui.Tooltip
     public boolean isHudRender = ModConfig.super.isHudRender();
@@ -56,6 +60,11 @@ public class ModClothConfig implements ModConfig, ConfigData {
     @Override
     public Difficulty difficulty() {
         return this.difficulty;
+    }
+
+    @Override
+    public boolean removeDuplicates() {
+        return this.removeDuplicates;
     }
 
     @Override

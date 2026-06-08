@@ -45,24 +45,30 @@ public class RandomItemSpeedrunClient {
     public static void renderHud(GuiGraphicsExtractor graphics) {
         if (!game.isStarted() || !Constants.getConfig().isHudRender()) return;
 
-        double offsetXPercent = 1;
+        //~ if >=26.1 'renderItem(' -> 'item('
+        graphics.item(
+                game.getItemStack(),
+                Utils.getPercent(graphics.guiWidth(), 0.75),
+                Utils.getPercent(graphics.guiHeight(), 2)
+        );
+
+        double offsetXPercent = 5;
         double offsetYPercent = 1.5;
         int color = getHudColor();
-
         //~ draw_string
         graphics.text(
                 Minecraft.getInstance().font,
                 Utils.removeBracketsOrDefault(game.getItemStack().getItemName().getString()),
                 Utils.getPercent(graphics.guiWidth(), offsetXPercent),
-                Utils.getPercent(graphics.guiWidth(), offsetYPercent),
+                Utils.getPercent(graphics.guiHeight(), offsetYPercent),
                 color
         );
-        offsetYPercent += 2.5;
+        offsetYPercent += 4;
         graphics.text(
                 Minecraft.getInstance().font,
                 Utils.getTimeComponent(game.getTime() / 20, color),
                 Utils.getPercent(graphics.guiWidth(), offsetXPercent),
-                Utils.getPercent(graphics.guiWidth(), offsetYPercent),
+                Utils.getPercent(graphics.guiHeight(), offsetYPercent),
                 color
         );
         //~ !draw_string
