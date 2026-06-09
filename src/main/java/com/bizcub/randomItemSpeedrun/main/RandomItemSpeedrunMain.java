@@ -45,6 +45,24 @@ public class RandomItemSpeedrunMain {
         game = new Game();
     }
 
+    public static void serverInit(MinecraftServer server) {
+        if (speedruns.isEmpty()) return;
+
+        Speedrun lastSpeedrun = speedruns.get(0);
+        if (lastSpeedrun.isSuccess() == Speedrun.Status.IN_PROGRESS) {
+            game.update(true, lastSpeedrun.getItem(), lastSpeedrun.time() * 20);
+        }
+    }
+
+    public static void serverClose(MinecraftServer server) {
+        if (speedruns.isEmpty()) return;
+
+        Speedrun lastSpeedrun = speedruns.get(0);
+        lastSpeedrun = new Speedrun(lastSpeedrun.itemId(), lastSpeedrun.playerName(), lastSpeedrun.isSuccess(), game.getTime() / 20, lastSpeedrun.time());
+        speedruns.set(0, lastSpeedrun);
+        writeSpeedruns();
+    }
+
     public static void setDifficulty() {
         if (Compat.isClothConfigLoaded()) {
             switch (Constants.getConfig().difficulty()) {
@@ -94,7 +112,7 @@ public class RandomItemSpeedrunMain {
                         itemsId.add(Utils.convertComponentToId(Utils.getNameFromItemStack(item))));
 
                 if (itemsId.contains(itemId)) {
-                    game.stop(true, player.getName().getString());
+                    game.stop(Speedrun.Status.SUCCESS, player.getName().getString());
                     server.getPlayerList().getPlayers().forEach(serverPlayer -> {
                         serverPlayer.sendSystemMessage(Component.translatable("chat.game_is_stopped", player.getName(), game.getItemStack().getItemName()));
                         sendSoundS2C(serverPlayer, SoundEvents.PLAYER_LEVELUP);

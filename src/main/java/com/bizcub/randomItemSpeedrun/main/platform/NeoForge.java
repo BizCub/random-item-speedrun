@@ -14,6 +14,8 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
+import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -72,6 +74,14 @@ public class NeoForge {
 
         public Init(IEventBus modEventBus, ModContainer modContainer) {
             RandomItemSpeedrunMain.init();
+
+            net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener((ServerStartedEvent event) ->
+                    RandomItemSpeedrunMain.serverInit(event.getServer())
+            );
+
+            net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener((ServerStoppedEvent event) ->
+                    RandomItemSpeedrunMain.serverClose(event.getServer())
+            );
         }
     }
 }*///?}

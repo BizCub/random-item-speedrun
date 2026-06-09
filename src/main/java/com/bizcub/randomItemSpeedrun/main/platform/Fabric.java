@@ -4,6 +4,7 @@ package com.bizcub.randomItemSpeedrun.main.platform;
 import com.bizcub.randomItemSpeedrun.main.RandomItemSpeedrunMain;
 import com.bizcub.randomItemSpeedrun.network.*;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 /*? >=1.20.5*/ import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
@@ -15,6 +16,9 @@ public class Fabric implements ModInitializer {
     @Override
     public void onInitialize() {
         RandomItemSpeedrunMain.init();
+
+        ServerLifecycleEvents.SERVER_STARTED.register(RandomItemSpeedrunMain::serverInit);
+        ServerLifecycleEvents.SERVER_STOPPED.register(RandomItemSpeedrunMain::serverClose);
 
         //? >=1.20.5 {
         /*~ if >=26.1 'playC2S' -> 'serverboundPlay'*/ /*~ if >=26.1 'playS2C' -> 'clientboundPlay' {*/

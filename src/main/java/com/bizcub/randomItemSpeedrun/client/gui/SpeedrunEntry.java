@@ -27,12 +27,17 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
         Identifier reject =
                 /*? >=1.20.2*/ Utils.getDefaultIdentifier("pending_invite/reject");
                 /*? <=1.20.1*/ //Utils.getCustomIdentifier("realms", "textures/gui/realms/reject_icon.png");
+        Identifier inProgress = Utils.getDefaultIdentifier("statistics/item_crafted");
 
         /*? >=1.20.2*/ graphics.blitSprite(
         /*? <=1.20.1*/ //graphics.blit(
                 /*? >=1.21.6*/ RenderPipelines.GUI_TEXTURED,
                 /*? <=1.21.5 && >=1.21.2*/ //RenderType::guiTextured,
-                this.speedrun.isSuccess() ? accept : reject,
+                switch (this.speedrun.isSuccess()) {
+                    case SUCCESS -> accept;
+                    case FAILURE -> reject;
+                    case IN_PROGRESS -> inProgress;
+                },
                 Utils.getPercent(width, 5),
                 y + Utils.getPercent(height, 17),
                 /*? >=1.20.2*/ 20, 20

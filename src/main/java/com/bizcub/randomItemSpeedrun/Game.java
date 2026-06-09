@@ -28,13 +28,15 @@ public class Game {
         this.isStart = true;
         this.time = 0;
         this.itemStack = Utils.getItemStackFromId(getRandomItem());
+
+        RandomItemSpeedrunMain.speedruns.add(0, new Speedrun(Utils.getIdFromItemStack(this.itemStack), "-", Speedrun.Status.IN_PROGRESS, 0, System.currentTimeMillis()));
     }
 
-    public void stop(boolean isSuccess, String playerName) {
+    public void stop(Speedrun.Status isSuccess, String playerName) {
         if (!this.isStart) return;
 
         this.isStart = false;
-        RandomItemSpeedrunMain.speedruns.add(0, new Speedrun(Utils.getIdFromItemStack(this.itemStack), playerName, isSuccess, this.time / 20, System.currentTimeMillis()));
+        RandomItemSpeedrunMain.speedruns.set(0, new Speedrun(Utils.getIdFromItemStack(this.itemStack), playerName, isSuccess, this.time / 20, System.currentTimeMillis()));
         RandomItemSpeedrunMain.writeSpeedruns();
         RandomItemSpeedrunMain.removeDuplicateItems();
     }
@@ -47,7 +49,7 @@ public class Game {
         if (!RandomItemSpeedrunMain.game.isStarted()) {
             RandomItemSpeedrunMain.game.start();
         } else {
-            RandomItemSpeedrunMain.game.stop(false, "");
+            RandomItemSpeedrunMain.game.stop(Speedrun.Status.FAILURE, "");
         }
     }
 
