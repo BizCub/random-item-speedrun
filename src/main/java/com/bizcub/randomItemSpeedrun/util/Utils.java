@@ -72,6 +72,6 @@ public class Utils {
         return
                 /*? >=1.21 {*/ Identifier.fromNamespaceAndPath(
                 /*?} else*/ //new Identifier(
-                        Constants.MOD_ID, id);
+                        location, id);
     }
 }

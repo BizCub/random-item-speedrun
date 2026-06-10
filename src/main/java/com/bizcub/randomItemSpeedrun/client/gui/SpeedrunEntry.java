@@ -27,7 +27,9 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
         Identifier reject =
                 /*? >=1.20.2*/ Utils.getDefaultIdentifier("pending_invite/reject");
                 /*? <=1.20.1*/ //Utils.getCustomIdentifier("realms", "textures/gui/realms/reject_icon.png");
-        Identifier inProgress = Utils.getDefaultIdentifier("statistics/item_crafted");
+        Identifier inProgress =
+                /*? >=1.20.2*/ Utils.getDefaultIdentifier("statistics/item_crafted");
+                /*? <=1.20.1*/ //Utils.getIdentifier("textures/gui/sprites/item_crafted.png");
 
         /*? >=1.20.2*/ graphics.blitSprite(
         /*? <=1.20.1*/ //graphics.blit(
