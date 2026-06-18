@@ -58,9 +58,11 @@ public class RandomItemSpeedrunMain {
         if (speedruns.isEmpty()) return;
 
         Speedrun lastSpeedrun = speedruns.get(0);
-        lastSpeedrun = new Speedrun(lastSpeedrun.itemId(), lastSpeedrun.playerName(), lastSpeedrun.isSuccess(), game.getTime() / 20, lastSpeedrun.time());
-        speedruns.set(0, lastSpeedrun);
-        writeSpeedruns();
+        if (lastSpeedrun.isSuccess() == Speedrun.Status.IN_PROGRESS) {
+            lastSpeedrun = new Speedrun(lastSpeedrun.itemId(), lastSpeedrun.playerName(), lastSpeedrun.isSuccess(), game.getTime() / 20, lastSpeedrun.date());
+            speedruns.set(0, lastSpeedrun);
+            writeSpeedruns();
+        }
     }
 
     public static void setDifficulty() {

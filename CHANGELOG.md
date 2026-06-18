@@ -1,3 +1,3 @@
-* Now the current speedrun is saved when you exit the world and can be continued when you re-enter
-* Item rendering has been added to the HUD
-* An option to remove duplicates has been added
+* The ability to edit mod configurations using the Cloth Config mod for Neoforge has been restored
+* Speedrun dates no longer reset to 1970
+* Updated to 26.2

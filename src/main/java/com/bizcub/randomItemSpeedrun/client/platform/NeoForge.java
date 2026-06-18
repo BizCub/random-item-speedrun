@@ -3,6 +3,7 @@
 /*package com.bizcub.randomItemSpeedrun.client.platform;
 
 import com.bizcub.randomItemSpeedrun.client.RandomItemSpeedrunClient;
+import com.bizcub.randomItemSpeedrun.client.config.Compat;
 import com.bizcub.randomItemSpeedrun.client.gui.GameStartScreen;
 /^? >=1.21.6^/ import com.bizcub.randomItemSpeedrun.client.gui.ScaledItemPIPRenderer;
 /^? >=1.21.6^/ import com.bizcub.randomItemSpeedrun.client.gui.ScaledItemRenderState;
@@ -14,12 +15,14 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 /^? >=1.21.6^/ import net.neoforged.neoforge.client.event.RegisterPictureInPictureRenderersEvent;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
 @EventBusSubscriber(modid = Constants.MOD_ID, value = Dist.CLIENT)
 public class NeoForge {
@@ -38,7 +41,7 @@ public class NeoForge {
                     /^? <=1.21.8^/ //event.getKey(), event.getScanCode()
             );
             if (RandomItemSpeedrunClient.OPEN_SCREEN.isActiveAndMatches(inputConstants)) {
-                Minecraft.getInstance().setScreen(new GameStartScreen());
+                Minecraft.getInstance().gui.setScreen(new GameStartScreen());
             }
             if (RandomItemSpeedrunClient.QUICK_START.isActiveAndMatches(inputConstants)) {
                 RandomItemSpeedrunMain.game.buttonPressed();
@@ -62,6 +65,9 @@ public class NeoForge {
 
         public Init(IEventBus modEventBus, ModContainer modContainer) {
             RandomItemSpeedrunClient.init();
+            
+            modContainer.registerExtensionPoint(IConfigScreenFactory.class,
+                    (container, parent) -> Compat.getScreen(parent));
         }
     }
 }*///?}

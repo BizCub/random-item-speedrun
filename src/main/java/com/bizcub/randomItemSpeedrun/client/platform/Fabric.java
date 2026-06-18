@@ -73,7 +73,7 @@ public class Fabric implements ClientModInitializer {
         //? >=1.21.6 {
         //~ if >=26.1 'SpecialGuiElementRegistry' -> 'PictureInPictureRendererRegistry' {
         //~ if >=26.1 'vertexConsumers' -> 'bufferSource' {
-        PictureInPictureRendererRegistry.register(ctx -> new ScaledItemPIPRenderer(/*? <26.2 >>+ ')'*/ ctx.bufferSource()));
+        PictureInPictureRendererRegistry.register(ctx -> new ScaledItemPIPRenderer(/*? <26.2 >>+ ')'*/ /*ctx.bufferSource()*/));
         /*~}*//*~}*//*?}*/
 
         KeyMappingHelper.registerKeyMapping(RandomItemSpeedrunClient.OPEN_SCREEN);
@@ -81,7 +81,7 @@ public class Fabric implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (RandomItemSpeedrunClient.OPEN_SCREEN.consumeClick()) {
-                Minecraft.getInstance().setScreen(new GameStartScreen());
+                Minecraft.getInstance().gui.setScreen(new GameStartScreen());
             }
             while (RandomItemSpeedrunClient.QUICK_START.consumeClick()) {
                 RandomItemSpeedrunClient.game.buttonPressed();
