@@ -1,6 +1,5 @@
 package com.bizcub.randomItemSpeedrun;
 
-import com.bizcub.randomItemSpeedrun.client.gui.Speedrun;
 import com.bizcub.randomItemSpeedrun.main.RandomItemSpeedrunMain;
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.client.Minecraft;

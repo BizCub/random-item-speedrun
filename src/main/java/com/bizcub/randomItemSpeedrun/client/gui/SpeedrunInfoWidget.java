@@ -1,5 +1,6 @@
 package com.bizcub.randomItemSpeedrun.client.gui;
 
+import com.bizcub.randomItemSpeedrun.Speedrun;
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;

@@ -1,5 +1,6 @@
 package com.bizcub.randomItemSpeedrun.client.gui;
 
+import com.bizcub.randomItemSpeedrun.Speedrun;
 import com.bizcub.randomItemSpeedrun.client.RandomItemSpeedrunClient;
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import com.bizcub.randomItemSpeedrun.client.config.Compat;

@@ -1,4 +1,4 @@
-package com.bizcub.randomItemSpeedrun.client.gui;
+package com.bizcub.randomItemSpeedrun;
 
 //? >=1.20.5 {
 import io.netty.buffer.ByteBuf;

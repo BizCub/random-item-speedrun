@@ -1,10 +1,12 @@
 package com.bizcub.randomItemSpeedrun.client.gui;
 
+import com.bizcub.randomItemSpeedrun.Speedrun;
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.ObjectSelectionList;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -13,14 +15,12 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
 
     public Speedrun speedrun;
     protected final Minecraft client = Minecraft.getInstance();
-    private final SpeedrunWidget list;
 
-    public SpeedrunEntry(Speedrun speedrun, SpeedrunWidget speedrunWidget) {
+    public SpeedrunEntry(Speedrun speedrun) {
         this.speedrun = speedrun;
-        this.list = speedrunWidget;
     }
 
-    private void render(GuiGraphicsExtractor graphics, int y, int width, int height) {
+    private void render(GuiGraphicsExtractor graphics, int y, int width, int height, int mouseX, int mouseY) {
         Identifier accept =
                 /*? >=1.20.2*/ Utils.getDefaultIdentifier("pending_invite/accept");
                 /*? <=1.20.1*/ //Utils.getCustomIdentifier("realms", "textures/gui/realms/accept_icon.png");
@@ -51,31 +51,40 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
                 Utils.getPercent(width, 12),
                 y + Utils.getPercent(height, 22)
         );
-        //~ draw_string
-        graphics.text(
-                this.client.font,
-                Component.translatable("gui.game_start_screen.entry",
-                        Utils.removeBracketsOrDefault(this.speedrun.getItem().getItemName().getString()),
-                        Component.translatable("gui.game_start_screen.entry.separator").withStyle(ChatFormatting.GRAY),
-                        Utils.getTimeComponent(speedrun.time(), 11184810)
-                ),
-                Utils.getPercent(width, 18),
-                y + Utils.getPercent(height, 37),
-                -1
+        int textX = Utils.getPercent(width, 18);
+        int textY = y + Utils.getPercent(height, 37);
+        Component textItem = Component.translatable("gui.game_start_screen.entry",
+                Utils.removeBracketsOrDefault(this.speedrun.getItem().getItemName().getString()),
+                Component.translatable("gui.game_start_screen.entry.separator").withStyle(ChatFormatting.GRAY),
+                Utils.getTimeComponent(speedrun.time(), 11184810)
         );
+        //~ draw_string
+        graphics.text(this.client.font, textItem, textX, textY, -1);
         //~ !draw_string
+        int textWidth = this.client.font.width(textItem.getVisualOrderText());
+        int textHeight = 9;
+        if (mouseX >= textX && mouseX <= textX + textWidth && mouseY >= textY && mouseY <= textY + textHeight) {
+            //~ if >=1.21.6 'renderTooltip' -> 'setTooltipForNextFrame'
+            graphics.setTooltipForNextFrame(
+                    this.client.font,
+                    Screen.getTooltipFromItem(this.client, this.speedrun.getItem()),
+                    this.speedrun.getItem().getTooltipImage(),
+                    mouseX,
+                    mouseY
+            );
+        }
     }
 
     //? >=1.21.9 {
     @Override
     public void extractContent(GuiGraphicsExtractor graphics, int mouseX, int mouseY, boolean hovered, float a) {
-        render(graphics, this.getY(), this.getWidth(), this.getHeight());
+        render(graphics, this.getY(), this.getWidth(), this.getHeight(), mouseX, mouseY);
     }
 
     //?} else {
     /*@Override
     public void render(GuiGraphicsExtractor graphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isHovered, float deltaTime) {
-        render(graphics, top, width, height);
+        render(graphics, top, width, height, mouseX, mouseY);
     }*///?}
 
     //? <=1.20.4 {

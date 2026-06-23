@@ -11,7 +11,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;*///?}
 
-import com.bizcub.randomItemSpeedrun.client.gui.Speedrun;
+import com.bizcub.randomItemSpeedrun.Speedrun;
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.resources.Identifier;
 

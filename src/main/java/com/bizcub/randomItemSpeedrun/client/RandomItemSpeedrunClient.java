@@ -3,7 +3,7 @@ package com.bizcub.randomItemSpeedrun.client;
 import com.bizcub.randomItemSpeedrun.Game;
 import com.bizcub.randomItemSpeedrun.client.config.Compat;
 import com.bizcub.randomItemSpeedrun.client.config.ModClothConfig;
-import com.bizcub.randomItemSpeedrun.client.gui.Speedrun;
+import com.bizcub.randomItemSpeedrun.Speedrun;
 import com.bizcub.randomItemSpeedrun.util.Constants;
 import com.bizcub.randomItemSpeedrun.util.Utils;
 import com.mojang.blaze3d.platform.InputConstants;

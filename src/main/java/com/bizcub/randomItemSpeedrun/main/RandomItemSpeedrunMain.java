@@ -2,7 +2,7 @@ package com.bizcub.randomItemSpeedrun.main;
 
 import com.bizcub.randomItemSpeedrun.Game;
 import com.bizcub.randomItemSpeedrun.client.config.Compat;
-import com.bizcub.randomItemSpeedrun.client.gui.Speedrun;
+import com.bizcub.randomItemSpeedrun.Speedrun;
 import com.bizcub.randomItemSpeedrun.network.*;
 import com.bizcub.randomItemSpeedrun.util.Constants;
 import com.bizcub.randomItemSpeedrun.util.RemovableItems;

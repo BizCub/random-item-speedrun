@@ -20,7 +20,7 @@ project.extensions.configure<MultiLoader>("multiloader") {
                     replace("GuiGraphics", "GuiGraphicsExtractor")
                 }
                 string(scp >= "26.1", "draw_string") {
-                    replace("drawString", "text")
+                    replace(".drawString(", ".text(")
                 }
                 string(scp >= "26.1") {
                     replace("gui.render.state", "renderer.state.gui")

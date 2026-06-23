@@ -18,20 +18,16 @@ public class SpeedrunInfoEntry extends ObjectSelectionList.Entry<SpeedrunInfoEnt
     }
 
     private void render(GuiGraphicsExtractor graphics, int y, int width, int height) {
+        int textX = Utils.getPercent(width, 3) + offsetX;
+        int textY = y + Utils.getPercent(height, 37);
         //~ draw_string
-        graphics.text(
-                this.client.font,
-                component,
-                Utils.getPercent(width, 3) + offsetX,
-                y + Utils.getPercent(height, 37),
-                -1
-        );
+        graphics.text(this.client.font, component, textX, textY, -1);
         //~ !draw_string
     }
 
     //? >= 1.21.9 {
     @Override
-    public void extractContent(GuiGraphicsExtractor guiGraphics, int i, int j, boolean bl, float f) {
+    public void extractContent(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, boolean bl, float f) {
         render(guiGraphics, this.getY(), this.getWidth(), this.getHeight());
     }
 
