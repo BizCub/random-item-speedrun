@@ -3,8 +3,6 @@ plugins {
     alias(libs.plugins.loom)
 }
 
-apply(from = ml.scriptPath)
-
 multiloader {
     repositories {
         for (rep in reps) maven(rep.repository)
@@ -13,17 +11,17 @@ multiloader {
     dependencies {
         minecraft("com.mojang:minecraft:${mod.mcExact}")
         if (isObfuscated) "mappings"(loom.officialMojangMappings())
-        for (dep in deps) add(if (isObfuscated) dep.modConfiguration else dep.configuration, dep.dependency) {
-            exclude("eu.pb4")
+        for (dep in deps) add(if (!isObfuscated) dep.configuration else dep.modConfiguration, dep.dependency) {
+            for (module in eModules) exclude(module.module)
         }
     }
 
     loom {
-        runConfigs.getByName("client") { runDir = clientRunPath }
-        runConfigs.getByName("server") { runDir = serverRunPath }
+        runConfigs.getByName("client") { runDirectory.set(clientRunFile) }
+        runConfigs.getByName("server") { runDirectory.set(serverRunFile) }
 
         val awFile = rootProject.file(ctFabricPath)
-        if (awFile.exists()) accessWidenerPath = sc.process(awFile, ctFabricProcessPath)
+        if (awFile.exists()) accessWidenerPath.set(sc.process(awFile, ctFabricProcessPath))
     }
 
     val builtFile = if (isObfuscated)
@@ -35,11 +33,13 @@ multiloader {
         file.set(builtFile)
     }
 
-    tasks.named<Copy>("buildAndCollect") {
-        from(builtFile)
-    }
+    tasks {
+        named<Copy>("buildAndCollect") {
+            from(builtFile)
+        }
 
-    tasks.named("validateAccessWidener") {
-        dependsOn("processResources")
+        named("validateAccessWidener") {
+            dependsOn("processResources")
+        }
     }
 }

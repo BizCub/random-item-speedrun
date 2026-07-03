@@ -15,9 +15,11 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
 
     public Speedrun speedrun;
     protected final Minecraft client = Minecraft.getInstance();
+    private final SpeedrunWidget list;
 
-    public SpeedrunEntry(Speedrun speedrun) {
+    public SpeedrunEntry(Speedrun speedrun, SpeedrunWidget speedrunWidget) {
         this.speedrun = speedrun;
+        this.list = speedrunWidget;
     }
 
     private void render(GuiGraphicsExtractor graphics, int y, int width, int height, int mouseX, int mouseY) {

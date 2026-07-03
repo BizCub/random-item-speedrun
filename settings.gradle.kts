@@ -18,9 +18,9 @@ plugins {
 rootProject.name = extra["mod.name"] as String
 
 stonecutter.create(rootProject) {
-    val fb = "fabric"; val fr = "forge"; val nf = "neoforge"
+    val fb = "fabric"; val nf = "neoforge"
     fun match(version: String, vararg loaders: String) = loaders.forEach {
-        version("$version-$it", version).buildscript = "scripts/$it.gradle.kts"
+        version("$version-$it", version).buildscript.set("buildscripts/$it.gradle.kts")
     }
     match("26.2",   fb, nf)
     match("26.1.2", fb, nf)

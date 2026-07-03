@@ -3,15 +3,15 @@ plugins {
     alias(libs.plugins.neoforged)
 }
 
-apply(from = ml.scriptPath)
-
 multiloader {
     repositories {
         for (rep in reps) maven(rep.repository)
     }
 
     dependencies {
-        for (dep in deps) dep.configuration(dep.dependency)
+        for (dep in deps) dep.configuration(dep.dependency) {
+            for (module in eModules) exclude(module.module)
+        }
     }
 
     neoForge {
@@ -22,11 +22,11 @@ multiloader {
                 disableIdeRun()
             }
             register("client") {
-                gameDirectory = file(clientRunPath)
+                gameDirectory.set(clientRunFile)
                 client()
             }
             register("server") {
-                gameDirectory = file(serverRunPath)
+                gameDirectory.set(serverRunFile)
                 programArgument("--nogui")
                 server()
             }
@@ -46,11 +46,13 @@ multiloader {
         file.set(builtFile)
     }
 
-    tasks.named<Copy>("buildAndCollect") {
-        from(builtFile)
-    }
+    tasks {
+        named<Copy>("buildAndCollect") {
+            from(builtFile)
+        }
 
-    tasks.named("createMinecraftArtifacts") {
-        dependsOn("processResources")
+        named("createMinecraftArtifacts") {
+            dependsOn("processResources")
+        }
     }
 }
