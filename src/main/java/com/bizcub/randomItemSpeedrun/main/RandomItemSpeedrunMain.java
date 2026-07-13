@@ -110,7 +110,7 @@ public class RandomItemSpeedrunMain {
             String itemId = Utils.convertComponentToId(Utils.getNameFromItemStack(game.getItemStack()));
             for (var player : server.getPlayerList().getPlayers()) {
                 ArrayList<String> itemsId = new ArrayList<>();
-                player.getInventory().getNonEquipmentItems().forEach(item ->
+                player.inventoryMenu.getItems().forEach(item ->
                         itemsId.add(Utils.convertComponentToId(Utils.getNameFromItemStack(item))));
 
                 if (itemsId.contains(itemId)) {
