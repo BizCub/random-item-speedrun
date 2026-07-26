@@ -16,6 +16,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
@@ -107,19 +108,31 @@ public class RandomItemSpeedrunMain {
         ) {
             game.addTick();
 
-            String itemId = Utils.convertComponentToId(Utils.getNameFromItemStack(game.getItemStack()));
+            String targetItemId = Utils.convertComponentToId(Utils.getNameFromItemStack(game.getItemStack()));
             for (var player : server.getPlayerList().getPlayers()) {
-                ArrayList<String> itemsId = new ArrayList<>();
-                player.inventoryMenu.getItems().forEach(item ->
-                        itemsId.add(Utils.convertComponentToId(Utils.getNameFromItemStack(item))));
+                boolean found = false;
+                for (var slot : player.inventoryMenu.slots) {
+                    if (slot.getContainerSlot() == InventoryMenu.RESULT_SLOT || !slot.hasItem()) {
+                        continue;
+                    }
 
-                if (itemsId.contains(itemId)) {
+                    ItemStack item = slot.getItem();
+                    String itemId = Utils.convertComponentToId(Utils.getNameFromItemStack(item));
+
+                    if (itemId.equals(targetItemId)) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found) {
                     game.stop(Speedrun.Status.SUCCESS, player.getName().getString());
                     server.getPlayerList().getPlayers().forEach(serverPlayer -> {
                         serverPlayer.sendSystemMessage(Component.translatable("chat.game_is_stopped", player.getName(), game.getItemStack().getItemName()));
                         sendSoundS2C(serverPlayer, SoundEvents.PLAYER_LEVELUP);
                         sendSpeedrunsS2C(serverPlayer);
                     });
+                    break;
                 }
             }
         }
