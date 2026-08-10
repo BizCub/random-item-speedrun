@@ -1,7 +1,8 @@
 package io.github.bizcub.randomItemSpeedrun.main;
 
 import io.github.bizcub.randomItemSpeedrun.Game;
-import io.github.bizcub.randomItemSpeedrun.client.config.Compat;
+import io.github.bizcub.randomItemSpeedrun.client.config.Config;
+import io.github.bizcub.randomItemSpeedrun.client.config.ConfigHelper;
 import io.github.bizcub.randomItemSpeedrun.Speedrun;
 import io.github.bizcub.randomItemSpeedrun.network.*;
 import io.github.bizcub.randomItemSpeedrun.util.Constants;
@@ -66,8 +67,8 @@ public class RandomItemSpeedrunMain {
     }
 
     public static void setDifficulty() {
-        if (Compat.isClothConfigLoaded()) {
-            switch (Constants.getConfig().difficulty()) {
+        if (ConfigHelper.isConfigLoaded()) {
+            switch (Config.get().difficulty()) {
                 case EASY -> fillItemsList(Constants.notEasyItems());
                 case NORMAL -> fillItemsList(Constants.notMediumItems());
                 case HARD -> fillItemsList(Constants.notHardItems());
@@ -90,7 +91,7 @@ public class RandomItemSpeedrunMain {
     }
 
     public static void removeDuplicateItems() {
-        if (Compat.isClothConfigLoaded() && !Constants.getConfig().removeDuplicates()) return;
+        if (ConfigHelper.isConfigLoaded() && !Config.get().removeDuplicates()) return;
 
         List<String> duplicates = new ArrayList<>();
         speedruns.forEach(speedrun -> duplicates.add(speedrun.itemId()));

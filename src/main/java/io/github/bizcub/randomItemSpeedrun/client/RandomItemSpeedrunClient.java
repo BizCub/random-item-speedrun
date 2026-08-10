@@ -1,8 +1,10 @@
 package io.github.bizcub.randomItemSpeedrun.client;
 
 import io.github.bizcub.randomItemSpeedrun.Game;
-import io.github.bizcub.randomItemSpeedrun.client.config.Compat;
-import io.github.bizcub.randomItemSpeedrun.client.config.ModClothConfig;
+import io.github.bizcub.randomItemSpeedrun.client.config.Config;
+import io.github.bizcub.randomItemSpeedrun.client.config.ConfigHelper;
+import io.github.bizcub.randomItemSpeedrun.client.config.ClothConfig;
+import io.github.bizcub.randomItemSpeedrun.client.config.SimpleConfig;
 import io.github.bizcub.randomItemSpeedrun.Speedrun;
 import io.github.bizcub.randomItemSpeedrun.util.Constants;
 import io.github.bizcub.randomItemSpeedrun.util.Utils;
@@ -18,9 +20,12 @@ public class RandomItemSpeedrunClient {
     public static Game game;
 
     public static void init() {
-        if (Compat.isClothConfigLoaded()) ModClothConfig.init();
         game = new Game();
-        Constants.getConfig();
+        if (ConfigHelper.isSimpleConfigLoaded()) {
+            Config.set(SimpleConfig.getInstance().get());
+        } else if (ConfigHelper.isClothConfigLoaded()) {
+            Config.set(ClothConfig.getInstance());
+        }
     }
 
     public static final KeyMapping OPEN_SCREEN = new KeyMapping(
@@ -38,12 +43,12 @@ public class RandomItemSpeedrunClient {
     );
 
     public static int getHudColor() {
-        if (Compat.isClothConfigLoaded()) return Constants.getConfig().hudColor() + 0xff000000;
+        if (ConfigHelper.isConfigLoaded()) return Config.get().hudColor() + 0xff000000;
         return 0xffffffff;
     }
 
     public static void renderHud(GuiGraphicsExtractor graphics) {
-        if (!game.isStarted() || !Constants.getConfig().isHudRender()) return;
+        if (!game.isStarted() || !Config.get().isHudRender()) return;
 
         //~ if >=26.1 'renderItem(' -> 'item('
         graphics.item(

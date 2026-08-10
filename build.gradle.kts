@@ -50,6 +50,9 @@ multiloader {
     versionRange("26.2", to = "latest")
 
     addDependency(
+        dependency = "io.github.bizcub:simple-config-lib:1.0-${mod.loader}+${mod.mc}"
+    )
+    addDependency(
         dependency = "me.shedaniel.cloth:cloth-config-${mod.loader}:${getDep("cloth-config").split("+").first()}",
         configuration = if (isClothConfigAvailable) "implementation" else "compileOnly",
         repository = "maven.shedaniel.me",

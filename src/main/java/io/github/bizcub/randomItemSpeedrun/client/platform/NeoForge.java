@@ -3,7 +3,7 @@
 /*package io.github.bizcub.randomItemSpeedrun.client.platform;
 
 import io.github.bizcub.randomItemSpeedrun.client.RandomItemSpeedrunClient;
-import io.github.bizcub.randomItemSpeedrun.client.config.Compat;
+import io.github.bizcub.randomItemSpeedrun.client.config.ConfigHelper;
 import io.github.bizcub.randomItemSpeedrun.client.gui.GameStartScreen;
 /^? >=1.21.6^/ import io.github.bizcub.randomItemSpeedrun.client.gui.ScaledItemPIPRenderer;
 /^? >=1.21.6^/ import io.github.bizcub.randomItemSpeedrun.client.gui.ScaledItemRenderState;
@@ -67,7 +67,7 @@ public class NeoForge {
             RandomItemSpeedrunClient.init();
             
             modContainer.registerExtensionPoint(IConfigScreenFactory.class,
-                    (container, parent) -> Compat.getScreen(parent));
+                    (container, parent) -> ConfigHelper.getScreen(parent));
         }
     }
 }*///?}
