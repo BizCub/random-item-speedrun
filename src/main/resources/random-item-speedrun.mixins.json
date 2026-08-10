@@ -1,6 +1,6 @@
 {
     "required": true,
-    "package": "com.bizcub.randomItemSpeedrun.client.mixin",
+    "package": "io.github.bizcub.randomItemSpeedrun.client.mixin",
     "injectors": {
         "defaultRequire": 1
     },
