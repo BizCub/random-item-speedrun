@@ -12,16 +12,16 @@ import net.minecraft.world.InteractionResult;
 @me.shedaniel.autoconfig.annotation.Config(name = Constants.MOD_ID + "/config")
 public class ClothConfig implements Config, ConfigData {
 
+    public static ClothConfig getInstance() {
+        return AutoConfig.getConfigHolder(ClothConfig.class).getConfig();
+    }
+
     public static void init() {
-        AutoConfig.getConfigHolder(ClothConfig.class).registerSaveListener((manager, data) -> {
+        AutoConfig.register(ClothConfig.class, GsonConfigSerializer::new).registerSaveListener((manager, data) -> {
             RandomItemSpeedrunMain.setDifficulty();
             RandomItemSpeedrunMain.removeDuplicateItems();
             return InteractionResult.SUCCESS;
         });
-    }
-
-    public static ClothConfig getInstance() {
-        return AutoConfig.register(ClothConfig.class, GsonConfigSerializer::new).getConfig();
     }
 
     @ConfigEntry.Gui.EnumHandler(option = EnumDisplayOption.BUTTON)
