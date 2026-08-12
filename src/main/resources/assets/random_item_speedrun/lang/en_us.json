@@ -30,11 +30,11 @@
     "text.autoconfig.random_item_speedrun/config.option.removeDuplicates.@Tooltip": "The items you find won't have to be speedrun again",
     "text.autoconfig.random_item_speedrun/config.option.difficulty": "Difficulty",
 
-    "text.random_item_speedrun.group.general": "Random Item Speedrun Settings",
-    "text.random_item_speedrun.option.isHudRender": "Display HUD",
-    "text.random_item_speedrun.option.isHudRender.tooltip": "Should time and item be displayed on the screen?",
-    "text.random_item_speedrun.option.hudColor": "HUD Color",
-    "text.random_item_speedrun.option.removeDuplicates": "Remove Duplicates",
-    "text.random_item_speedrun.option.removeDuplicates.tooltip": "The items you find won't have to be speedrun again",
-    "text.random_item_speedrun.option.difficulty": "Difficulty"
+    "text.random_item_speedrun/config.group.general": "Random Item Speedrun Settings",
+    "text.random_item_speedrun/config.option.isHudRender": "Display HUD",
+    "text.random_item_speedrun/config.option.isHudRender.tooltip": "Should time and item be displayed on the screen?",
+    "text.random_item_speedrun/config.option.hudColor": "HUD Color",
+    "text.random_item_speedrun/config.option.removeDuplicates": "Remove Duplicates",
+    "text.random_item_speedrun/config.option.removeDuplicates.tooltip": "The items you find won't have to be speedrun again",
+    "text.random_item_speedrun/config.option.difficulty": "Difficulty"
 }

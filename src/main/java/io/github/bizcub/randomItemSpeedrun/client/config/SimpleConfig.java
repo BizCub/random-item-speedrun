@@ -5,7 +5,7 @@ import io.github.bizcub.randomItemSpeedrun.util.Constants;
 import io.github.bizcub.simpleConfigLib.autoconfig.ConfigHolder;
 import io.github.bizcub.simpleConfigLib.autoconfig.annotation.*;
 
-@AutoConfig(name = Constants.MOD_ID, translate = true)
+@AutoConfig(name = Constants.MOD_ID + "/config", translate = true)
 public class SimpleConfig implements Config {
 
     public static ConfigHolder<SimpleConfig> getInstance() {

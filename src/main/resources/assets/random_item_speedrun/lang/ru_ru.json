@@ -30,13 +30,13 @@
     "text.autoconfig.random_item_speedrun/config.option.removeDuplicates.@Tooltip": "Найденные предметы не придётся спидранить снова",
     "text.autoconfig.random_item_speedrun/config.option.difficulty": "Сложность",
 
-    "text.random_item_speedrun.group.general": "Настройки Random Item Speedrun",
-    "text.random_item_speedrun.option.isHudRender": "Отображать оверлей",
-    "text.random_item_speedrun.option.isHudRender.tooltip": "Должны ли время и предмет отображаться на экране?",
-    "text.random_item_speedrun.option.hudColor": "Цвет оверлея",
-    "text.random_item_speedrun.option.removeDuplicates": "Удалить дубликаты",
-    "text.random_item_speedrun.option.removeDuplicates.tooltip": "Найденные предметы не придётся спидранить снова",
-    "text.random_item_speedrun.option.difficulty": "Сложность",
+    "text.random_item_speedrun/config.group.general": "Настройки Random Item Speedrun",
+    "text.random_item_speedrun/config.option.isHudRender": "Отображать оверлей",
+    "text.random_item_speedrun/config.option.isHudRender.tooltip": "Должны ли время и предмет отображаться на экране?",
+    "text.random_item_speedrun/config.option.hudColor": "Цвет оверлея",
+    "text.random_item_speedrun/config.option.removeDuplicates": "Удалить дубликаты",
+    "text.random_item_speedrun/config.option.removeDuplicates.tooltip": "Найденные предметы не придётся спидранить снова",
+    "text.random_item_speedrun/config.option.difficulty": "Сложность",
 
     "modmenu.descriptionTranslation.random_item_speedrun": "Этот мод позволит вам проверить свои знания в игре и умение быстро находить предметы"
 }
