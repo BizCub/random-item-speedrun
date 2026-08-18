@@ -194,7 +194,7 @@ public class Forge {
                         });
                     }
                 },
-                Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+                Optional.of(NetworkDirection.PLAY_TO_SERVER)
         );
     }//?}
 
@@ -213,6 +213,8 @@ public class Forge {
 
     @SubscribeEvent //~ if <=1.20.2 'ServerTickEvent.Post' -> 'ServerTickEvent'
     public static void onServerTick(TickEvent.ServerTickEvent event) {
+        /*? <=1.20.2*/ if (event.phase != TickEvent.Phase.END) return;
+
         //~ if >=1.21.9 'event.getServer()' -> 'event.server()' {
         RandomItemSpeedrunMain.serverTick(event.getServer());
         event.getServer().getPlayerList().getPlayers().forEach(RandomItemSpeedrunMain::sendHUDS2C);//~}
