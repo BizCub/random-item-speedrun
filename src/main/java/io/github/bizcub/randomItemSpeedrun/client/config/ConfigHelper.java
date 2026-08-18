@@ -2,6 +2,7 @@ package io.github.bizcub.randomItemSpeedrun.client.config;
 
 //~ auto_config
 import me.shedaniel.autoconfig.AutoConfigClient;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 /*? fabric*/ import net.fabricmc.loader.api.FabricLoader;
 /*? forge*/ //import net.minecraftforge.fml.ModList;

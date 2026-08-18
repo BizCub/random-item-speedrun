@@ -14,7 +14,9 @@ public interface PictureInPictureRendererAccessor {
 }
 
 //?} else {
-/*@Mixin(value = {})
+/*import net.minecraft.client.Minecraft;
+
+@Mixin(Minecraft.class)
 public class PictureInPictureRendererAccessor {
 
 }*///?}

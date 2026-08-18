@@ -30,6 +30,10 @@ public record ChangeGameStatusPayloadC2S() /*? >=1.20.5 >> ' {'*/ implements Cus
     //?} else {
     /*public static final Codec<ChangeGameStatusPayloadC2S> CODEC = Codec.unit(new ChangeGameStatusPayloadC2S());
 
+    public static ChangeGameStatusPayloadC2S read(FriendlyByteBuf buf) {
+        return new ChangeGameStatusPayloadC2S();
+    }
+
     public FriendlyByteBuf toBuffer() {
         return new FriendlyByteBuf(Unpooled.buffer());
     }*///?}
