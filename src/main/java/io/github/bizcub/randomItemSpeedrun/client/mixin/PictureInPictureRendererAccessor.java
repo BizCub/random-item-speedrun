@@ -3,7 +3,7 @@ package io.github.bizcub.randomItemSpeedrun.client.mixin;
 import org.spongepowered.asm.mixin.Mixin;
 
 //? >=1.21.6 {
-/*import com.mojang.blaze3d.textures.GpuTextureView;
+import com.mojang.blaze3d.textures.GpuTextureView;
 import net.minecraft.client.gui.render.pip.PictureInPictureRenderer;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
@@ -13,10 +13,10 @@ public interface PictureInPictureRendererAccessor {
     GpuTextureView getTextureView();
 }
 
-*///?} else {
-import net.minecraft.client.Minecraft;
+//?} else {
+/*import net.minecraft.client.Minecraft;
 
 @Mixin(Minecraft.class)
 public class PictureInPictureRendererAccessor {
 
-}//?}
+}*///?}

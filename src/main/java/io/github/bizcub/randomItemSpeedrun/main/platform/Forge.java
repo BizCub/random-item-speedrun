@@ -1,5 +1,5 @@
 //? forge {
-package io.github.bizcub.randomItemSpeedrun.main.platform;
+/*package io.github.bizcub.randomItemSpeedrun.main.platform;
 
 import io.github.bizcub.randomItemSpeedrun.client.RandomItemSpeedrunClient;
 import io.github.bizcub.randomItemSpeedrun.client.config.ConfigHelper;
@@ -15,7 +15,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -23,14 +23,14 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.network.NetworkDirection;
 
 //? >=1.20.2 {
-/*import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraftforge.network.Channel;
 import net.minecraftforge.network.ChannelBuilder;
 import net.minecraftforge.network.SimpleChannel;
-*///?} else {
-import net.minecraftforge.network.NetworkRegistry;
+//?} else {
+/^import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
-//?}
+^///?}
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -40,9 +40,9 @@ import java.util.Optional;
 public class Forge {
 
     //? >=1.20.5 {
-    /*public static final Channel<CustomPacketPayload> CHANNEL =
+    public static final Channel<CustomPacketPayload> CHANNEL =
             ChannelBuilder
-                    .named(Utils.getResourceLocation("main"))
+                    .named(Utils.getIdentifier("main"))
                     .networkProtocolVersion(1)
                     .optional()
                     .payloadChannel()
@@ -82,10 +82,10 @@ public class Forge {
                     })
                     .build();
 
-    *///?} >=1.20.2 {
-    /*public static final SimpleChannel CHANNEL =
+    //?} >=1.20.2 {
+    /^public static final SimpleChannel CHANNEL =
             ChannelBuilder
-                    .named(Utils.getResourceLocation("main"))
+                    .named(Utils.getIdentifier("main"))
                     .networkProtocolVersion(1)
                     .acceptedVersions((status, ver) -> true)
                     .simpleChannel()
@@ -130,10 +130,10 @@ public class Forge {
                     })
                     .add();
 
-    *///?} else {
-    private static final String NETWORK_PROTOCOL_VERSION = "1";
+    ^///?} else {
+    /^private static final String NETWORK_PROTOCOL_VERSION = "1";
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
-            Utils.getResourceLocation("main"),
+            Utils.getIdentifier("main"),
             () -> NETWORK_PROTOCOL_VERSION,
             NETWORK_PROTOCOL_VERSION::equals,
             NETWORK_PROTOCOL_VERSION::equals
@@ -196,7 +196,7 @@ public class Forge {
                 },
                 Optional.of(NetworkDirection.PLAY_TO_SERVER)
         );
-    }//?}
+    }^///?}
 
     public Forge() {
         RandomItemSpeedrunMain.init();
@@ -208,16 +208,16 @@ public class Forge {
                     new ConfigScreenHandler.ConfigScreenFactory((minecraft, parent) -> ConfigHelper.getScreen(parent)));
         }
 
-        /*? 1.20.1*/ registerPayloads();
+        /^? 1.20.1^/ //registerPayloads();
     }
 
     @SubscribeEvent //~ if <=1.20.2 'ServerTickEvent.Post' -> 'ServerTickEvent'
-    public static void onServerTick(TickEvent.ServerTickEvent event) {
-        /*? <=1.20.2*/ if (event.phase != TickEvent.Phase.END) return;
+    public static void onServerTick(TickEvent.ServerTickEvent.Post event) {
+        /^? <=1.20.2^/ //if (event.phase != TickEvent.Phase.END) return;
 
         //~ if >=1.21.9 'event.getServer()' -> 'event.server()' {
-        RandomItemSpeedrunMain.serverTick(event.getServer());
-        event.getServer().getPlayerList().getPlayers().forEach(RandomItemSpeedrunMain::sendHUDS2C);//~}
+        RandomItemSpeedrunMain.serverTick(event.server());
+        event.server().getPlayerList().getPlayers().forEach(RandomItemSpeedrunMain::sendHUDS2C);//~}
     }
 
     @SubscribeEvent
@@ -236,4 +236,4 @@ public class Forge {
     public static void onServerStopped(ServerStoppedEvent event) {
         RandomItemSpeedrunMain.serverClose(event.getServer());
     }
-}//?}
+}*///?}

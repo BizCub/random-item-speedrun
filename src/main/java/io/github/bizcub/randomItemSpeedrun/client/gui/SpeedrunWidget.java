@@ -12,8 +12,8 @@ public class SpeedrunWidget extends ObjectSelectionList<SpeedrunEntry> {
     public ArrayList<SpeedrunEntry> entries = new ArrayList<>();
     private SpeedrunEntry lastSelectedEntry;
 
-    public SpeedrunWidget(Minecraft minecraft, int width, int height, /*? >=1.20.3 {*/ /*int y *//*?} else {*/ int y1, int y2 /*?}*/, int entryHeight) {
-        super(minecraft, width, height, /*? >=1.20.3 {*/ /*y *//*?} else {*/  y1, y2 /*?}*/, entryHeight);
+    public SpeedrunWidget(Minecraft minecraft, int width, int height, /*? >=1.20.3 {*/ int y /*?} else {*/ /*int y1, int y2 *//*?}*/, int entryHeight) {
+        super(minecraft, width, height, /*? >=1.20.3 {*/ y /*?} else {*/  /*y1, y2 *//*?}*/, entryHeight);
         refreshEntries("");
     }
 
@@ -39,7 +39,7 @@ public class SpeedrunWidget extends ObjectSelectionList<SpeedrunEntry> {
     }
 
     @Override
-    protected int getScrollbarPosition() {
+    protected int scrollBarX() {
         return Utils.getPercent(width, 98.5);
     }
 

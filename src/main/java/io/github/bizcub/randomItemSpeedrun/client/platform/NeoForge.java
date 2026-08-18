@@ -41,7 +41,7 @@ public class NeoForge {
                     /^? <=1.21.8^/ //event.getKey(), event.getScanCode()
             );
             if (RandomItemSpeedrunClient.OPEN_SCREEN.isActiveAndMatches(inputConstants)) {
-                Minecraft.getInstance().setScreen(new GameStartScreen());
+                Minecraft.getInstance().gui.setScreen(new GameStartScreen());
             }
             if (RandomItemSpeedrunClient.QUICK_START.isActiveAndMatches(inputConstants)) {
                 RandomItemSpeedrunMain.game.buttonPressed();

@@ -1,8 +1,8 @@
 //? >=1.21.6 {
-/*package io.github.bizcub.randomItemSpeedrun.client.gui;
+package io.github.bizcub.randomItemSpeedrun.client.gui;
 
 import net.minecraft.client.gui.navigation.ScreenRectangle;
-import net.minecraft.client.gui.render.state.pip.PictureInPictureRenderState;
+import net.minecraft.client.renderer.state.gui.pip.PictureInPictureRenderState;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix3x2f;
@@ -44,10 +44,10 @@ public record ScaledItemRenderState(
     }
 
     //? <26.2 {
-    @Override
+    /*@Override
     public Matrix3x2f pose() {
         return IDENTITY_POSE;
-    }//?}
+    }*///?}
 
     @Nullable
     @Override
@@ -60,4 +60,4 @@ public record ScaledItemRenderState(
     public ScreenRectangle bounds() {
         return PictureInPictureRenderState.getBounds(x0(), y0(), x1(), y1(), scissor);
     }
-}*///?}
+}//?}
