@@ -133,28 +133,29 @@ public class RandomItemSpeedrunMain {
     public static void sendChangeGameStatusC2S() {
         ChangeGameStatusPayloadC2S payload = new ChangeGameStatusPayloadC2S();
         /*? fabric*/ //ClientPlayNetworking.send(/*? <1.20.5 {*/ /*ChangeGameStatusPayloadC2S.ID, payload.toBuffer() *//*?} else {*/ payload /*?}*/);
+        /*? forge*/ Forge.CHANNEL.send(payload, PacketDistributor.SERVER.noArg());
         //~ if >=1.21.6 'PacketDistributor' -> 'ClientPacketDistributor'
         /*? neoforge*/ //ClientPacketDistributor.sendToServer(payload);
-        /*? forge*/ Forge.CHANNEL.send(payload, PacketDistributor.SERVER.noArg());
     }
 
     public static void sendAnimationS2C(ServerPlayer player) {
         AnimationPayloadS2C payload = new AnimationPayloadS2C(game.getItemStack());
         /*? fabric*/ //ServerPlayNetworking.send(player, /*? <1.20.5 {*/ /*AnimationPayloadS2C.ID, payload.toBuffer() *//*?} else {*/ payload /*?}*/);
-        /*? neoforge*/ //PacketDistributor.sendToPlayer(player, payload);
         /*? forge*/ Forge.CHANNEL.send(payload, PacketDistributor.PLAYER.with(player));
+        /*? neoforge*/ //PacketDistributor.sendToPlayer(player, payload);
     }
 
     public static void sendSpeedrunsS2C(ServerPlayer player) {
         SpeedrunsPayloadS2C payload = new SpeedrunsPayloadS2C(speedruns);
         /*? fabric*/ //ServerPlayNetworking.send(player, /*? <1.20.5 {*/ /*SpeedrunsPayloadS2C.ID, payload.toBuffer() *//*?} else {*/ payload /*?}*/);
-        /*? neoforge*/ //PacketDistributor.sendToPlayer(player, payload);
         /*? forge*/ Forge.CHANNEL.send(payload, PacketDistributor.PLAYER.with(player));
+        /*? neoforge*/ //PacketDistributor.sendToPlayer(player, payload);
     }
 
     public static void sendSoundS2C(ServerPlayer player, SoundEvent soundEvent) {
         SoundPayloadS2C payload = new SoundPayloadS2C(soundEvent);
         /*? fabric*/ //ServerPlayNetworking.send(player, /*? <1.20.5 {*/ /*SoundPayloadS2C.ID, payload.toBuffer() *//*?} else {*/ payload /*?}*/);
+        /*? forge*/ Forge.CHANNEL.send(payload, PacketDistributor.PLAYER.with(player));
         /*? neoforge*/ //PacketDistributor.sendToPlayer(player, payload);
     }
 
@@ -165,8 +166,8 @@ public class RandomItemSpeedrunMain {
                 game.isStarted()
         );
         /*? fabric*/ //ServerPlayNetworking.send(player, /*? <1.20.5 {*/ /*HUDPayloadS2C.ID, payload.toBuffer() *//*?} else {*/ payload /*?}*/);
-        /*? neoforge*/ //PacketDistributor.sendToPlayer(player, payload);
         /*? forge*/ Forge.CHANNEL.send(payload, PacketDistributor.PLAYER.with(player));
+        /*? neoforge*/ //PacketDistributor.sendToPlayer(player, payload);
     }
 
     public static void readSpeedruns() {

@@ -7,8 +7,10 @@ import io.github.bizcub.randomItemSpeedrun.client.gui.GameStartScreen;
 /*? >=1.21.6*/ import io.github.bizcub.randomItemSpeedrun.client.gui.ScaledItemPIPRenderer;
 import io.github.bizcub.randomItemSpeedrun.main.RandomItemSpeedrunMain;
 import io.github.bizcub.randomItemSpeedrun.util.Constants;
+import io.github.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.AddGuiOverlayLayersEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 /*? >=1.21.6*/ import net.minecraftforge.client.event.RegisterPictureInPictureRendererEvent;
 import net.minecraftforge.event.TickEvent;
@@ -39,4 +41,12 @@ public class Forge {
     public static void registerPIPRenderers(RegisterPictureInPictureRendererEvent event) {
         event.register(new ScaledItemPIPRenderer());
     }//?}
+
+    @SubscribeEvent
+    public static void onAddGuiOverlayLayers(AddGuiOverlayLayersEvent event) {
+        event.getLayeredDraw().add(
+                Utils.getIdentifier("hud"),
+                (graphics, deltaTracker) -> RandomItemSpeedrunClient.renderHud(graphics)
+        );
+    }
 }//?}
