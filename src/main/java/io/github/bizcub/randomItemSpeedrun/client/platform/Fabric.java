@@ -1,10 +1,10 @@
 //? fabric {
-package io.github.bizcub.randomItemSpeedrun.client.platform;
+/*package io.github.bizcub.randomItemSpeedrun.client.platform;
 
 import io.github.bizcub.randomItemSpeedrun.client.RandomItemSpeedrunClient;
 import io.github.bizcub.randomItemSpeedrun.client.config.ConfigHelper;
 import io.github.bizcub.randomItemSpeedrun.client.gui.GameStartScreen;
-/*? >=1.21.6*/ import io.github.bizcub.randomItemSpeedrun.client.gui.ScaledItemPIPRenderer;
+/^? >=1.21.6^/ import io.github.bizcub.randomItemSpeedrun.client.gui.ScaledItemPIPRenderer;
 import io.github.bizcub.randomItemSpeedrun.network.AnimationPayloadS2C;
 import io.github.bizcub.randomItemSpeedrun.network.HUDPayloadS2C;
 import io.github.bizcub.randomItemSpeedrun.network.SoundPayloadS2C;
@@ -18,7 +18,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 //~ if >=26.1 'SpecialGuiElementRegistry' -> 'PictureInPictureRendererRegistry'
-/*? >=1.21.6*/ import net.fabricmc.fabric.api.client.rendering.v1.PictureInPictureRendererRegistry;
+/^? >=1.21.6^/ import net.fabricmc.fabric.api.client.rendering.v1.PictureInPictureRendererRegistry;
 //~ if >=26.1 'HudRenderCallback' -> 'hud.HudElementRegistry'
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.minecraft.client.Minecraft;
@@ -45,7 +45,7 @@ public class Fabric implements ClientModInitializer {
                 context.client().execute(() -> RandomItemSpeedrunClient.game.update(payload.isStart(), payload.itemStack(), payload.time())));
 
         //?} else {
-        /*ClientPlayNetworking.registerGlobalReceiver(AnimationPayloadS2C.ID, (client, listener, buf, sender) -> {
+        /^ClientPlayNetworking.registerGlobalReceiver(AnimationPayloadS2C.ID, (client, listener, buf, sender) -> {
             AnimationPayloadS2C payload = AnimationPayloadS2C.read(buf);
             client.execute(() -> client.gameRenderer.displayItemActivation(payload.itemStack()));
         });
@@ -63,18 +63,18 @@ public class Fabric implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(HUDPayloadS2C.ID, (client, listener, buf, sender) -> {
             HUDPayloadS2C payload = HUDPayloadS2C.read(buf);
             client.execute(() -> RandomItemSpeedrunClient.game.update(payload.isStart(), payload.itemStack(), payload.time()));
-        });*///?}
+        });^///?}
 
-        /*? >=26.1 {*/ HudElementRegistry.addLast(Utils.getIdentifier("hud"),
-        /*?} else*/ //HudRenderCallback.EVENT.register(
+        /^? >=26.1 {^/ HudElementRegistry.addLast(Utils.getIdentifier("hud"),
+        /^?} else^/ //HudRenderCallback.EVENT.register(
                 (graphics, deltaTracker) ->
                         RandomItemSpeedrunClient.renderHud(graphics));
 
         //? >=1.21.6 {
         //~ if >=26.1 'SpecialGuiElementRegistry' -> 'PictureInPictureRendererRegistry' {
         //~ if >=26.1 'vertexConsumers' -> 'bufferSource' {
-        PictureInPictureRendererRegistry.register(ctx -> new ScaledItemPIPRenderer(/*? <26.2 >>+ ')'*/ /*ctx.bufferSource()*/));
-        /*~}*//*~}*//*?}*/
+        PictureInPictureRendererRegistry.register(ctx -> new ScaledItemPIPRenderer(/^? <26.2 >>+ ')'^/ /^ctx.bufferSource()^/));
+        /^~}^//^~}^//^?}^/
 
         KeyMappingHelper.registerKeyMapping(RandomItemSpeedrunClient.OPEN_SCREEN);
         KeyMappingHelper.registerKeyMapping(RandomItemSpeedrunClient.QUICK_START);
@@ -96,4 +96,4 @@ public class Fabric implements ClientModInitializer {
             return ConfigHelper::getScreen;
         }
     }
-}//?}
+}*///?}

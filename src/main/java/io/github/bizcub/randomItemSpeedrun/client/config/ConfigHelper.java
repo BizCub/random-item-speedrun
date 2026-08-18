@@ -1,21 +1,21 @@
 package io.github.bizcub.randomItemSpeedrun.client.config;
 
 //~ auto_config
-import me.shedaniel.autoconfig.AutoConfigClient;
+import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.gui.screens.Screen;
-/*? fabric*/ import net.fabricmc.loader.api.FabricLoader;
-/*? forge*/ //import net.minecraftforge.fml.ModList;
+/*? fabric*/ //import net.fabricmc.loader.api.FabricLoader;
+/*? forge*/ import net.minecraftforge.fml.ModList;
 /*? neoforge*/ //import net.neoforged.fml.ModList;
 
 public class ConfigHelper {
     public static boolean isModLoaded(String modId) {
-        /*? fabric*/ return FabricLoader.getInstance().isModLoaded(modId);
+        /*? fabric*/ //return FabricLoader.getInstance().isModLoaded(modId);
         /*? (forge && <26.1) || neoforge*/ //return ModList.get().isLoaded(modId);
-        /*? forge && >=26.1*/ //return ModList.isLoaded(modId);
+        /*? forge && >=26.1*/ return ModList.isLoaded(modId);
     }
 
     public static boolean isClothConfigLoaded() {
-        return isModLoaded(/*$ cloth_config_id >> ')'*/ "cloth-config");
+        return isModLoaded(/*$ cloth_config_id >> ')'*/ "cloth_config");
     }
 
     public static boolean isSimpleConfigLoaded() {
@@ -30,7 +30,7 @@ public class ConfigHelper {
         if (isSimpleConfigLoaded()) {
             return SimpleConfig.getInstance().createScreen(parent);
         } else if (isClothConfigLoaded()) {
-            return AutoConfigClient.getConfigScreen(ClothConfig.class, parent).get();
+            return AutoConfig.getConfigScreen(ClothConfig.class, parent).get();
         } else {
             return parent;
         }

@@ -1,12 +1,12 @@
 //? fabric {
-package io.github.bizcub.randomItemSpeedrun.main.platform;
+/*package io.github.bizcub.randomItemSpeedrun.main.platform;
 
 import io.github.bizcub.randomItemSpeedrun.main.RandomItemSpeedrunMain;
 import io.github.bizcub.randomItemSpeedrun.network.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-/*? >=1.20.5*/ import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+/^? >=1.20.5^/ import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.sounds.SoundEvents;
@@ -21,12 +21,12 @@ public class Fabric implements ModInitializer {
         ServerLifecycleEvents.SERVER_STOPPED.register(RandomItemSpeedrunMain::serverClose);
 
         //? >=1.20.5 {
-        /*~ if >=26.1 'playC2S' -> 'serverboundPlay'*/ /*~ if >=26.1 'playS2C' -> 'clientboundPlay' {*/
+        /^~ if >=26.1 'playC2S' -> 'serverboundPlay'^/ /^~ if >=26.1 'playS2C' -> 'clientboundPlay' {^/
         PayloadTypeRegistry.serverboundPlay().register(ChangeGameStatusPayloadC2S.TYPE, ChangeGameStatusPayloadC2S.CODEC);
         PayloadTypeRegistry.clientboundPlay().register(HUDPayloadS2C.TYPE, HUDPayloadS2C.CODEC);
         PayloadTypeRegistry.clientboundPlay().register(AnimationPayloadS2C.TYPE, AnimationPayloadS2C.CODEC);
         PayloadTypeRegistry.clientboundPlay().register(SpeedrunsPayloadS2C.TYPE, SpeedrunsPayloadS2C.CODEC);
-        PayloadTypeRegistry.clientboundPlay().register(SoundPayloadS2C.TYPE, SoundPayloadS2C.CODEC);/*~}*/ //?}
+        PayloadTypeRegistry.clientboundPlay().register(SoundPayloadS2C.TYPE, SoundPayloadS2C.CODEC);/^~}^/ //?}
 
         //? >=1.20.5 {
         ServerPlayNetworking.registerGlobalReceiver(ChangeGameStatusPayloadC2S.TYPE, (payload, context) ->
@@ -45,7 +45,7 @@ public class Fabric implements ModInitializer {
         );
 
         //?} else {
-        /*ServerPlayNetworking.registerGlobalReceiver(ChangeGameStatusPayloadC2S.ID, (server, player, listener, buf, sender) ->
+        /^ServerPlayNetworking.registerGlobalReceiver(ChangeGameStatusPayloadC2S.ID, (server, player, listener, buf, sender) ->
                 server.execute(() -> {
                     RandomItemSpeedrunMain.game.changeGameStatus();
 
@@ -58,7 +58,7 @@ public class Fabric implements ModInitializer {
                         });
                     }
                 })
-        );*///?}
+        );^///?}
 
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             RandomItemSpeedrunMain.serverTick(server);
@@ -68,4 +68,4 @@ public class Fabric implements ModInitializer {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) ->
                 RandomItemSpeedrunMain.sendSpeedrunsS2C(handler.player));
     }
-}//?}
+}*///?}
