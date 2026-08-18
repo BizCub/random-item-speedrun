@@ -3,4 +3,4 @@ plugins {
     id("io.github.bizcub.multiloader")
 }
 
-stonecutter active "26.2-forge"
+stonecutter active "1.20.1-forge"

@@ -1,14 +1,14 @@
 package io.github.bizcub.randomItemSpeedrun;
 
 //? >=1.20.5 {
-import io.netty.buffer.ByteBuf;
+/*import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ByIdMap;
-//?} else {
-/*import com.mojang.serialization.Codec;
+*///?} else {
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.FriendlyByteBuf;*///?}
+import net.minecraft.network.FriendlyByteBuf;//?}
 
 import io.github.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.world.item.ItemStack;
@@ -28,13 +28,13 @@ public record Speedrun(
     }
 
     //? >=1.20.5 {
-    public static final StreamCodec<ByteBuf, Speedrun> CODEC = StreamCodec.composite(
+    /*public static final StreamCodec<ByteBuf, Speedrun> CODEC = StreamCodec.composite(
             ByteBufCodecs.STRING_UTF8, Speedrun::itemId,
             ByteBufCodecs.STRING_UTF8, Speedrun::playerName,
             Status.STREAM_CODEC, Speedrun::isSuccess,
             ByteBufCodecs.INT, Speedrun::time,
             //~ if >=1.21.2 'VAR_LONG' -> 'LONG'
-            ByteBufCodecs.LONG, Speedrun::date,
+            ByteBufCodecs.VAR_LONG, Speedrun::date,
             Speedrun::new
     );
 
@@ -47,8 +47,8 @@ public record Speedrun(
                 ByteBufCodecs.idMapper(BY_ID, Enum::ordinal);
     }
 
-    //?} else {
-    /*public static final Codec<Speedrun> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    *///?} else {
+    public static final Codec<Speedrun> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.STRING.fieldOf("itemId").forGetter(Speedrun::itemId),
             Codec.STRING.fieldOf("playerName").forGetter(Speedrun::playerName),
             Status.CODEC.fieldOf("isSuccess").forGetter(Speedrun::isSuccess),
@@ -72,5 +72,5 @@ public record Speedrun(
         SUCCESS, FAILURE, IN_PROGRESS;
 
         public static final Codec<Status> CODEC = Codec.STRING.xmap(Status::valueOf, Status::name);
-    }*///?}
+    }//?}
 }

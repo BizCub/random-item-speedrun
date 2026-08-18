@@ -15,7 +15,7 @@ import com.terraformersmc.modmenu.api.ModMenuApi;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 //~ if >=26.1 'keybinding' -> 'keymapping'
-import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 //~ if >=26.1 'SpecialGuiElementRegistry' -> 'PictureInPictureRendererRegistry'
 /^? >=1.21.6^/ import net.fabricmc.fabric.api.client.rendering.v1.PictureInPictureRendererRegistry;
@@ -65,7 +65,7 @@ public class Fabric implements ClientModInitializer {
             client.execute(() -> RandomItemSpeedrunClient.game.update(payload.isStart(), payload.itemStack(), payload.time()));
         });^///?}
 
-        /^? >=26.1 {^/ HudElementRegistry.addLast(Utils.getIdentifier("hud"),
+        /^? >=26.1 {^/ HudElementRegistry.addLast(Utils.getResourceLocation("hud"),
         /^?} else^/ //HudRenderCallback.EVENT.register(
                 (graphics, deltaTracker) ->
                         RandomItemSpeedrunClient.renderHud(graphics));
@@ -76,12 +76,12 @@ public class Fabric implements ClientModInitializer {
         PictureInPictureRendererRegistry.register(ctx -> new ScaledItemPIPRenderer(/^? <26.2 >>+ ')'^/ /^ctx.bufferSource()^/));
         /^~}^//^~}^//^?}^/
 
-        KeyMappingHelper.registerKeyMapping(RandomItemSpeedrunClient.OPEN_SCREEN);
-        KeyMappingHelper.registerKeyMapping(RandomItemSpeedrunClient.QUICK_START);
+        KeyBindingHelper.registerKeyBinding(RandomItemSpeedrunClient.OPEN_SCREEN);
+        KeyBindingHelper.registerKeyBinding(RandomItemSpeedrunClient.QUICK_START);
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (RandomItemSpeedrunClient.OPEN_SCREEN.consumeClick()) {
-                Minecraft.getInstance().gui.setScreen(new GameStartScreen());
+                Minecraft.getInstance().setScreen(new GameStartScreen());
             }
             while (RandomItemSpeedrunClient.QUICK_START.consumeClick()) {
                 RandomItemSpeedrunClient.game.buttonPressed();

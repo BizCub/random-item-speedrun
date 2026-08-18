@@ -1,20 +1,20 @@
 package io.github.bizcub.randomItemSpeedrun.client.mixin;
 
+import net.minecraft.client.gui.GuiGraphics;
 import org.spongepowered.asm.mixin.Mixin;
 
 //? >=1.21.6 {
-import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.renderer.state.gui.GuiRenderState;
+/*import net.minecraft.client.gui.render.state.GuiRenderState;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(GuiGraphicsExtractor.class)
+@Mixin(GuiGraphics.class)
 public interface GraphicsAccessor {
     @Accessor("guiRenderState")
     GuiRenderState getGuiRenderState();
 }
 
-//?} else {
-/*@Mixin(value = {})
+*///?} else {
+@Mixin(GuiGraphics.class)
 public class GraphicsAccessor {
 
-}*///?}
+}//?}

@@ -1,28 +1,28 @@
 package io.github.bizcub.randomItemSpeedrun.network;
 
 //? >=1.20.5 {
-import net.minecraft.network.RegistryFriendlyByteBuf;
+/*import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-//?} else {
-/*import com.mojang.serialization.Codec;
+*///?} else {
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.Unpooled;
-import net.minecraft.network.FriendlyByteBuf;*///?}
+import net.minecraft.network.FriendlyByteBuf;//?}
 
 import io.github.bizcub.randomItemSpeedrun.Speedrun;
 import io.github.bizcub.randomItemSpeedrun.util.Utils;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
 
-public record SpeedrunsPayloadS2C(List<Speedrun> speedruns) /*? >=1.20.5 >> ' {'*/ implements CustomPacketPayload {
+public record SpeedrunsPayloadS2C(List<Speedrun> speedruns) /*? >=1.20.5 >> ' {'*/ /*implements CustomPacketPayload*/ {
 
-    public static final Identifier ID = Utils.getIdentifier("speedruns");
+    public static final ResourceLocation ID = Utils.getResourceLocation("speedruns");
 
     //? >=1.20.5 {
-    public static final Type<SpeedrunsPayloadS2C> TYPE = new Type<>(ID);
+    /*public static final Type<SpeedrunsPayloadS2C> TYPE = new Type<>(ID);
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SpeedrunsPayloadS2C> CODEC =
             StreamCodec.composite(
@@ -35,8 +35,8 @@ public record SpeedrunsPayloadS2C(List<Speedrun> speedruns) /*? >=1.20.5 >> ' {'
         return TYPE;
     }
 
-    //?} else {
-    /*public static final Codec<SpeedrunsPayloadS2C> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    *///?} else {
+    public static final Codec<SpeedrunsPayloadS2C> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                     Speedrun.CODEC.listOf().fieldOf("speedruns").forGetter(SpeedrunsPayloadS2C::speedruns)
             ).apply(instance, SpeedrunsPayloadS2C::new));
 
@@ -48,5 +48,5 @@ public record SpeedrunsPayloadS2C(List<Speedrun> speedruns) /*? >=1.20.5 >> ' {'
         FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
         buf.writeCollection(speedruns, Speedrun::write);
         return buf;
-    }*///?}
+    }//?}
 }

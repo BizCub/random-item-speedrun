@@ -2,7 +2,7 @@ package io.github.bizcub.randomItemSpeedrun.util;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -51,27 +51,27 @@ public class Utils {
 
     public static String removeBracketsOrDefault(String string) {
         return
-                /*? >=1.21.2 {*/ string;
-                /*?} else*/ //string.substring(1, string.length() - 1);
+                /*? >=1.21.2 {*/ /*string;
+                *//*?} else*/ string.substring(1, string.length() - 1);
     }
 
-    public static Identifier getDefaultIdentifier(String id) {
+    public static ResourceLocation getDefaultResourceLocation(String id) {
         return
-                /*? >=1.21 {*/ Identifier.withDefaultNamespace(id);
-                 /*?} else*/ //new Identifier(id);
+                /*? >=1.21 {*/ /*ResourceLocation.withDefaultNamespace(id);
+                 *//*?} else*/ new ResourceLocation(id);
     }
 
-    public static Identifier getIdentifier(String id) {
+    public static ResourceLocation getResourceLocation(String id) {
         return
-                /*? >=1.21 {*/ Identifier.fromNamespaceAndPath(
-                /*?} else*/ //new Identifier(
+                /*? >=1.21 {*/ /*ResourceLocation.fromNamespaceAndPath(
+                *//*?} else*/ new ResourceLocation(
                         Constants.MOD_ID, id);
     }
 
-    public static Identifier getCustomIdentifier(String location, String id) {
+    public static ResourceLocation getCustomResourceLocation(String location, String id) {
         return
-                /*? >=1.21 {*/ Identifier.fromNamespaceAndPath(
-                /*?} else*/ //new Identifier(
+                /*? >=1.21 {*/ /*ResourceLocation.fromNamespaceAndPath(
+                *//*?} else*/ new ResourceLocation(
                         location, id);
     }
 }

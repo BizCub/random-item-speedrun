@@ -2,6 +2,7 @@ package io.github.bizcub.randomItemSpeedrun.client.config;
 
 //~ auto_config
 import me.shedaniel.autoconfig.AutoConfig;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 /*? fabric*/ //import net.fabricmc.loader.api.FabricLoader;
 /*? forge*/ import net.minecraftforge.fml.ModList;
@@ -10,8 +11,8 @@ import net.minecraft.client.gui.screens.Screen;
 public class ConfigHelper {
     public static boolean isModLoaded(String modId) {
         /*? fabric*/ //return FabricLoader.getInstance().isModLoaded(modId);
-        /*? (forge && <26.1) || neoforge*/ //return ModList.get().isLoaded(modId);
-        /*? forge && >=26.1*/ return ModList.isLoaded(modId);
+        /*? (forge && <26.1) || neoforge*/ return ModList.get().isLoaded(modId);
+        /*? forge && >=26.1*/ //return ModList.isLoaded(modId);
     }
 
     public static boolean isClothConfigLoaded() {

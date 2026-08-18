@@ -8,7 +8,6 @@ import io.github.bizcub.randomItemSpeedrun.network.*;
 import io.github.bizcub.randomItemSpeedrun.util.Constants;
 import io.github.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.client.ConfigScreenHandler;
@@ -16,22 +15,34 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.network.NetworkDirection;
+
+//? >=1.20.2 {
+/*import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraftforge.network.Channel;
 import net.minecraftforge.network.ChannelBuilder;
+import net.minecraftforge.network.SimpleChannel;
+*///?} else {
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.simple.SimpleChannel;
+//?}
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Mod(Constants.MOD_ID)
 @EventBusSubscriber(modid = Constants.MOD_ID)
 public class Forge {
 
-    public static final Channel<CustomPacketPayload> CHANNEL =
-            ChannelBuilder.named(Utils.getIdentifier("main"))
+    //? >=1.20.5 {
+    /*public static final Channel<CustomPacketPayload> CHANNEL =
+            ChannelBuilder
+                    .named(Utils.getResourceLocation("main"))
                     .networkProtocolVersion(1)
                     .optional()
                     .payloadChannel()
@@ -71,6 +82,122 @@ public class Forge {
                     })
                     .build();
 
+    *///?} >=1.20.2 {
+    /*public static final SimpleChannel CHANNEL =
+            ChannelBuilder
+                    .named(Utils.getResourceLocation("main"))
+                    .networkProtocolVersion(1)
+                    .acceptedVersions((status, ver) -> true)
+                    .simpleChannel()
+                    .messageBuilder(AnimationPayloadS2C.class, NetworkDirection.PLAY_TO_CLIENT)
+                    .encoder((payload, buf) -> buf.writeBytes(payload.toBuffer()))
+                    .decoder(AnimationPayloadS2C::read)
+                    .consumerMainThread((payload, ctx) ->
+                            Minecraft.getInstance().gameRenderer.displayItemActivation(payload.itemStack()))
+                    .add()
+                    .messageBuilder(SpeedrunsPayloadS2C.class, NetworkDirection.PLAY_TO_CLIENT)
+                    .encoder((payload, buf) -> buf.writeBytes(payload.toBuffer()))
+                    .decoder(SpeedrunsPayloadS2C::read)
+                    .consumerMainThread((payload, ctx) ->
+                            RandomItemSpeedrunClient.speedruns = new ArrayList<>(payload.speedruns()))
+                    .add()
+                    .messageBuilder(SoundPayloadS2C.class, NetworkDirection.PLAY_TO_CLIENT)
+                    .encoder((payload, buf) -> buf.writeBytes(payload.toBuffer()))
+                    .decoder(SoundPayloadS2C::read)
+                    .consumerMainThread((payload, ctx) ->
+                            Minecraft.getInstance().player.playSound(payload.soundEvent(), 1.0F, 1.0F))
+                    .add()
+                    .messageBuilder(HUDPayloadS2C.class, NetworkDirection.PLAY_TO_CLIENT)
+                    .encoder((payload, buf) -> buf.writeBytes(payload.toBuffer()))
+                    .decoder(HUDPayloadS2C::read)
+                    .consumerMainThread((payload, ctx) ->
+                            RandomItemSpeedrunClient.game.update(payload.isStart(), payload.itemStack(), payload.time()))
+                    .add()
+                    .messageBuilder(ChangeGameStatusPayloadC2S.class, NetworkDirection.PLAY_TO_SERVER)
+                    .encoder((payload, buf) -> buf.writeBytes(payload.toBuffer()))
+                    .decoder(ChangeGameStatusPayloadC2S::read)
+                    .consumerMainThread((payload, ctx) -> {
+                        RandomItemSpeedrunMain.game.changeGameStatus();
+                        ServerPlayer sender = ctx.getSender();
+                        var players = sender.level().getServer().getPlayerList().getPlayers();
+                        players.forEach(RandomItemSpeedrunMain::sendSpeedrunsS2C);
+                        if (RandomItemSpeedrunMain.game.isStarted()) {
+                            players.forEach(p -> {
+                                RandomItemSpeedrunMain.sendAnimationS2C(p);
+                                RandomItemSpeedrunMain.sendSoundS2C(p, SoundEvents.UI_TOAST_IN);
+                            });
+                        }
+                    })
+                    .add();
+
+    *///?} else {
+    private static final String NETWORK_PROTOCOL_VERSION = "1";
+    public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
+            Utils.getResourceLocation("main"),
+            () -> NETWORK_PROTOCOL_VERSION,
+            NETWORK_PROTOCOL_VERSION::equals,
+            NETWORK_PROTOCOL_VERSION::equals
+    );
+
+    private static void registerPayloads() {
+        int id = 0;
+        CHANNEL.registerMessage(
+                id++,
+                AnimationPayloadS2C.class,
+                (payload, buf) -> buf.writeBytes(payload.toBuffer()),
+                AnimationPayloadS2C::read,
+                (payload, ctx) ->
+                        Minecraft.getInstance().gameRenderer.displayItemActivation(payload.itemStack()),
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+        CHANNEL.registerMessage(
+                id++,
+                SpeedrunsPayloadS2C.class,
+                (payload, buf) -> buf.writeBytes(payload.toBuffer()),
+                SpeedrunsPayloadS2C::read,
+                (payload, ctx) ->
+                        RandomItemSpeedrunClient.speedruns = new ArrayList<>(payload.speedruns()),
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+        CHANNEL.registerMessage(
+                id++,
+                SoundPayloadS2C.class,
+                (payload, buf) -> buf.writeBytes(payload.toBuffer()),
+                SoundPayloadS2C::read,
+                (payload, ctx) ->
+                        Minecraft.getInstance().player.playSound(payload.soundEvent(), 1.0F, 1.0F),
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+        CHANNEL.registerMessage(
+                id++,
+                HUDPayloadS2C.class,
+                (payload, buf) -> buf.writeBytes(payload.toBuffer()),
+                HUDPayloadS2C::read,
+                (payload, ctx) ->
+                        RandomItemSpeedrunClient.game.update(payload.isStart(), payload.itemStack(), payload.time()),
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+        CHANNEL.registerMessage(
+                id++,
+                ChangeGameStatusPayloadC2S.class,
+                (payload, buf) -> buf.writeBytes(payload.toBuffer()),
+                ChangeGameStatusPayloadC2S::read,
+                (payload, ctx) -> {
+                    RandomItemSpeedrunMain.game.changeGameStatus();
+                    ServerPlayer sender = ctx.get().getSender();
+                    var players = sender.level().getServer().getPlayerList().getPlayers();
+                    players.forEach(RandomItemSpeedrunMain::sendSpeedrunsS2C);
+                    if (RandomItemSpeedrunMain.game.isStarted()) {
+                        players.forEach(p -> {
+                            RandomItemSpeedrunMain.sendAnimationS2C(p);
+                            RandomItemSpeedrunMain.sendSoundS2C(p, SoundEvents.UI_TOAST_IN);
+                        });
+                    }
+                },
+                Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+    }//?}
+
     public Forge() {
         RandomItemSpeedrunMain.init();
 
@@ -78,14 +205,17 @@ public class Forge {
             RandomItemSpeedrunClient.init();
 
             ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () ->
-                    new ConfigScreenHandler.ConfigScreenFactory(ConfigHelper::getScreen));
+                    new ConfigScreenHandler.ConfigScreenFactory((minecraft, parent) -> ConfigHelper.getScreen(parent)));
         }
+
+        /*? 1.20.1*/ registerPayloads();
     }
 
-    @SubscribeEvent
-    public static void onServerTick(TickEvent.ServerTickEvent.Post event) {
-        RandomItemSpeedrunMain.serverTick(event.server());
-        event.server().getPlayerList().getPlayers().forEach(RandomItemSpeedrunMain::sendHUDS2C);
+    @SubscribeEvent //~ if <=1.20.2 'ServerTickEvent.Post' -> 'ServerTickEvent'
+    public static void onServerTick(TickEvent.ServerTickEvent event) {
+        //~ if >=1.21.9 'event.getServer()' -> 'event.server()' {
+        RandomItemSpeedrunMain.serverTick(event.getServer());
+        event.getServer().getPlayerList().getPlayers().forEach(RandomItemSpeedrunMain::sendHUDS2C);//~}
     }
 
     @SubscribeEvent

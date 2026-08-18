@@ -20,7 +20,7 @@ public class Game {
 
         if (RandomItemSpeedrunMain.allItemsId.isEmpty()) {
             //~ if >=26.1 'displayClientMessage' -> 'sendOverlayMessage'
-            Minecraft.getInstance().player.sendOverlayMessage(Component.translatable("title.no_items") /*? <=1.21.11 {*//*, true *//*?}*/);
+            Minecraft.getInstance().player.displayClientMessage(Component.translatable("title.no_items") /*? <=1.21.11 {*/, true /*?}*/);
             return;
         }
 
