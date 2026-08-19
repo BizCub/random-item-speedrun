@@ -32,10 +32,12 @@ public class Forge {
                 RandomItemSpeedrunMain.game.buttonPressed();
             }
         }
-    }
+
+        //? <=1.21.8 {
+    /^}
 
     @EventBusSubscriber(modid = Constants.MOD_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
-    public static class ModBus {
+    public static class ModBus {^///?}
 
         @SubscribeEvent
         public static void registerBindings(RegisterKeyMappingsEvent event) {
