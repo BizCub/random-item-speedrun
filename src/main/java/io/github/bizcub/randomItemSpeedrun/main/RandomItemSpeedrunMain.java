@@ -32,6 +32,7 @@ import net.minecraftforge.network.PacketDistributor;
 import io.github.bizcub.randomItemSpeedrun.main.platform.Forge;
 *///?}
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -179,6 +180,8 @@ public class RandomItemSpeedrunMain {
     public static void readSpeedruns() {
         Gson gson = new Gson();
         try {
+            File parent = Constants.SPEEDRUNS_FILE.getParentFile();
+            if (parent != null) parent.mkdirs();
             Constants.SPEEDRUNS_FILE.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
