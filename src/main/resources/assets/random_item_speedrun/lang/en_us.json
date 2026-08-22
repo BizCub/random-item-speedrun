@@ -5,7 +5,7 @@
     "gui.game_start_screen.title": "Random Item Speedrun",
     "gui.game_start_screen.entry": "%1$s%2$s%3$s",
     "gui.game_start_screen.entry.separator": " - ",
-    "gui.game_start_screen.cloth_config_is_not_loaded": "Cloth Config is not loaded!",
+    "gui.game_start_screen.cloth_config_is_not_loaded": "Config is not loaded!",
     "gui.game_start_screen.start_button.not_started": "Start Game",
     "gui.game_start_screen.start_button.started": "Finish Game",
     "gui.game_start_screen.side_panel.item": "Item: %s",
@@ -29,8 +29,12 @@
     "text.autoconfig.random_item_speedrun/config.option.removeDuplicates": "Remove Duplicates",
     "text.autoconfig.random_item_speedrun/config.option.removeDuplicates.@Tooltip": "The items you find won't have to be speedrun again",
     "text.autoconfig.random_item_speedrun/config.option.difficulty": "Difficulty",
-    "text.autoconfig.random_item_speedrun/config.option.difficulty.easy": "Easy",
-    "text.autoconfig.random_item_speedrun/config.option.difficulty.normal": "Normal",
-    "text.autoconfig.random_item_speedrun/config.option.difficulty.hard": "Hard",
-    "text.autoconfig.random_item_speedrun/config.option.difficulty.hardcore": "Hardcore"
+
+    "text.random_item_speedrun/config.group.general": "Random Item Speedrun Settings",
+    "text.random_item_speedrun/config.option.isHudRender": "Display HUD",
+    "text.random_item_speedrun/config.option.isHudRender.tooltip": "Should time and item be displayed on the screen?",
+    "text.random_item_speedrun/config.option.hudColor": "HUD Color",
+    "text.random_item_speedrun/config.option.removeDuplicates": "Remove Duplicates",
+    "text.random_item_speedrun/config.option.removeDuplicates.tooltip": "The items you find won't have to be speedrun again",
+    "text.random_item_speedrun/config.option.difficulty": "Difficulty"
 }
