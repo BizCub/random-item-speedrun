@@ -5,7 +5,7 @@
     "gui.game_start_screen.title": "Random Item Speedrun",
     "gui.game_start_screen.entry": "%1$s%2$s%3$s",
     "gui.game_start_screen.entry.separator": " - ",
-    "gui.game_start_screen.cloth_config_is_not_loaded": "Config is not loaded!",
+    "gui.game_start_screen.config_mod_is_not_loaded": "Config mod is not loaded!",
     "gui.game_start_screen.start_button.not_started": "Start Game",
     "gui.game_start_screen.start_button.started": "Finish Game",
     "gui.game_start_screen.side_panel.item": "Item: %s",

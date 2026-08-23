@@ -55,7 +55,7 @@ public class GameStartScreen extends Screen {
 
         if (!ConfigHelper.isConfigLoaded()) {
             settingsButton.active = false;
-            settingsButton.setTooltip(Tooltip.create(Component.translatable("gui.game_start_screen.cloth_config_is_not_loaded")));
+            settingsButton.setTooltip(Tooltip.create(Component.translatable("gui.game_start_screen.config_mod_is_not_loaded")));
         }
 
         changeFocus();
