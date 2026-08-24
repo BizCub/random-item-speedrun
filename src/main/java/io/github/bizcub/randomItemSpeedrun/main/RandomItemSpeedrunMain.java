@@ -118,10 +118,10 @@ public class RandomItemSpeedrunMain {
             String targetItemId = Utils.convertComponentToId(Utils.getNameFromItemStack(game.getItemStack()));
             for (var player : server.getPlayerList().getPlayers()) {
                 boolean found = false;
-                for (var slot : player.inventoryMenu.slots) {
-                    if (slot.getContainerSlot() == InventoryMenu.RESULT_SLOT || !slot.hasItem()) {
-                        continue;
-                    }
+                for (int i = 0; i < player.inventoryMenu.slots.size(); i++) {
+                    if (i == InventoryMenu.RESULT_SLOT) continue;
+                    var slot = player.inventoryMenu.slots.get(i);
+                    if (!slot.hasItem()) continue;
 
                     ItemStack item = slot.getItem();
                     String itemId = Utils.convertComponentToId(Utils.getNameFromItemStack(item));
