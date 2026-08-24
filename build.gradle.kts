@@ -50,7 +50,8 @@ multiloader {
     versionRange("26.2", to = "latest")
 
     addDependency(
-        dependency = "maven.modrinth:simple-config-lib:${getDep("simple-config-lib")}"
+        dependency = "maven.modrinth:simple-config-lib:${getDep("simple-config-lib")}",
+        isPublishDepEnabled = true
     )
     addDependency(
         dependency = "me.shedaniel.cloth:cloth-config-${mod.loader}:${getDep("cloth-config").split("+").first()}",
