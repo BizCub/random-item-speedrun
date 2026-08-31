@@ -1,6 +1,8 @@
 package io.github.bizcub.randomItemSpeedrun.client.config;
 
 //~ auto_config
+import io.github.bizcub.randomItemSpeedrun.config.ClothConfig;
+import io.github.bizcub.randomItemSpeedrun.config.SimpleConfig;
 import io.github.bizcub.simpleConfigLib.autoconfig.gui.AutoConfigScreen;
 import me.shedaniel.autoconfig.AutoConfigClient;
 import net.minecraft.client.gui.screens.Screen;

@@ -1,6 +1,5 @@
 package io.github.bizcub.randomItemSpeedrun;
 
-import io.github.bizcub.randomItemSpeedrun.main.RandomItemSpeedrunMain;
 import io.github.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -18,7 +17,7 @@ public class Game {
     public void start() {
         if (this.isStart) return;
 
-        if (RandomItemSpeedrunMain.allItemsId.isEmpty()) {
+        if (RandomItemSpeedrun.allItemsId.isEmpty()) {
             //~ if >=26.1 'displayClientMessage' -> 'sendOverlayMessage'
             Minecraft.getInstance().player.sendOverlayMessage(Component.translatable("title.no_items") /*? <=1.21.11 {*//*, true *//*?}*/);
             return;
@@ -28,33 +27,33 @@ public class Game {
         this.time = 0;
         this.itemStack = Utils.getItemStackFromId(getRandomItem());
 
-        RandomItemSpeedrunMain.speedruns.add(0, new Speedrun(Utils.getIdFromItemStack(this.itemStack), "-", Speedrun.Status.IN_PROGRESS, 0, System.currentTimeMillis()));
+        RandomItemSpeedrun.speedruns.add(0, new Speedrun(Utils.getIdFromItemStack(this.itemStack), "-", Speedrun.Status.IN_PROGRESS, 0, System.currentTimeMillis()));
     }
 
     public void stop(Speedrun.Status isSuccess, String playerName) {
         if (!this.isStart) return;
 
         this.isStart = false;
-        RandomItemSpeedrunMain.speedruns.set(0, new Speedrun(Utils.getIdFromItemStack(this.itemStack), playerName, isSuccess, this.time / 20, System.currentTimeMillis()));
-        RandomItemSpeedrunMain.writeSpeedruns();
-        RandomItemSpeedrunMain.removeDuplicateItems();
+        RandomItemSpeedrun.speedruns.set(0, new Speedrun(Utils.getIdFromItemStack(this.itemStack), playerName, isSuccess, this.time / 20, System.currentTimeMillis()));
+        RandomItemSpeedrun.writeSpeedruns();
+        RandomItemSpeedrun.removeDuplicateItems();
     }
 
     public void buttonPressed() {
-        RandomItemSpeedrunMain.sendChangeGameStatusC2S();
+        RandomItemSpeedrun.sendChangeGameStatusC2S();
     }
 
     public void changeGameStatus() {
-        if (!RandomItemSpeedrunMain.game.isStarted()) {
-            RandomItemSpeedrunMain.game.start();
+        if (!RandomItemSpeedrun.game.isStarted()) {
+            RandomItemSpeedrun.game.start();
         } else {
-            RandomItemSpeedrunMain.game.stop(Speedrun.Status.FAILURE, "");
+            RandomItemSpeedrun.game.stop(Speedrun.Status.FAILURE, "");
         }
     }
 
     private String getRandomItem() {
         Random random = new Random();
-        List<String> allItemsId = RandomItemSpeedrunMain.allItemsId;
+        List<String> allItemsId = RandomItemSpeedrun.allItemsId;
         return allItemsId.get(random.nextInt(allItemsId.size()));
     }
 

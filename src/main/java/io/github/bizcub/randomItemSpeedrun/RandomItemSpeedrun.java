@@ -1,9 +1,6 @@
-package io.github.bizcub.randomItemSpeedrun.main;
+package io.github.bizcub.randomItemSpeedrun;
 
-import io.github.bizcub.randomItemSpeedrun.Game;
-import io.github.bizcub.randomItemSpeedrun.client.config.Config;
-import io.github.bizcub.randomItemSpeedrun.client.config.ConfigHelper;
-import io.github.bizcub.randomItemSpeedrun.Speedrun;
+import io.github.bizcub.randomItemSpeedrun.config.Config;
 import io.github.bizcub.randomItemSpeedrun.network.*;
 import io.github.bizcub.randomItemSpeedrun.util.Constants;
 import io.github.bizcub.randomItemSpeedrun.util.RemovableItems;
@@ -30,7 +27,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 *///?} else {
 /*import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.PacketDistributor;
-import io.github.bizcub.randomItemSpeedrun.main.platform.Forge;
+import io.github.bizcub.randomItemSpeedrun.platform.Forge;
 *///?}
 
 import java.io.File;
@@ -41,7 +38,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RandomItemSpeedrunMain {
+public class RandomItemSpeedrun {
     public static List<String> allItemsId = new ArrayList<>();
     public static ArrayList<Speedrun> speedruns = new ArrayList<>();
     public static Game game;
@@ -74,16 +71,12 @@ public class RandomItemSpeedrunMain {
     }
 
     public static void setDifficulty() {
-        if (ConfigHelper.isConfigLoaded()) {
-            switch (Config.get().difficulty()) {
-                case EASY -> fillItemsList(Constants.notEasyItems());
-                case NORMAL -> fillItemsList(Constants.notMediumItems());
-                case HARD -> fillItemsList(Constants.notHardItems());
-                case HARDCORE -> fillItemsList(Constants.impossibleItems());
-                default -> {}
-            }
-        } else {
-            fillItemsList(Constants.notMediumItems());
+        switch (Config.get().difficulty()) {
+            case EASY -> fillItemsList(Constants.notEasyItems());
+            case NORMAL -> fillItemsList(Constants.notMediumItems());
+            case HARD -> fillItemsList(Constants.notHardItems());
+            case HARDCORE -> fillItemsList(Constants.impossibleItems());
+            default -> {}
         }
     }
 
@@ -98,7 +91,7 @@ public class RandomItemSpeedrunMain {
     }
 
     public static void removeDuplicateItems() {
-        if (ConfigHelper.isConfigLoaded() && !Config.get().removeDuplicates()) return;
+        if (!Config.get().removeDuplicates()) return;
 
         List<String> duplicates = new ArrayList<>();
         speedruns.forEach(speedrun -> duplicates.add(speedrun.itemId()));
@@ -147,7 +140,7 @@ public class RandomItemSpeedrunMain {
 
     public static void sendChangeGameStatusC2S() {
         ChangeGameStatusPayloadC2S payload = new ChangeGameStatusPayloadC2S();
-        /*? fabric*/ ClientPlayNetworking.send(/*? <1.20.5 {*/ /*ChangeGameStatusPayloadC2S.ID, payload.toBuffer() *//*?} else {*/ payload /*?}*/);
+        /*? fabric*/ ClientPlayNetworking.send(/*? <1.20.5 {*/ /*ChangeGameStatusPayloadC2S.ID, payload.toBuffer() *//*?} else >> ')'*/ payload);
         /*? forge && >=1.20.2*/ //Forge.CHANNEL.send(payload, PacketDistributor.SERVER.noArg());
         /*? forge && 1.20.1*/ //Forge.CHANNEL.sendToServer(payload);
         //~ if >=1.21.6 'PacketDistributor' -> 'ClientPacketDistributor'
@@ -156,7 +149,7 @@ public class RandomItemSpeedrunMain {
 
     public static void sendAnimationS2C(ServerPlayer player) {
         AnimationPayloadS2C payload = new AnimationPayloadS2C(game.getItemStack());
-        /*? fabric*/ ServerPlayNetworking.send(player, /*? <1.20.5 {*/ /*AnimationPayloadS2C.ID, payload.toBuffer() *//*?} else {*/ payload /*?}*/);
+        /*? fabric*/ ServerPlayNetworking.send(player, /*? <1.20.5 {*/ /*AnimationPayloadS2C.ID, payload.toBuffer() *//*?} else >> ')'*/ payload);
         /*? forge && >=1.20.2*/ //Forge.CHANNEL.send(payload, PacketDistributor.PLAYER.with(player));
         /*? forge && 1.20.1*/ //Forge.CHANNEL.sendTo(payload, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
         /*? neoforge*/ //PacketDistributor.sendToPlayer(player, payload);
@@ -164,7 +157,7 @@ public class RandomItemSpeedrunMain {
 
     public static void sendSpeedrunsS2C(ServerPlayer player) {
         SpeedrunsPayloadS2C payload = new SpeedrunsPayloadS2C(speedruns);
-        /*? fabric*/ ServerPlayNetworking.send(player, /*? <1.20.5 {*/ /*SpeedrunsPayloadS2C.ID, payload.toBuffer() *//*?} else {*/ payload /*?}*/);
+        /*? fabric*/ ServerPlayNetworking.send(player, /*? <1.20.5 {*/ /*SpeedrunsPayloadS2C.ID, payload.toBuffer() *//*?} else >> ')'*/ payload);
         /*? forge && >=1.20.2*/ //Forge.CHANNEL.send(payload, PacketDistributor.PLAYER.with(player));
         /*? forge && 1.20.1*/ //Forge.CHANNEL.sendTo(payload, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
         /*? neoforge*/ //PacketDistributor.sendToPlayer(player, payload);
@@ -172,7 +165,7 @@ public class RandomItemSpeedrunMain {
 
     public static void sendSoundS2C(ServerPlayer player, SoundEvent soundEvent) {
         SoundPayloadS2C payload = new SoundPayloadS2C(soundEvent);
-        /*? fabric*/ ServerPlayNetworking.send(player, /*? <1.20.5 {*/ /*SoundPayloadS2C.ID, payload.toBuffer() *//*?} else {*/ payload /*?}*/);
+        /*? fabric*/ ServerPlayNetworking.send(player, /*? <1.20.5 {*/ /*SoundPayloadS2C.ID, payload.toBuffer() *//*?} else >> ')'*/ payload);
         /*? forge && >=1.20.2*/ //Forge.CHANNEL.send(payload, PacketDistributor.PLAYER.with(player));
         /*? forge && 1.20.1*/ //Forge.CHANNEL.sendTo(payload, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
         /*? neoforge*/ //PacketDistributor.sendToPlayer(player, payload);
@@ -184,7 +177,7 @@ public class RandomItemSpeedrunMain {
                 game.isStarted() ? game.getTime() : 0,
                 game.isStarted()
         );
-        /*? fabric*/ ServerPlayNetworking.send(player, /*? <1.20.5 {*/ /*HUDPayloadS2C.ID, payload.toBuffer() *//*?} else {*/ payload /*?}*/);
+        /*? fabric*/ ServerPlayNetworking.send(player, /*? <1.20.5 {*/ /*HUDPayloadS2C.ID, payload.toBuffer() *//*?} else >> ')'*/ payload);
         /*? forge && >=1.20.2*/ //Forge.CHANNEL.send(payload, PacketDistributor.PLAYER.with(player));
         /*? forge && 1.20.1*/ //Forge.CHANNEL.sendTo(payload, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
         /*? neoforge*/ //PacketDistributor.sendToPlayer(player, payload);

@@ -7,7 +7,7 @@ import io.github.bizcub.randomItemSpeedrun.client.config.ConfigHelper;
 import io.github.bizcub.randomItemSpeedrun.client.gui.GameStartScreen;
 /^? >=1.21.6^/ import io.github.bizcub.randomItemSpeedrun.client.gui.ScaledItemPIPRenderer;
 /^? >=1.21.6^/ import io.github.bizcub.randomItemSpeedrun.client.gui.ScaledItemRenderState;
-import io.github.bizcub.randomItemSpeedrun.main.RandomItemSpeedrunMain;
+import io.github.bizcub.randomItemSpeedrun.RandomItemSpeedrun;
 import io.github.bizcub.randomItemSpeedrun.util.Constants;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
@@ -44,7 +44,7 @@ public class NeoForge {
                 Minecraft.getInstance().gui.setScreen(new GameStartScreen());
             }
             if (RandomItemSpeedrunClient.QUICK_START.isActiveAndMatches(inputConstants)) {
-                RandomItemSpeedrunMain.game.buttonPressed();
+                RandomItemSpeedrun.game.buttonPressed();
             }
         }
     }

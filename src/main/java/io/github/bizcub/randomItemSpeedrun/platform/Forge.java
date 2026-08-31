@@ -1,9 +1,9 @@
 //? forge {
-/*package io.github.bizcub.randomItemSpeedrun.main.platform;
+/*package io.github.bizcub.randomItemSpeedrun.platform;
 
 import io.github.bizcub.randomItemSpeedrun.client.RandomItemSpeedrunClient;
 import io.github.bizcub.randomItemSpeedrun.client.config.ConfigHelper;
-import io.github.bizcub.randomItemSpeedrun.main.RandomItemSpeedrunMain;
+import io.github.bizcub.randomItemSpeedrun.RandomItemSpeedrun;
 import io.github.bizcub.randomItemSpeedrun.network.*;
 import io.github.bizcub.randomItemSpeedrun.util.Constants;
 import io.github.bizcub.randomItemSpeedrun.util.Utils;
@@ -67,14 +67,14 @@ public class Forge {
                     .serverbound()
                     .add(ChangeGameStatusPayloadC2S.TYPE, ChangeGameStatusPayloadC2S.CODEC, (payload, ctx) -> {
                         ctx.enqueueWork(() -> {
-                            RandomItemSpeedrunMain.game.changeGameStatus();
+                            RandomItemSpeedrun.game.changeGameStatus();
                             ServerPlayer sender = ctx.getSender();
                             var players = sender.level().getServer().getPlayerList().getPlayers();
-                            players.forEach(RandomItemSpeedrunMain::sendSpeedrunsS2C);
-                            if (RandomItemSpeedrunMain.game.isStarted()) {
+                            players.forEach(RandomItemSpeedrun::sendSpeedrunsS2C);
+                            if (RandomItemSpeedrun.game.isStarted()) {
                                 players.forEach(p -> {
-                                    RandomItemSpeedrunMain.sendAnimationS2C(p);
-                                    RandomItemSpeedrunMain.sendSoundS2C(p, SoundEvents.UI_TOAST_IN);
+                                    RandomItemSpeedrun.sendAnimationS2C(p);
+                                    RandomItemSpeedrun.sendSoundS2C(p, SoundEvents.UI_TOAST_IN);
                                 });
                             }
                         });
@@ -117,14 +117,14 @@ public class Forge {
                     .encoder((payload, buf) -> buf.writeBytes(payload.toBuffer()))
                     .decoder(ChangeGameStatusPayloadC2S::read)
                     .consumerMainThread((payload, ctx) -> {
-                        RandomItemSpeedrunMain.game.changeGameStatus();
+                        RandomItemSpeedrun.game.changeGameStatus();
                         ServerPlayer sender = ctx.getSender();
                         var players = sender.level().getServer().getPlayerList().getPlayers();
-                        players.forEach(RandomItemSpeedrunMain::sendSpeedrunsS2C);
-                        if (RandomItemSpeedrunMain.game.isStarted()) {
+                        players.forEach(RandomItemSpeedrun::sendSpeedrunsS2C);
+                        if (RandomItemSpeedrun.game.isStarted()) {
                             players.forEach(p -> {
-                                RandomItemSpeedrunMain.sendAnimationS2C(p);
-                                RandomItemSpeedrunMain.sendSoundS2C(p, SoundEvents.UI_TOAST_IN);
+                                RandomItemSpeedrun.sendAnimationS2C(p);
+                                RandomItemSpeedrun.sendSoundS2C(p, SoundEvents.UI_TOAST_IN);
                             });
                         }
                     })
@@ -183,14 +183,14 @@ public class Forge {
                 (payload, buf) -> buf.writeBytes(payload.toBuffer()),
                 ChangeGameStatusPayloadC2S::read,
                 (payload, ctx) -> {
-                    RandomItemSpeedrunMain.game.changeGameStatus();
+                    RandomItemSpeedrun.game.changeGameStatus();
                     ServerPlayer sender = ctx.get().getSender();
                     var players = sender.level().getServer().getPlayerList().getPlayers();
-                    players.forEach(RandomItemSpeedrunMain::sendSpeedrunsS2C);
-                    if (RandomItemSpeedrunMain.game.isStarted()) {
+                    players.forEach(RandomItemSpeedrun::sendSpeedrunsS2C);
+                    if (RandomItemSpeedrun.game.isStarted()) {
                         players.forEach(p -> {
-                            RandomItemSpeedrunMain.sendAnimationS2C(p);
-                            RandomItemSpeedrunMain.sendSoundS2C(p, SoundEvents.UI_TOAST_IN);
+                            RandomItemSpeedrun.sendAnimationS2C(p);
+                            RandomItemSpeedrun.sendSoundS2C(p, SoundEvents.UI_TOAST_IN);
                         });
                     }
                 },
@@ -199,7 +199,7 @@ public class Forge {
     }^///?}
 
     public Forge() {
-        RandomItemSpeedrunMain.init();
+        RandomItemSpeedrun.init();
 
         if (FMLEnvironment.dist.isClient()) {
             RandomItemSpeedrunClient.init();
@@ -216,24 +216,24 @@ public class Forge {
         /^? <=1.20.2^/ //if (event.phase != TickEvent.Phase.END) return;
 
         //~ if >=1.21.9 'event.getServer()' -> 'event.server()' {
-        RandomItemSpeedrunMain.serverTick(event.server());
-        event.server().getPlayerList().getPlayers().forEach(RandomItemSpeedrunMain::sendHUDS2C);//~}
+        RandomItemSpeedrun.serverTick(event.server());
+        event.server().getPlayerList().getPlayers().forEach(RandomItemSpeedrun::sendHUDS2C);//~}
     }
 
     @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
-            RandomItemSpeedrunMain.sendSpeedrunsS2C(serverPlayer);
+            RandomItemSpeedrun.sendSpeedrunsS2C(serverPlayer);
         }
     }
 
     @SubscribeEvent
     public static void onServerStarted(ServerStartedEvent event) {
-        RandomItemSpeedrunMain.serverInit(event.getServer());
+        RandomItemSpeedrun.serverInit(event.getServer());
     }
 
     @SubscribeEvent
     public static void onServerStopped(ServerStoppedEvent event) {
-        RandomItemSpeedrunMain.serverClose(event.getServer());
+        RandomItemSpeedrun.serverClose(event.getServer());
     }
 }*///?}

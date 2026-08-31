@@ -1,4 +1,4 @@
-package io.github.bizcub.randomItemSpeedrun.client.config;
+package io.github.bizcub.randomItemSpeedrun.config;
 
 public interface Config {
     static Config get() {
@@ -28,6 +28,6 @@ public interface Config {
     }
 
     default int hudColor() {
-        return 0xffffff;
+        return 0xffffffff;
     }
 }

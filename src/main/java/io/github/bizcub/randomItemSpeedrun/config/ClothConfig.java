@@ -1,6 +1,6 @@
-package io.github.bizcub.randomItemSpeedrun.client.config;
+package io.github.bizcub.randomItemSpeedrun.config;
 
-import io.github.bizcub.randomItemSpeedrun.main.RandomItemSpeedrunMain;
+import io.github.bizcub.randomItemSpeedrun.RandomItemSpeedrun;
 import io.github.bizcub.randomItemSpeedrun.util.Constants;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
@@ -18,8 +18,8 @@ public class ClothConfig implements Config, ConfigData {
 
     public static void init() {
         AutoConfig.register(ClothConfig.class, GsonConfigSerializer::new).registerSaveListener((manager, data) -> {
-            RandomItemSpeedrunMain.setDifficulty();
-            RandomItemSpeedrunMain.removeDuplicateItems();
+            RandomItemSpeedrun.setDifficulty();
+            RandomItemSpeedrun.removeDuplicateItems();
             return InteractionResult.SUCCESS;
         });
     }
@@ -33,7 +33,7 @@ public class ClothConfig implements Config, ConfigData {
     @ConfigEntry.Gui.Tooltip
     public boolean isHudRender = Config.super.isHudRender();
 
-    @ConfigEntry.ColorPicker
+    @ConfigEntry.ColorPicker(allowAlpha = true)
     public int hudColor = Config.super.hudColor();
 
     @Override

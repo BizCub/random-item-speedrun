@@ -51,7 +51,7 @@ multiloader {
     versionRange("26.2", to = "latest")
 
     addDependency(
-        dependency = getSimpleConfigLibDep("1.1"),
+        dependency = getSimpleConfigLibDep(),
         isPublishDepEnabled = true
     )
     addDependency(

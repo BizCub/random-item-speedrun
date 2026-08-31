@@ -5,7 +5,7 @@
 import io.github.bizcub.randomItemSpeedrun.client.RandomItemSpeedrunClient;
 import io.github.bizcub.randomItemSpeedrun.client.gui.GameStartScreen;
 /^? >=1.21.6^/ import io.github.bizcub.randomItemSpeedrun.client.gui.ScaledItemPIPRenderer;
-import io.github.bizcub.randomItemSpeedrun.main.RandomItemSpeedrunMain;
+import io.github.bizcub.randomItemSpeedrun.RandomItemSpeedrun;
 import io.github.bizcub.randomItemSpeedrun.util.Constants;
 import io.github.bizcub.randomItemSpeedrun.util.Utils;
 import net.minecraft.client.Minecraft;
@@ -29,7 +29,7 @@ public class Forge {
                 Minecraft.getInstance().gui.setScreen(new GameStartScreen());
             }
             if (RandomItemSpeedrunClient.QUICK_START.consumeClick()) {
-                RandomItemSpeedrunMain.game.buttonPressed();
+                RandomItemSpeedrun.game.buttonPressed();
             }
         }
 

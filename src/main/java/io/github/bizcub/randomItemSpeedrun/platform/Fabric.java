@@ -1,7 +1,7 @@
 //? fabric {
-package io.github.bizcub.randomItemSpeedrun.main.platform;
+package io.github.bizcub.randomItemSpeedrun.platform;
 
-import io.github.bizcub.randomItemSpeedrun.main.RandomItemSpeedrunMain;
+import io.github.bizcub.randomItemSpeedrun.RandomItemSpeedrun;
 import io.github.bizcub.randomItemSpeedrun.network.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -15,10 +15,10 @@ public class Fabric implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        RandomItemSpeedrunMain.init();
+        RandomItemSpeedrun.init();
 
-        ServerLifecycleEvents.SERVER_STARTED.register(RandomItemSpeedrunMain::serverInit);
-        ServerLifecycleEvents.SERVER_STOPPED.register(RandomItemSpeedrunMain::serverClose);
+        ServerLifecycleEvents.SERVER_STARTED.register(RandomItemSpeedrun::serverInit);
+        ServerLifecycleEvents.SERVER_STOPPED.register(RandomItemSpeedrun::serverClose);
 
         //? >=1.20.5 {
         /*~ if >=26.1 'playC2S' -> 'serverboundPlay'*/ /*~ if >=26.1 'playS2C' -> 'clientboundPlay' {*/
@@ -31,14 +31,14 @@ public class Fabric implements ModInitializer {
         //? >=1.20.5 {
         ServerPlayNetworking.registerGlobalReceiver(ChangeGameStatusPayloadC2S.TYPE, (payload, context) ->
                 context.server().execute(() -> {
-                    RandomItemSpeedrunMain.game.changeGameStatus();
+                    RandomItemSpeedrun.game.changeGameStatus();
 
-                    context.server().getPlayerList().getPlayers().forEach(RandomItemSpeedrunMain::sendSpeedrunsS2C);
+                    context.server().getPlayerList().getPlayers().forEach(RandomItemSpeedrun::sendSpeedrunsS2C);
 
-                    if (RandomItemSpeedrunMain.game.isStarted()) {
+                    if (RandomItemSpeedrun.game.isStarted()) {
                         context.server().getPlayerList().getPlayers().forEach(serverPlayer -> {
-                            RandomItemSpeedrunMain.sendAnimationS2C(serverPlayer);
-                            RandomItemSpeedrunMain.sendSoundS2C(serverPlayer, SoundEvents.UI_TOAST_IN);
+                            RandomItemSpeedrun.sendAnimationS2C(serverPlayer);
+                            RandomItemSpeedrun.sendSoundS2C(serverPlayer, SoundEvents.UI_TOAST_IN);
                         });
                     }
                 })
@@ -47,25 +47,25 @@ public class Fabric implements ModInitializer {
         //?} else {
         /*ServerPlayNetworking.registerGlobalReceiver(ChangeGameStatusPayloadC2S.ID, (server, player, listener, buf, sender) ->
                 server.execute(() -> {
-                    RandomItemSpeedrunMain.game.changeGameStatus();
+                    RandomItemSpeedrun.game.changeGameStatus();
 
-                    server.getPlayerList().getPlayers().forEach(RandomItemSpeedrunMain::sendSpeedrunsS2C);
+                    server.getPlayerList().getPlayers().forEach(RandomItemSpeedrun::sendSpeedrunsS2C);
 
-                    if (RandomItemSpeedrunMain.game.isStarted()) {
+                    if (RandomItemSpeedrun.game.isStarted()) {
                         server.getPlayerList().getPlayers().forEach(serverPlayer -> {
-                            RandomItemSpeedrunMain.sendAnimationS2C(serverPlayer);
-                            RandomItemSpeedrunMain.sendSoundS2C(serverPlayer, SoundEvents.UI_TOAST_IN);
+                            RandomItemSpeedrun.sendAnimationS2C(serverPlayer);
+                            RandomItemSpeedrun.sendSoundS2C(serverPlayer, SoundEvents.UI_TOAST_IN);
                         });
                     }
                 })
         );*///?}
 
         ServerTickEvents.END_SERVER_TICK.register(server -> {
-            RandomItemSpeedrunMain.serverTick(server);
-            server.getPlayerList().getPlayers().forEach(RandomItemSpeedrunMain::sendHUDS2C);
+            RandomItemSpeedrun.serverTick(server);
+            server.getPlayerList().getPlayers().forEach(RandomItemSpeedrun::sendHUDS2C);
         });
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) ->
-                RandomItemSpeedrunMain.sendSpeedrunsS2C(handler.player));
+                RandomItemSpeedrun.sendSpeedrunsS2C(handler.player));
     }
 }//?}

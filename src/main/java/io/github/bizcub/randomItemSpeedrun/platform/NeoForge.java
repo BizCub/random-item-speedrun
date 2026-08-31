@@ -1,8 +1,8 @@
 //? neoforge {
-/*package io.github.bizcub.randomItemSpeedrun.main.platform;
+/*package io.github.bizcub.randomItemSpeedrun.platform;
 
 import io.github.bizcub.randomItemSpeedrun.client.RandomItemSpeedrunClient;
-import io.github.bizcub.randomItemSpeedrun.main.RandomItemSpeedrunMain;
+import io.github.bizcub.randomItemSpeedrun.RandomItemSpeedrun;
 import io.github.bizcub.randomItemSpeedrun.network.*;
 import io.github.bizcub.randomItemSpeedrun.util.Constants;
 import net.minecraft.client.Minecraft;
@@ -44,12 +44,12 @@ public class NeoForge {
 
         registrar.playToServer(ChangeGameStatusPayloadC2S.TYPE, ChangeGameStatusPayloadC2S.CODEC, (payload, context) ->
                 context.enqueueWork(() -> {
-                    RandomItemSpeedrunMain.game.changeGameStatus();
+                    RandomItemSpeedrun.game.changeGameStatus();
 
-                    PacketDistributor.sendToAllPlayers(new SpeedrunsPayloadS2C(RandomItemSpeedrunMain.speedruns));
+                    PacketDistributor.sendToAllPlayers(new SpeedrunsPayloadS2C(RandomItemSpeedrun.speedruns));
 
-                    if (RandomItemSpeedrunMain.game.isStarted()) {
-                        PacketDistributor.sendToAllPlayers(new AnimationPayloadS2C(RandomItemSpeedrunMain.game.getItemStack()));
+                    if (RandomItemSpeedrun.game.isStarted()) {
+                        PacketDistributor.sendToAllPlayers(new AnimationPayloadS2C(RandomItemSpeedrun.game.getItemStack()));
                         PacketDistributor.sendToAllPlayers(new SoundPayloadS2C(SoundEvents.UI_TOAST_IN));
                     }
                 })
@@ -58,14 +58,14 @@ public class NeoForge {
 
     @SubscribeEvent
     public static void onServerTickEnd(ServerTickEvent.Post event) {
-        RandomItemSpeedrunMain.serverTick(event.getServer());
-        event.getServer().getPlayerList().getPlayers().forEach(RandomItemSpeedrunMain::sendHUDS2C);
+        RandomItemSpeedrun.serverTick(event.getServer());
+        event.getServer().getPlayerList().getPlayers().forEach(RandomItemSpeedrun::sendHUDS2C);
     }
 
     @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
-            RandomItemSpeedrunMain.sendSpeedrunsS2C(serverPlayer);
+            RandomItemSpeedrun.sendSpeedrunsS2C(serverPlayer);
         }
     }
 
@@ -73,14 +73,14 @@ public class NeoForge {
     public static class Init {
 
         public Init(IEventBus modEventBus, ModContainer modContainer) {
-            RandomItemSpeedrunMain.init();
+            RandomItemSpeedrun.init();
 
             net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener((ServerStartedEvent event) ->
-                    RandomItemSpeedrunMain.serverInit(event.getServer())
+                    RandomItemSpeedrun.serverInit(event.getServer())
             );
 
             net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener((ServerStoppedEvent event) ->
-                    RandomItemSpeedrunMain.serverClose(event.getServer())
+                    RandomItemSpeedrun.serverClose(event.getServer())
             );
         }
     }

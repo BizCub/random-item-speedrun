@@ -1,10 +1,10 @@
 package io.github.bizcub.randomItemSpeedrun.client;
 
 import io.github.bizcub.randomItemSpeedrun.Game;
-import io.github.bizcub.randomItemSpeedrun.client.config.Config;
+import io.github.bizcub.randomItemSpeedrun.config.Config;
 import io.github.bizcub.randomItemSpeedrun.client.config.ConfigHelper;
-import io.github.bizcub.randomItemSpeedrun.client.config.ClothConfig;
-import io.github.bizcub.randomItemSpeedrun.client.config.SimpleConfig;
+import io.github.bizcub.randomItemSpeedrun.config.ClothConfig;
+import io.github.bizcub.randomItemSpeedrun.config.SimpleConfig;
 import io.github.bizcub.randomItemSpeedrun.Speedrun;
 import io.github.bizcub.randomItemSpeedrun.util.Constants;
 import io.github.bizcub.randomItemSpeedrun.util.Utils;
@@ -32,21 +32,16 @@ public class RandomItemSpeedrunClient {
     public static final KeyMapping OPEN_SCREEN = new KeyMapping(
             "key." + Constants.MOD_ID + ".open_game_start_screen",
             InputConstants.KEY_Y,
-            /*? >=1.21.9*/ KeyMapping.Category.MISC
-            /*? <=1.21.8*/ //KeyMapping.CATEGORY_MISC
+            /*? >=1.21.9 {*/ KeyMapping.Category.MISC
+            /*?} else*/ //KeyMapping.CATEGORY_MISC
     );
 
     public static final KeyMapping QUICK_START = new KeyMapping(
             "key." + Constants.MOD_ID + ".quick_start",
             InputConstants.UNKNOWN.getValue(),
-            /*? >=1.21.9*/ KeyMapping.Category.MISC
-            /*? <=1.21.8*/ //KeyMapping.CATEGORY_MISC
+            /*? >=1.21.9 {*/ KeyMapping.Category.MISC
+            /*?} else*/ //KeyMapping.CATEGORY_MISC
     );
-
-    public static int getHudColor() {
-        if (ConfigHelper.isConfigLoaded()) return Config.get().hudColor() + 0xff000000;
-        return 0xffffffff;
-    }
 
     public static void renderHud(GuiGraphicsExtractor graphics) {
         if (!game.isStarted() || !Config.get().isHudRender()) return;
@@ -60,7 +55,7 @@ public class RandomItemSpeedrunClient {
 
         double offsetXPercent = 5;
         double offsetYPercent = 1.5;
-        int color = getHudColor();
+        int color = Config.get().hudColor();
         //~ draw_string
         graphics.text(
                 Minecraft.getInstance().font,

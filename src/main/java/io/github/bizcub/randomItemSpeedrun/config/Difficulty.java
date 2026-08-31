@@ -1,4 +1,4 @@
-package io.github.bizcub.randomItemSpeedrun.client.config;
+package io.github.bizcub.randomItemSpeedrun.config;
 
 public enum Difficulty {
     EASY, NORMAL, HARD, HARDCORE

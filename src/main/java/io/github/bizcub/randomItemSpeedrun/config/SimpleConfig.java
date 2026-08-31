@@ -1,6 +1,6 @@
-package io.github.bizcub.randomItemSpeedrun.client.config;
+package io.github.bizcub.randomItemSpeedrun.config;
 
-import io.github.bizcub.randomItemSpeedrun.main.RandomItemSpeedrunMain;
+import io.github.bizcub.randomItemSpeedrun.RandomItemSpeedrun;
 import io.github.bizcub.randomItemSpeedrun.util.Constants;
 import io.github.bizcub.simpleConfigLib.autoconfig.ConfigHolder;
 import io.github.bizcub.simpleConfigLib.autoconfig.annotation.*;
@@ -10,8 +10,8 @@ public class SimpleConfig implements Config {
 
     public static ConfigHolder<SimpleConfig> getInstance() {
         return ConfigHolder.register(SimpleConfig.class).onSave(config -> {
-            RandomItemSpeedrunMain.setDifficulty();
-            RandomItemSpeedrunMain.removeDuplicateItems();
+            RandomItemSpeedrun.setDifficulty();
+            RandomItemSpeedrun.removeDuplicateItems();
         });
     }
 
@@ -23,7 +23,7 @@ public class SimpleConfig implements Config {
     @Tooltip
     public boolean isHudRender = Config.super.isHudRender();
 
-    @Color
+    @Color(alpha = true)
     public int hudColor = Config.super.hudColor();
 
     @Override
