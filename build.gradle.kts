@@ -3,10 +3,10 @@ plugins {
 }
 
 multiloader {
-    val isClothConfigAvailable = !(isForge && scp > "1.21.3")
-    sc.constants["is_cloth_config_available"] = isClothConfigAvailable
-
     sc.replacements {
+        string(scp >= "26.3") {
+            replace("blaze3d.textures", "renderpearl.api.textures")
+        }
         string(scp >= "26.2") {
             replace(".setScreen(", ".gui.setScreen(")
         }
@@ -51,9 +51,10 @@ multiloader {
     versionRange("26.2", to = "latest")
 
     addDependency(
-        dependency = getSimpleConfigLibDep(),
+        dependency = getSimpleConfigLibDep("2.0"),
         isPublishDepEnabled = true
     )
+    val isClothConfigAvailable = !(isForge && scp > "1.21.3") && false
     addDependency(
         dependency = "me.shedaniel.cloth:cloth-config-${mod.loader}:${getDep("cloth-config").split("+").first()}",
         configuration = if (isClothConfigAvailable) "implementation" else "compileOnly",

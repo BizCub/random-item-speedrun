@@ -33,7 +33,8 @@ public class Fabric implements ClientModInitializer {
 
         //? >=1.20.5 {
         ClientPlayNetworking.registerGlobalReceiver(AnimationPayloadS2C.TYPE, (payload, context) ->
-                context.client().execute(() -> context.client().gameRenderer.displayItemActivation(payload.itemStack())));
+                //~ if >=26.3 'client().gameRenderer' -> 'player()'
+                context.client().execute(() -> context.player().displayItemActivation(payload.itemStack())));
 
         ClientPlayNetworking.registerGlobalReceiver(SpeedrunsPayloadS2C.TYPE, (payload, context) ->
                 context.client().execute(() -> RandomItemSpeedrunClient.speedruns = new ArrayList<>(payload.speedruns())));
