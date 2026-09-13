@@ -7,7 +7,7 @@ import io.github.bizcub.simpleConfigLib.autoconfig.annotation.AutoConfig;
 import io.github.bizcub.simpleConfigLib.autoconfig.annotation.Color;
 import io.github.bizcub.simpleConfigLib.autoconfig.annotation.Tooltip;
 
-@AutoConfig(name = Constants.MOD_ID, fileName = Constants.MOD_ID + "/config_cleint_scl", translate = true, side = ConfigSide.CLIENT)
+@AutoConfig(name = Constants.MOD_ID, fileName = Constants.MOD_ID + "/config_cleint_scl", side = ConfigSide.CLIENT, translate = true)
 public class SimpleConfigClient implements ConfigClient {
 
     public static ConfigHolder<SimpleConfigClient> getInstance() {
