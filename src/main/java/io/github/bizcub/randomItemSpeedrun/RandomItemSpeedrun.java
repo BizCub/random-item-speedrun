@@ -1,6 +1,9 @@
 package io.github.bizcub.randomItemSpeedrun;
 
-import io.github.bizcub.randomItemSpeedrun.config.Config;
+import io.github.bizcub.randomItemSpeedrun.client.config.ConfigHelper;
+import io.github.bizcub.randomItemSpeedrun.config.ClothConfigMain;
+import io.github.bizcub.randomItemSpeedrun.config.ConfigMain;
+import io.github.bizcub.randomItemSpeedrun.config.SimpleConfigMain;
 import io.github.bizcub.randomItemSpeedrun.network.*;
 import io.github.bizcub.randomItemSpeedrun.util.Constants;
 import io.github.bizcub.randomItemSpeedrun.util.RemovableItems;
@@ -48,6 +51,13 @@ public class RandomItemSpeedrun {
         setDifficulty();
         removeDuplicateItems();
         game = new Game();
+
+        if (ConfigHelper.isSimpleConfigLoaded()) {
+            ConfigMain.set(SimpleConfigMain.getInstance().get());
+        } else if (ConfigHelper.isClothConfigLoaded()) {
+            ClothConfigMain.init();
+            ConfigMain.set(ClothConfigMain.getInstance());
+        }
     }
 
     public static void serverInit(MinecraftServer server) {
@@ -71,7 +81,7 @@ public class RandomItemSpeedrun {
     }
 
     public static void setDifficulty() {
-        switch (Config.get().difficulty()) {
+        switch (ConfigMain.get().difficulty()) {
             case EASY -> fillItemsList(Constants.notEasyItems());
             case NORMAL -> fillItemsList(Constants.notMediumItems());
             case HARD -> fillItemsList(Constants.notHardItems());
@@ -91,7 +101,7 @@ public class RandomItemSpeedrun {
     }
 
     public static void removeDuplicateItems() {
-        if (!Config.get().removeDuplicates()) return;
+        if (!ConfigMain.get().removeDuplicates()) return;
 
         List<String> duplicates = new ArrayList<>();
         speedruns.forEach(speedrun -> duplicates.add(speedrun.itemId()));

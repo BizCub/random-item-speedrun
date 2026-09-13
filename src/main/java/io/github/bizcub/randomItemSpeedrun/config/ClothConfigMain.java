@@ -4,20 +4,21 @@ import io.github.bizcub.randomItemSpeedrun.RandomItemSpeedrun;
 import io.github.bizcub.randomItemSpeedrun.util.Constants;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
+import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.EnumHandler.EnumDisplayOption;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.minecraft.world.InteractionResult;
 
-@me.shedaniel.autoconfig.annotation.Config(name = Constants.MOD_ID + "/config")
-public class ClothConfig implements Config, ConfigData {
+@Config(name = Constants.MOD_ID + "/config_main")
+public class ClothConfigMain implements ConfigMain, ConfigData {
 
-    public static ClothConfig getInstance() {
-        return AutoConfig.getConfigHolder(ClothConfig.class).getConfig();
+    public static ClothConfigMain getInstance() {
+        return AutoConfig.getConfigHolder(ClothConfigMain.class).getConfig();
     }
 
     public static void init() {
-        AutoConfig.register(ClothConfig.class, GsonConfigSerializer::new).registerSaveListener((manager, data) -> {
+        AutoConfig.register(ClothConfigMain.class, GsonConfigSerializer::new).registerSaveListener((manager, data) -> {
             RandomItemSpeedrun.setDifficulty();
             RandomItemSpeedrun.removeDuplicateItems();
             return InteractionResult.SUCCESS;
@@ -25,16 +26,10 @@ public class ClothConfig implements Config, ConfigData {
     }
 
     @ConfigEntry.Gui.EnumHandler(option = EnumDisplayOption.BUTTON)
-    public Difficulty difficulty = Config.super.difficulty();
+    public Difficulty difficulty = ConfigMain.super.difficulty();
 
     @ConfigEntry.Gui.Tooltip
-    public boolean removeDuplicates = Config.super.removeDuplicates();
-
-    @ConfigEntry.Gui.Tooltip
-    public boolean isHudRender = Config.super.isHudRender();
-
-    @ConfigEntry.ColorPicker(allowAlpha = true)
-    public int hudColor = Config.super.hudColor();
+    public boolean removeDuplicates = ConfigMain.super.removeDuplicates();
 
     @Override
     public Difficulty difficulty() {
@@ -44,15 +39,5 @@ public class ClothConfig implements Config, ConfigData {
     @Override
     public boolean removeDuplicates() {
         return this.removeDuplicates;
-    }
-
-    @Override
-    public boolean isHudRender() {
-        return this.isHudRender;
-    }
-
-    @Override
-    public int hudColor() {
-        return this.hudColor;
     }
 }

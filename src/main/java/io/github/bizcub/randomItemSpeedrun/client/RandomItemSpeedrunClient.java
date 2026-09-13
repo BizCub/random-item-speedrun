@@ -1,11 +1,11 @@
 package io.github.bizcub.randomItemSpeedrun.client;
 
 import io.github.bizcub.randomItemSpeedrun.Game;
-import io.github.bizcub.randomItemSpeedrun.config.Config;
-import io.github.bizcub.randomItemSpeedrun.client.config.ConfigHelper;
-import io.github.bizcub.randomItemSpeedrun.config.ClothConfig;
-import io.github.bizcub.randomItemSpeedrun.config.SimpleConfig;
+import io.github.bizcub.randomItemSpeedrun.client.config.ClothConfigClient;
+import io.github.bizcub.randomItemSpeedrun.client.config.ConfigClient;
 import io.github.bizcub.randomItemSpeedrun.Speedrun;
+import io.github.bizcub.randomItemSpeedrun.client.config.ConfigHelper;
+import io.github.bizcub.randomItemSpeedrun.client.config.SimpleConfigClient;
 import io.github.bizcub.randomItemSpeedrun.util.Constants;
 import io.github.bizcub.randomItemSpeedrun.util.Utils;
 import com.mojang.blaze3d.platform.InputConstants;
@@ -21,11 +21,12 @@ public class RandomItemSpeedrunClient {
 
     public static void init() {
         game = new Game();
+
         if (ConfigHelper.isSimpleConfigLoaded()) {
-            Config.set(SimpleConfig.getInstance().get());
+            ConfigClient.set(SimpleConfigClient.getInstance().get());
         } else if (ConfigHelper.isClothConfigLoaded()) {
-            ClothConfig.init();
-            Config.set(ClothConfig.getInstance());
+            ClothConfigClient.init();
+            ConfigClient.set(ClothConfigClient.getInstance());
         }
     }
 
@@ -44,7 +45,7 @@ public class RandomItemSpeedrunClient {
     );
 
     public static void renderHud(GuiGraphicsExtractor graphics) {
-        if (!game.isStarted() || !Config.get().isHudRender()) return;
+        if (!game.isStarted() || !ConfigClient.get().isHudRender()) return;
 
         //~ if >=26.1 'renderItem(' -> 'item('
         graphics.item(
@@ -55,7 +56,7 @@ public class RandomItemSpeedrunClient {
 
         double offsetXPercent = 5;
         double offsetYPercent = 1.5;
-        int color = Config.get().hudColor();
+        int color = ConfigClient.get().hudColor();
         //~ draw_string
         graphics.text(
                 Minecraft.getInstance().font,

@@ -1,8 +1,8 @@
 package io.github.bizcub.randomItemSpeedrun.client.config;
 
 //~ auto_config
-import io.github.bizcub.randomItemSpeedrun.config.ClothConfig;
-import io.github.bizcub.randomItemSpeedrun.config.SimpleConfig;
+import io.github.bizcub.randomItemSpeedrun.config.ClothConfigMain;
+import io.github.bizcub.randomItemSpeedrun.util.Constants;
 import io.github.bizcub.simpleConfigLib.autoconfig.gui.ConfigScreenFactory;
 import me.shedaniel.autoconfig.AutoConfigClient;
 import net.minecraft.client.gui.screens.Screen;
@@ -31,10 +31,10 @@ public class ConfigHelper {
 
     public static Screen getScreen(Screen parent) {
         if (isSimpleConfigLoaded()) {
-            return ConfigScreenFactory.open(SimpleConfig.getInstance(), parent);
+            return ConfigScreenFactory.open(Constants.MOD_ID, parent);
         }
         if (isClothConfigLoaded()) {
-            return AutoConfigClient.getConfigScreen(ClothConfig.class, parent).get();
+            return AutoConfigClient.getConfigScreen(ClothConfigMain.class, parent).get();
         }
         return parent;
     }
