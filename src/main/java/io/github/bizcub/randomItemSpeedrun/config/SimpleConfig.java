@@ -3,9 +3,10 @@ package io.github.bizcub.randomItemSpeedrun.config;
 import io.github.bizcub.randomItemSpeedrun.RandomItemSpeedrun;
 import io.github.bizcub.randomItemSpeedrun.util.Constants;
 import io.github.bizcub.simpleConfigLib.autoconfig.ConfigHolder;
+import io.github.bizcub.simpleConfigLib.autoconfig.ConfigSide;
 import io.github.bizcub.simpleConfigLib.autoconfig.annotation.*;
 
-@AutoConfig(name = Constants.MOD_ID + "/config", translate = true)
+@AutoConfig(name = Constants.MOD_ID + "/config", fileName = Constants.MOD_ID + "/config_scl", translate = true)
 public class SimpleConfig implements Config {
 
     public static ConfigHolder<SimpleConfig> getInstance() {
@@ -21,9 +22,11 @@ public class SimpleConfig implements Config {
     public boolean removeDuplicates = Config.super.removeDuplicates();
 
     @Tooltip
+    @Side(ConfigSide.CLIENT)
     public boolean isHudRender = Config.super.isHudRender();
 
     @Color(alpha = true)
+    @Side(ConfigSide.CLIENT)
     public int hudColor = Config.super.hudColor();
 
     @Override
