@@ -1,13 +1,18 @@
 package io.github.bizcub.randomItemSpeedrun.config;
 
-import io.github.bizcub.simpleConfigLib.autoconfig.ConfigProvider;
-
 public interface ConfigMain {
     static ConfigMain get() {
-        return ConfigProvider.get(ConfigMain.class);
+        return Holder.INSTANCE;
     }
-    static void set(ConfigMain instance) {
-        ConfigProvider.set(ConfigMain.class, instance);
+
+    static void set(final ConfigMain config) {
+        if (config != null) {
+            Holder.INSTANCE = config;
+        }
+    }
+
+    class Holder {
+        private static ConfigMain INSTANCE = new ConfigMain() { };
     }
 
     default Difficulty difficulty() {

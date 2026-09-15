@@ -1,13 +1,18 @@
 package io.github.bizcub.randomItemSpeedrun.client.config;
 
-import io.github.bizcub.simpleConfigLib.autoconfig.ConfigProvider;
-
 public interface ConfigClient {
     static ConfigClient get() {
-        return ConfigProvider.get(ConfigClient.class);
+        return Holder.INSTANCE;
     }
-    static void set(ConfigClient instance) {
-        ConfigProvider.set(ConfigClient.class, instance);
+
+    static void set(final ConfigClient config) {
+        if (config != null) {
+            Holder.INSTANCE = config;
+        }
+    }
+
+    class Holder {
+        private static ConfigClient INSTANCE = new ConfigClient() { };
     }
 
     default boolean isHudRender() {
