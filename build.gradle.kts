@@ -48,10 +48,10 @@ multiloader {
     setMREnvironment(mrEnvs.clientAndServer)
     setCFEnvironment(cfEnvs.both)
 
-    versionRange("26.2", to = "latest")
+    versionRange("26.3", to = "latest")
 
     addDependency(
-        dependency = getSimpleConfigLibDep("2.0"),
+        dependency = getSimpleConfigLibDep(),
         isPublishDepEnabled = true
     )
     val isClothConfigAvailable = !(isForge && scp > "1.21.3")
