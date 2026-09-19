@@ -1,16 +1,10 @@
-package io.github.bizcub.randomItemSpeedrun.client.config;
+package io.github.bizcub.randomItemSpeedrun.config;
 
-//~ auto_config
-import io.github.bizcub.randomItemSpeedrun.config.ClothConfigMain;
-import io.github.bizcub.randomItemSpeedrun.util.Constants;
-import io.github.bizcub.simpleConfigLib.autoconfig.gui.ConfigScreens;
-import me.shedaniel.autoconfig.AutoConfigClient;
-import net.minecraft.client.gui.screens.Screen;
 /*? fabric*/ import net.fabricmc.loader.api.FabricLoader;
 /*? forge*/ //import net.minecraftforge.fml.ModList;
 /*? neoforge*/ //import net.neoforged.fml.ModList;
 
-public class ConfigHelper {
+public class ConfigHelperMain {
     public static boolean isModLoaded(String modId) {
         /*? fabric*/ return FabricLoader.getInstance().isModLoaded(modId);
         /*? (forge && <26.1) || neoforge*/ //return ModList.get().isLoaded(modId);
@@ -27,15 +21,5 @@ public class ConfigHelper {
 
     public static boolean isConfigLoaded() {
         return isClothConfigLoaded() || isSimpleConfigLoaded();
-    }
-
-    public static Screen getScreen(Screen parent) {
-        if (isSimpleConfigLoaded()) {
-            return ConfigScreens.open(Constants.MOD_ID, parent);
-        }
-        if (isClothConfigLoaded()) {
-            return AutoConfigClient.getConfigScreen(ClothConfigMain.class, parent).get();
-        }
-        return parent;
     }
 }

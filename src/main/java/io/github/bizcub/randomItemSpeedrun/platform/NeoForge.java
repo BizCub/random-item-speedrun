@@ -31,7 +31,8 @@ public class NeoForge {
         PayloadRegistrar registrar = event.registrar(Constants.MOD_ID);
 
         registrar.playToClient(AnimationPayloadS2C.TYPE, AnimationPayloadS2C.CODEC, (payload, context) ->
-                context.enqueueWork(() -> Minecraft.getInstance().gameRenderer.displayItemActivation(payload.itemStack())));
+                //~ if >=26.3 'gameRenderer' -> 'player'
+                context.enqueueWork(() -> Minecraft.getInstance().player.displayItemActivation(payload.itemStack())));
 
         registrar.playToClient(SpeedrunsPayloadS2C.TYPE, SpeedrunsPayloadS2C.CODEC, (payload, context) ->
                 context.enqueueWork(() -> RandomItemSpeedrunClient.speedruns = new ArrayList<>(payload.speedruns())));

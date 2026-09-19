@@ -22,13 +22,14 @@
 
     "title.no_items": "Не осталось предметов для спидрана!",
 
-    "text.autoconfig.random_item_speedrun/config.title": "Настройки Random Item Speedrun",
-    "text.autoconfig.random_item_speedrun/config.option.isHudRender": "Отображать оверлей",
-    "text.autoconfig.random_item_speedrun/config.option.isHudRender.@Tooltip": "Должны ли время и предмет отображаться на экране?",
-    "text.autoconfig.random_item_speedrun/config.option.hudColor": "Цвет оверлея",
-    "text.autoconfig.random_item_speedrun/config.option.removeDuplicates": "Удалить дубликаты",
-    "text.autoconfig.random_item_speedrun/config.option.removeDuplicates.@Tooltip": "Найденные предметы не придётся спидранить снова",
-    "text.autoconfig.random_item_speedrun/config.option.difficulty": "Сложность",
+    "text.autoconfig.random_item_speedrun/config_client.title": "Настройки Random Item Speedrun",
+    "text.autoconfig.random_item_speedrun/config_main.title": "Настройки Random Item Speedrun",
+    "text.autoconfig.random_item_speedrun/config_client.option.isHudRender": "Отображать оверлей",
+    "text.autoconfig.random_item_speedrun/config_client.option.isHudRender.@Tooltip": "Должны ли время и предмет отображаться на экране?",
+    "text.autoconfig.random_item_speedrun/config_client.option.hudColor": "Цвет оверлея",
+    "text.autoconfig.random_item_speedrun/config_main.option.removeDuplicates": "Удалить дубликаты",
+    "text.autoconfig.random_item_speedrun/config_main.option.removeDuplicates.@Tooltip": "Найденные предметы не придётся спидранить снова",
+    "text.autoconfig.random_item_speedrun/config_main.option.difficulty": "Сложность",
 
     "text.random_item_speedrun.group.general": "Настройки Random Item Speedrun",
     "text.random_item_speedrun.option.isHudRender": "Отображать оверлей",

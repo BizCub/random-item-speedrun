@@ -2,7 +2,7 @@
 /*package io.github.bizcub.randomItemSpeedrun.platform;
 
 import io.github.bizcub.randomItemSpeedrun.client.RandomItemSpeedrunClient;
-import io.github.bizcub.randomItemSpeedrun.client.config.ConfigHelper;
+import io.github.bizcub.randomItemSpeedrun.client.config.ConfigHelperClient;
 import io.github.bizcub.randomItemSpeedrun.RandomItemSpeedrun;
 import io.github.bizcub.randomItemSpeedrun.network.*;
 import io.github.bizcub.randomItemSpeedrun.util.Constants;
@@ -49,6 +49,7 @@ public class Forge {
                     .play()
                     .clientbound()
                     .add(AnimationPayloadS2C.TYPE, AnimationPayloadS2C.CODEC, (payload, ctx) -> {
+                        //~ if >=26.3 'gameRenderer' -> 'player'
                         ctx.enqueueWork(() -> Minecraft.getInstance().gameRenderer.displayItemActivation(payload.itemStack()));
                         ctx.setPacketHandled(true);
                     })
@@ -205,7 +206,7 @@ public class Forge {
             RandomItemSpeedrunClient.init();
 
             ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () ->
-                    new ConfigScreenHandler.ConfigScreenFactory((minecraft, parent) -> ConfigHelper.getScreen(parent)));
+                    new ConfigScreenHandler.ConfigScreenFactory((minecraft, parent) -> ConfigHelperClient.getScreen(parent)));
         }
 
         /^? 1.20.1^/ //registerPayloads();

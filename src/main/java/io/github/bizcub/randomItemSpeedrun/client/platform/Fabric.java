@@ -2,7 +2,7 @@
 package io.github.bizcub.randomItemSpeedrun.client.platform;
 
 import io.github.bizcub.randomItemSpeedrun.client.RandomItemSpeedrunClient;
-import io.github.bizcub.randomItemSpeedrun.client.config.ConfigHelper;
+import io.github.bizcub.randomItemSpeedrun.client.config.ConfigHelperClient;
 import io.github.bizcub.randomItemSpeedrun.client.gui.GameStartScreen;
 /*? >=1.21.6*/ import io.github.bizcub.randomItemSpeedrun.client.gui.ScaledItemPIPRenderer;
 import io.github.bizcub.randomItemSpeedrun.network.AnimationPayloadS2C;
@@ -94,7 +94,7 @@ public class Fabric implements ClientModInitializer {
 
         @Override
         public ConfigScreenFactory<?> getModConfigScreenFactory() {
-            return ConfigHelper::getScreen;
+            return ConfigHelperClient::getScreen;
         }
     }
 }//?}

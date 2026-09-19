@@ -4,8 +4,8 @@ import io.github.bizcub.randomItemSpeedrun.Game;
 import io.github.bizcub.randomItemSpeedrun.client.config.ClothConfigClient;
 import io.github.bizcub.randomItemSpeedrun.client.config.ConfigClient;
 import io.github.bizcub.randomItemSpeedrun.Speedrun;
-import io.github.bizcub.randomItemSpeedrun.client.config.ConfigHelper;
 import io.github.bizcub.randomItemSpeedrun.client.config.SimpleConfigClient;
+import io.github.bizcub.randomItemSpeedrun.config.ConfigHelperMain;
 import io.github.bizcub.randomItemSpeedrun.util.Constants;
 import io.github.bizcub.randomItemSpeedrun.util.Utils;
 import com.mojang.blaze3d.platform.InputConstants;
@@ -22,9 +22,9 @@ public class RandomItemSpeedrunClient {
     public static void init() {
         game = new Game();
 
-        if (ConfigHelper.isSimpleConfigLoaded()) {
+        if (ConfigHelperMain.isSimpleConfigLoaded()) {
             ConfigClient.set(SimpleConfigClient.getInstance().get());
-        } else if (ConfigHelper.isClothConfigLoaded()) {
+        } else if (ConfigHelperMain.isClothConfigLoaded()) {
             ClothConfigClient.init();
             ConfigClient.set(ClothConfigClient.getInstance());
         }

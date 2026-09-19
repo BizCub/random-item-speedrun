@@ -1,7 +1,7 @@
 package io.github.bizcub.randomItemSpeedrun;
 
-import io.github.bizcub.randomItemSpeedrun.client.config.ConfigHelper;
 import io.github.bizcub.randomItemSpeedrun.config.ClothConfigMain;
+import io.github.bizcub.randomItemSpeedrun.config.ConfigHelperMain;
 import io.github.bizcub.randomItemSpeedrun.config.ConfigMain;
 import io.github.bizcub.randomItemSpeedrun.config.SimpleConfigMain;
 import io.github.bizcub.randomItemSpeedrun.network.*;
@@ -52,9 +52,9 @@ public class RandomItemSpeedrun {
         removeDuplicateItems();
         game = new Game();
 
-        if (ConfigHelper.isSimpleConfigLoaded()) {
+        if (ConfigHelperMain.isSimpleConfigLoaded()) {
             ConfigMain.set(SimpleConfigMain.getInstance().get());
-        } else if (ConfigHelper.isClothConfigLoaded()) {
+        } else if (ConfigHelperMain.isClothConfigLoaded()) {
             ClothConfigMain.init();
             ConfigMain.set(ClothConfigMain.getInstance());
         }

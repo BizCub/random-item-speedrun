@@ -10,12 +10,12 @@ public class Constants {
     public static final File SPEEDRUNS_FILE = new File("config/" + MOD_ID + "/speedruns.json");
 
     public static RemovableItems notEasyItems() {
-        ArrayList<String> equalItems = new ArrayList<>(List.of("pale_hanging_moss", "enchanting_table", "wind_charge", "music_disc_tears", "music_disc_relic", "music_disc_creator_music_box", "totem_of_undying", "spectral_arrow", "ominous_bottle", "mojang_banner_pattern", "enchanted_golden_apple", "conduit", "warped_roots", "weeping_vines", "twisting_vines", "dried_ghast", "turtle_egg", "jukebox", "glowstone", "glowstone_dust", "comparator", "daylight_detector", "observer", "tadpole_bucket", "ghast_tear", "experience_bottle", "trident", "heart_of_the_sea", "trial_key", "respawn_anchor"));
+        ArrayList<String> equalItems = new ArrayList<>(List.of("pale_hanging_moss", "enchanting_table", "wind_charge", "abandoned_camp_map", "buried_ancient_city_map", "buried_mineshaft_map", "buried_treasure_map", "buried_trial_chambers_map", "desert_pyramid_map", "music_disc_bounce", "music_disc_tears", "music_disc_relic", "music_disc_creator_music_box", "totem_of_undying", "spectral_arrow", "ominous_bottle", "mojang_banner_pattern", "enchanted_golden_apple", "conduit", "warped_roots", "weeping_vines", "twisting_vines", "dried_ghast", "turtle_egg", "jukebox", "glowstone", "glowstone_dust", "comparator", "daylight_detector", "observer", "tadpole_bucket", "ghast_tear", "experience_bottle", "trident", "heart_of_the_sea", "trial_key", "respawn_anchor"));
         equalItems.addAll(notMediumItems().equalItems());
         equalItems.addAll(notHardItems().equalItems());
         equalItems.addAll(impossibleItems().equalItems());
 
-        ArrayList<String> containItems = new ArrayList<>(List.of("mangrove", "pale_oak", "pale_moss", "crimson", "warped", "resin", "prismarine", "nether", "basalt", "blackstone", "diamond", "exposed", "quartz", "red_sand", "candle", "anvil", "soul", "nautilus_armor", "splash_potion", "pottery_sherd", "smithing_template", "waxed", "eyeblossom", "honey"));
+        ArrayList<String> containItems = new ArrayList<>(List.of("_village_map", "mangrove", "pale_oak", "pale_moss", "crimson", "warped", "resin", "prismarine", "nether", "basalt", "blackstone", "diamond", "exposed", "quartz", "red_sand", "candle", "anvil", "soul", "nautilus_armor", "splash_potion", "pottery_sherd", "smithing_template", "waxed", "eyeblossom", "honey"));
         containItems.addAll(notMediumItems().containItems());
         containItems.addAll(notHardItems().containItems());
         containItems.addAll(impossibleItems().containItems());
