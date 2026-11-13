@@ -1,0 +1,35 @@
+{
+    "key.random_item_speedrun.open_game_start_screen": "Открыть экран",
+    "key.random_item_speedrun.quick_start": "Быстрый старт спидрана",
+
+    "gui.game_start_screen.title": "Random Item Speedrun",
+    "gui.game_start_screen.entry": "%1$s%2$s%3$s",
+    "gui.game_start_screen.entry.separator": " - ",
+    "gui.game_start_screen.config_mod_is_not_loaded": "Конфигурационный мод не загружен!",
+    "gui.game_start_screen.start_button.not_started": "Начать игру",
+    "gui.game_start_screen.start_button.started": "Завершить игру",
+    "gui.game_start_screen.side_panel.item": "Предмет: %s",
+    "gui.game_start_screen.side_panel.player": "Игрок: %s",
+    "gui.game_start_screen.side_panel.time": "Время: %s",
+    "gui.game_start_screen.side_panel.time.time": "%1$s%2$s%3$s%4$s",
+    "gui.game_start_screen.side_panel.time.seconds": "%sс",
+    "gui.game_start_screen.side_panel.time.minutes": "%sм ",
+    "gui.game_start_screen.side_panel.time.hours": "%sч ",
+    "gui.game_start_screen.side_panel.time.days": "%sд ",
+    "gui.game_start_screen.side_panel.date": "Дата: %s",
+
+    "chat.game_is_stopped": "%1$s нашёл предмет %2$s!",
+
+    "title.no_items": "Не осталось предметов для спидрана!",
+
+
+    "text.random_item_speedrun.group.general": "Настройки Random Item Speedrun",
+    "text.random_item_speedrun.option.isHudRender": "Отображать оверлей",
+    "text.random_item_speedrun.option.isHudRender.tooltip": "Должны ли время и предмет отображаться на экране?",
+    "text.random_item_speedrun.option.hudColor": "Цвет оверлея",
+    "text.random_item_speedrun.option.removeDuplicates": "Удалить дубликаты",
+    "text.random_item_speedrun.option.removeDuplicates.tooltip": "Найденные предметы не придётся спидранить снова",
+    "text.random_item_speedrun.option.difficulty": "Сложность",
+
+    "modmenu.descriptionTranslation.random_item_speedrun": "Этот мод позволит вам проверить свои знания в игре и умение быстро находить предметы"
+}

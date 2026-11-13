@@ -1,0 +1,32 @@
+{
+    "key.random_item_speedrun.open_game_start_screen": "Open Screen",
+    "key.random_item_speedrun.quick_start": "Quick Start Speedrun",
+
+    "gui.game_start_screen.title": "Random Item Speedrun",
+    "gui.game_start_screen.entry": "%1$s%2$s%3$s",
+    "gui.game_start_screen.entry.separator": " - ",
+    "gui.game_start_screen.config_mod_is_not_loaded": "Config mod is not loaded!",
+    "gui.game_start_screen.start_button.not_started": "Start Game",
+    "gui.game_start_screen.start_button.started": "Finish Game",
+    "gui.game_start_screen.side_panel.item": "Item: %s",
+    "gui.game_start_screen.side_panel.player": "Player: %s",
+    "gui.game_start_screen.side_panel.time": "Time: %s",
+    "gui.game_start_screen.side_panel.time.time": "%1$s%2$s%3$s%4$s",
+    "gui.game_start_screen.side_panel.time.seconds": "%ss",
+    "gui.game_start_screen.side_panel.time.minutes": "%sm ",
+    "gui.game_start_screen.side_panel.time.hours": "%sh ",
+    "gui.game_start_screen.side_panel.time.days": "%sd ",
+    "gui.game_start_screen.side_panel.date": "Date: %s",
+
+    "chat.game_is_stopped": "%1$s found the item %2$s!",
+
+    "title.no_items": "There are no items left for speedrunning!",
+
+    "text.random_item_speedrun.group.general": "Random Item Speedrun Settings",
+    "text.random_item_speedrun.option.isHudRender": "Display HUD",
+    "text.random_item_speedrun.option.isHudRender.tooltip": "Should time and item be displayed on the screen?",
+    "text.random_item_speedrun.option.hudColor": "HUD Color",
+    "text.random_item_speedrun.option.removeDuplicates": "Remove Duplicates",
+    "text.random_item_speedrun.option.removeDuplicates.tooltip": "The items you find won't have to be speedrun again",
+    "text.random_item_speedrun.option.difficulty": "Difficulty"
+}
