@@ -43,7 +43,7 @@ public class NeoForge {
 
         registrar.playToServer(ChangeGameStatusPayloadC2S.TYPE, ChangeGameStatusPayloadC2S.CODEC, (payload, context) ->
                 context.enqueueWork(() -> {
-                    RandomItemSpeedrun.game.changeGameStatus();
+                    RandomItemSpeedrun.game.changeGameStatus(context.player());
 
                     PacketDistributor.sendToAllPlayers(new SpeedrunsPayloadS2C(RandomItemSpeedrun.speedruns));
 

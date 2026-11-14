@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -74,11 +75,11 @@ public class RandomItemSpeedrun {
     private static void fillItemsList(RemovableItems items) {
         allItemsId.clear();
         BuiltInRegistries.ITEM.stream().toList().forEach(item ->
-                allItemsId.add(Utils.convertComponentToId(item.getDescriptionId())));
+                allItemsId.add(Utils.getIdFromItemStack(item.getDefaultInstance())));
 
-        allItemsId.removeAll(items.equalItems());
+        allItemsId.removeIf(id -> items.equalItems().contains(Identifier.parse(id).getPath()));
         for (String item : items.containItems())
-            allItemsId.removeIf(id -> id.contains(item));
+            allItemsId.removeIf(id -> Identifier.parse(id).getPath().contains(item));
     }
 
     public static void removeDuplicateItems() {
@@ -95,7 +96,6 @@ public class RandomItemSpeedrun {
         if (server != null && !server.isPaused() && game.isStarted()) {
             game.addTick();
 
-            String targetItemId = Utils.convertComponentToId(Utils.getNameFromItemStack(game.getItemStack()));
             for (var player : server.getPlayerList().getPlayers()) {
                 boolean found = false;
                 for (int i = 0; i < player.inventoryMenu.slots.size(); i++) {
@@ -104,9 +104,8 @@ public class RandomItemSpeedrun {
                     if (!slot.hasItem()) continue;
 
                     ItemStack item = slot.getItem();
-                    String itemId = Utils.convertComponentToId(Utils.getNameFromItemStack(item));
 
-                    if (itemId.equals(targetItemId)) {
+                    if (item.is(game.getItemStack().getItem())) {
                         found = true;
                         break;
                     }

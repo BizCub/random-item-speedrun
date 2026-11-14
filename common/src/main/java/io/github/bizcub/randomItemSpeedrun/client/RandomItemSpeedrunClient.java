@@ -58,7 +58,7 @@ public class RandomItemSpeedrunClient {
 
         graphics.text(
                 Minecraft.getInstance().font,
-                Utils.removeBracketsOrDefault(game.getItemStack().getItemName().getString()),
+                game.getItemStack().getItemName().getString(),
                 Utils.getPercent(graphics.guiWidth(), offsetXPercent),
                 Utils.getPercent(graphics.guiHeight(), offsetYPercent),
                 color

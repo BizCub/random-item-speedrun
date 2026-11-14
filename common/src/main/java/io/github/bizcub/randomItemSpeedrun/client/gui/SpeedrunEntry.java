@@ -23,9 +23,9 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
     }
 
     private void render(GuiGraphicsExtractor graphics, int y, int width, int height, int mouseX, int mouseY) {
-        Identifier accept = Utils.getDefaultIdentifier("pending_invite/accept");
-        Identifier reject = Utils.getDefaultIdentifier("pending_invite/reject");
-        Identifier inProgress = Utils.getDefaultIdentifier("statistics/item_crafted");
+        Identifier accept = Identifier.withDefaultNamespace("pending_invite/accept");
+        Identifier reject = Identifier.withDefaultNamespace("pending_invite/reject");
+        Identifier inProgress = Identifier.withDefaultNamespace("statistics/item_crafted");
 
         graphics.blitSprite(
                 RenderPipelines.GUI_TEXTURED,
@@ -47,7 +47,7 @@ public class SpeedrunEntry extends ObjectSelectionList.Entry<SpeedrunEntry> {
         int textX = Utils.getPercent(width, 18);
         int textY = y + Utils.getPercent(height, 37);
         Component textItem = Component.translatable("gui.game_start_screen.entry",
-                Utils.removeBracketsOrDefault(this.speedrun.getItem().getItemName().getString()),
+                this.speedrun.getItem().getItemName().getString(),
                 Component.translatable("gui.game_start_screen.entry.separator").withStyle(ChatFormatting.GRAY),
                 Utils.getTimeComponent(speedrun.time(), 11184810)
         );

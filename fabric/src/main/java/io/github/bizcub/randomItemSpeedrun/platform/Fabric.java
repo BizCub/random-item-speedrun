@@ -28,7 +28,7 @@ public class Fabric implements ModInitializer {
 
         ServerPlayNetworking.registerGlobalReceiver(ChangeGameStatusPayloadC2S.TYPE, (payload, context) ->
                 context.server().execute(() -> {
-                    RandomItemSpeedrun.game.changeGameStatus();
+                    RandomItemSpeedrun.game.changeGameStatus(context.player());
 
                     context.server().getPlayerList().getPlayers().forEach(RandomItemSpeedrun::sendSpeedrunsS2C);
 

@@ -1,8 +1,8 @@
 package io.github.bizcub.randomItemSpeedrun;
 
 import io.github.bizcub.randomItemSpeedrun.util.Utils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
@@ -14,11 +14,11 @@ public class Game {
     private ItemStack itemStack;
     private boolean isStart = false;
 
-    public void start() {
+    public void start(Player player) {
         if (this.isStart) return;
 
         if (RandomItemSpeedrun.allItemsId.isEmpty()) {
-            Minecraft.getInstance().player.sendOverlayMessage(Component.translatable("title.no_items"));
+            player.sendOverlayMessage(Component.translatable("title.no_items"));
             return;
         }
 
@@ -38,9 +38,9 @@ public class Game {
         RandomItemSpeedrun.removeDuplicateItems();
     }
 
-    public void changeGameStatus() {
+    public void changeGameStatus(Player player) {
         if (!RandomItemSpeedrun.game.isStarted()) {
-            RandomItemSpeedrun.game.start();
+            RandomItemSpeedrun.game.start(player);
         } else {
             RandomItemSpeedrun.game.stop(Speedrun.Status.FAILURE, "");
         }

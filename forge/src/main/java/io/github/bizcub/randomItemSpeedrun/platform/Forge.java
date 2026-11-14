@@ -54,8 +54,8 @@ public class Forge {
                     .serverbound()
                     .add(ChangeGameStatusPayloadC2S.TYPE, ChangeGameStatusPayloadC2S.CODEC, (payload, ctx) -> {
                         ctx.enqueueWork(() -> {
-                            RandomItemSpeedrun.game.changeGameStatus();
                             ServerPlayer sender = ctx.getSender();
+                            RandomItemSpeedrun.game.changeGameStatus(sender);
                             var players = sender.level().getServer().getPlayerList().getPlayers();
                             players.forEach(RandomItemSpeedrun::sendSpeedrunsS2C);
                             if (RandomItemSpeedrun.game.isStarted()) {

@@ -23,7 +23,7 @@ public class SpeedrunWidget extends ObjectSelectionList<SpeedrunEntry> {
 
         RandomItemSpeedrunClient.speedruns.forEach(speedrun -> entries.add(new SpeedrunEntry(speedrun, this)));
 
-        entries.removeIf(entry -> !Utils.getNameFromItemStack(entry.speedrun.getItem()).toLowerCase().contains(searchTerm.toLowerCase()));
+        entries.removeIf(entry -> !entry.speedrun.getItem().getItemName().getString().toLowerCase().contains(searchTerm.toLowerCase()));
         entries.forEach(this::addEntry);
         if (!entries.isEmpty()) this.setFocused(entries.get(0));
     }
